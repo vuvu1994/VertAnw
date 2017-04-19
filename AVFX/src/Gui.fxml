@@ -16,7 +16,7 @@
    <children>
       <ImageView fx:id="bimage" fitHeight="600.0" fitWidth="893.0" layoutX="7.0" opacity="0.22" pickOnBounds="true">
          <image>
-            <Image url="@../../../../../Downloads/ghost-in-the-shell-58b5ad7f6a596.jpg" />
+            <Image url="@bg.jpg" />
          </image>
       </ImageView>
       <HBox alignment="CENTER_RIGHT" opacity="0.75" prefHeight="55.0" prefWidth="900.0" style="-fx-background-color: #121212;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -36,7 +36,7 @@
             <Insets />
          </opaqueInsets>
       </HBox>
-      <VBox alignment="TOP_CENTER" opacity="0.75" prefHeight="600.0" prefWidth="111.0" style="-fx-background-color: #121212;">
+      <VBox alignment="TOP_CENTER" opacity="0.75" prefHeight="600.0" prefWidth="111.0" style="-fx-background-color: #121212;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button mnemonicParsing="false" onAction="#bibliothek" prefHeight="50.0" prefWidth="90.0" text="Bibliothek">
                <VBox.margin>

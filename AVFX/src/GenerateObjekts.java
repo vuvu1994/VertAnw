@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javafx.application.Platform;
@@ -19,16 +21,20 @@ public class GenerateObjekts extends Thread {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}
 	
-	public void generate() throws IOException{
+	public void generate() throws IOException, URISyntaxException{
 		//FlowPane fp = GuiElemente.getFlowPane();
 				for (int i = 0; i < 20; i++) {
 					m = new MediaObjekt();
 					m.setName("Ghost in the Shell");
-					m.setBild("C:/Users/Denni/Downloads/ghost.jpg");
+					
+					m.setBild(getClass().getResource("/resources/ghost.jpg").toURI().toString());
 					
 					m.setPath("");
 				
