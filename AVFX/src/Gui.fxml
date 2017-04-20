@@ -19,7 +19,7 @@
             <Image url="@bg.jpg" />
          </image>
       </ImageView>
-      <HBox alignment="CENTER_RIGHT" opacity="0.75" prefHeight="55.0" prefWidth="900.0" style="-fx-background-color: #121212;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER_RIGHT" layoutX="111.0" opacity="0.75" prefHeight="55.0" prefWidth="864.0" style="-fx-background-color: #121212;" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button mnemonicParsing="false" prefWidth="70.0" text="Vollbild">
                <HBox.margin>
@@ -71,6 +71,9 @@
                               <Insets left="30.0" />
                            </padding></FlowPane>
                      </content>
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
                   </ScrollPane>
                </children>
             </AnchorPane>

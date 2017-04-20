@@ -77,7 +77,6 @@ public class MediaObjekt {
 		tname.setFill(Color.WHITE);
 		hb.getChildren().add(vb);
 		vb.getChildren().add(tname);
-		vb.setOpacity(1);
 		vb.setStyle("-fx-background-color: rgba(0, 0, 0, 0.4);");
 
 		bu.setPrefWidth(tname.getWrappingWidth());

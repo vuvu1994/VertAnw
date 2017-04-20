@@ -23,12 +23,9 @@ public class MainApp extends Application {
 		primaryStage.setTitle("Media Player");
 		primaryStage.setScene(scene);
 		primaryStage.sizeToScene();
-	
 		primaryStage.setResizable(true);
 		primaryStage.show();
-		
 		primaryStage.setFullScreenExitHint("");
-		
 		primaryStage.setFullScreen(true);
 
 	}

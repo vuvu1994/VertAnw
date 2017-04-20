@@ -9,11 +9,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
 public class GenerateObjekts extends Thread {
-	FlowPane fp;
+
 	MediaObjekt m=null;
 	private ArrayList<AnchorPane> Objekte = new ArrayList<AnchorPane>();
-	public GenerateObjekts(FlowPane fp){
-		this.fp=fp;
+	public GenerateObjekts(){
+		
 	}
 	public void run(){
 		try {
@@ -29,16 +29,15 @@ public class GenerateObjekts extends Thread {
 	}
 	
 	public void generate() throws IOException, URISyntaxException{
-		//FlowPane fp = GuiElemente.getFlowPane();
+		FlowPane fp = GuiElemente.getFlowPane();
 				for (int i = 0; i < 20; i++) {
 					m = new MediaObjekt();
 					m.setName("Ghost in the Shell");
 					
-					m.setBild(getClass().getResource("/resources/ghost.jpg").toURI().toString());
+					m.setBild("G:/Bilder/ghost.jpg");
 					
 					m.setPath("");
-				
-						m.createMediaObjekt();
+				m.createMediaObjekt();
 					
 					Objekte.add(m.getObjekt());
 			
@@ -48,7 +47,7 @@ public class GenerateObjekts extends Thread {
 					public void run() {
 						
 						System.out.println(Objekte.size());
-						System.out.println(Objekte.get(0).getPrefHeight());
+						
 						fp.getChildren().addAll(Objekte);
 				
 					}

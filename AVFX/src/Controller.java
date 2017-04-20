@@ -48,7 +48,7 @@ FlowPane fp;
 	}
   public void bibliothek() throws Exception{
 	  fp.getChildren().clear();
-	  new GenerateObjekts(fp).start();
+	  new GenerateObjekts().start();
 	  
   }
 	
