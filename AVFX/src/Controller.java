@@ -33,7 +33,7 @@ AnchorPane Main;
 ScrollPane ScrollPane;
 @FXML
 FlowPane fp;
-	public void initialize() throws InterruptedException {
+	public void initialize() throws InterruptedException, SQLException {
 		fp.prefWidthProperty().bind(ScrollPane.widthProperty());
 		fp.prefHeightProperty().bind(ScrollPane.heightProperty());
 		fp.setStyle("-fx-background-color: transparent;");
@@ -44,7 +44,12 @@ FlowPane fp;
 		bimage.fitWidthProperty().bind(Main.widthProperty());
 		bimage.fitHeightProperty().bind(Main.heightProperty());
 		bimage.setPreserveRatio(false);
-		
+		//Database test
+		Database.getDatabase();
+		Database.createTable();
+		Database.addtoMedia("TestName");
+		System.out.println(Database.getAllMedia());
+		//Database test Ende
 	}
   public void bibliothek() throws Exception{
 	  fp.getChildren().clear();
