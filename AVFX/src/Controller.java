@@ -48,6 +48,7 @@ FlowPane fp;
 		Database.getDatabase();
 		Database.createTable();
 		Database.addtoMedia("TestName");
+		Database.addtoMedia("TestName2");
 		System.out.println(Database.getAllMedia());
 		//Database test Ende
 	}
@@ -55,6 +56,10 @@ FlowPane fp;
 	  fp.getChildren().clear();
 	  new GenerateObjekts().start();
 	  
+  }
+  public void exit(){
+	  System.out.println("EXIT");
+	  System.exit(0);
   }
 	
 }
