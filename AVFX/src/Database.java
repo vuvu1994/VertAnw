@@ -1,3 +1,4 @@
+
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -14,9 +15,11 @@ public class Database {
 	public static void getDatabase(){
 	try {
 		
+		//Laden des Treibers
 		Class.forName("org.h2.Driver");
+		//Datenbank erzeugen und Verbindung zur Datenbank herstellen
 		JdbcConnectionPool cp = JdbcConnectionPool.create(
-	            "jdbc:h2:file:Z:/Media;", "", "");
+	            "jdbc:h2:file:C:/Programme/AudioFX/Media;", "", "");
 		conn = cp.getConnection(); 
 
 	} catch (ClassNotFoundException | SQLException e) {
@@ -24,7 +27,7 @@ public class Database {
 		e.printStackTrace();
 	}
 	}
-	
+	//Rückgabe der Vorhanden Tabelle ( falls keine Vorhanden ist Fehlermeldung)
 	public static void getTable() throws SQLException{
 		DatabaseMetaData md = conn.getMetaData(); 
 		ResultSet rs = md.getTables(null, null, "%", null);
@@ -32,6 +35,7 @@ public class Database {
 			System.out.println(rs.getString("TABLE_NAME"));
 		}
 	}
+	//Erzeugen der Tabelle "Media" falls diese noch nicht angelegt wurde
 	public static void createTable() throws SQLException{
 		System.out.println("Erstelle Table");
 	      Statement stmt = conn.createStatement();
@@ -48,12 +52,7 @@ public class Database {
 	      
 	}
 
-	
-		
-	
-	
-
-	
+	//Hinzufügen aller Elemente die sich in dem Lokalen Verzeichnis befinden	
 	public static void addtoMedia(String Name) throws SQLException{
 		Statement stmt = conn.createStatement();
 		ArrayList test = getAllMedia();
@@ -67,6 +66,7 @@ public class Database {
 		}
 		
 	}
+	//Aktuallisieren der alle Audio/ Video Elemente in der Tabelle Media
 	public static void updateaktuell(String Name,Double Min) {
 		Statement stmt;
 		try {
@@ -83,7 +83,7 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
-		
+		//  Aktualisieren der Länger der Audio / Video Dateien
 		public static void updateDauer(String Name,Double Max) {
 			Statement stmt;
 			try {
@@ -102,7 +102,7 @@ public class Database {
 		
 		
 	}
-	
+	//Rückgabe aller Audio / Video Elemente im Lokalen Verzeichnis um diese in dei ArrayListe zu Speichern 
 	public static ArrayList getAllMedia() throws SQLException{
 		ArrayList all= new ArrayList();
 		Statement stmt = conn.createStatement();
@@ -120,7 +120,7 @@ public class Database {
        
         return all;
 	}
-	
+	//Rückgabe des Namens der Aktuell ausgewählten Audio / Video Datei
 	public static String getaktuell(String Name) throws SQLException{
 		ArrayList all= new ArrayList();
 		Statement stmt = conn.createStatement();
@@ -140,6 +140,7 @@ public class Database {
        }
         return all.get(0).toString();
 	}
+	////Rückgabe der Dauer der Aktuellen ausgewählten Audio / Video Datei
 	public static String getDauer(String Name) throws SQLException{
 		ArrayList all= new ArrayList();
 		Statement stmt = conn.createStatement();
