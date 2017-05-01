@@ -34,6 +34,7 @@ ScrollPane ScrollPane;
 @FXML
 FlowPane fp;
 	public void initialize() throws InterruptedException, SQLException {
+		Settings.createProperties();
 		fp.prefWidthProperty().bind(ScrollPane.widthProperty());
 		fp.prefHeightProperty().bind(ScrollPane.heightProperty());
 		fp.setStyle("-fx-background-color: transparent;");
