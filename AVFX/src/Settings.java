@@ -17,7 +17,7 @@ public class Settings {
 	static void save() {
 
 		try {
-			output = new FileOutputStream("C:/Users/Vural/Desktop/f.xml");
+			output = new FileOutputStream("settings.xml");
 			prop.storeToXML(output, null);
 			output.close();
 		} catch (FileNotFoundException e) {
@@ -33,7 +33,7 @@ public class Settings {
 	// Loads Properties from a XML File
 	static void load() {
 		try {
-			input = new FileInputStream("C:/Users/Vural/Desktop/f.xml");
+			input = new FileInputStream("settings.xml");
 
 			// load a properties file
 			prop.loadFromXML(input);
@@ -54,7 +54,7 @@ public class Settings {
 
 	// Creates a Property with default values if there is no XML File
 	static void createProperties() {
-		File file = new File("C:/Users/Vural/Desktop/Settings.xml");
+		File file = new File("settings.xml");
 		if (file.exists()) {
 
 		} else {
