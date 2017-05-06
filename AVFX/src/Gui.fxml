@@ -19,7 +19,7 @@
             <Image url="@bg.jpg" />
          </image>
       </ImageView>
-      <HBox alignment="CENTER_RIGHT" layoutX="111.0" opacity="0.75" prefHeight="55.0" prefWidth="864.0" style="-fx-background-color: #121212;" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox fx:id="hbox" alignment="CENTER_RIGHT" layoutX="111.0" opacity="0.75" prefHeight="55.0" prefWidth="864.0" style="-fx-background-color: #121212;" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button mnemonicParsing="false" prefWidth="70.0" text="Vollbild">
                <HBox.margin>
@@ -36,7 +36,7 @@
             <Insets />
          </opaqueInsets>
       </HBox>
-      <VBox alignment="TOP_CENTER" opacity="0.75" prefHeight="600.0" prefWidth="111.0" style="-fx-background-color: #121212;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox fx:id="vbox" alignment="TOP_CENTER" opacity="0.75" prefHeight="600.0" prefWidth="111.0" style="-fx-background-color: #121212;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button mnemonicParsing="false" onAction="#bibliothek" prefHeight="50.0" prefWidth="90.0" text="Bibliothek">
                <VBox.margin>
@@ -59,7 +59,7 @@
             <Insets top="20.0" />
          </padding>
       </VBox>
-      <AnchorPane layoutX="111.0" layoutY="55.0" prefHeight="545.0" prefWidth="789.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
+      <AnchorPane fx:id="anchorpane" layoutX="111.0" layoutY="55.0" prefHeight="545.0" prefWidth="789.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>

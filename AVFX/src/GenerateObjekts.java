@@ -31,7 +31,7 @@ public class GenerateObjekts extends Thread {
 		
 	}
 	public void getMedia(){
-		File file = new File("Z:/Movies");
+		File file = new File("C:/Users/Denni/Videos/Trailer");
 		MediaNamen = file.list(new FilenameFilter() {
 			@Override
 			public boolean accept(File current, String name) {
@@ -46,8 +46,8 @@ public class GenerateObjekts extends Thread {
 				for (int i = 0; i < MediaNamen.length; i++) {
 					m = new MediaObjekt();
 					m.setName(MediaNamen[i]);
-					m.setBild("G:/Bilder/ghost.jpg");
-					m.setPath("");
+					m.setBild("Cover/"+MediaNamen[i]+".jpg");
+					m.setPath("C:/Users/Denni/Videos/Trailer/");
 					m.createMediaObjekt();
 					
 					Objekte.add(m.getObjekt());

@@ -30,9 +30,15 @@ ImageView bimage;
 @FXML
 AnchorPane Main;
 @FXML
+AnchorPane anchorpane;
+@FXML
 ScrollPane ScrollPane;
 @FXML
 FlowPane fp;
+@FXML
+VBox vbox;
+@FXML
+HBox hbox;
 	public void initialize() throws InterruptedException, SQLException {
 		Settings.createProperties();
 		fp.prefWidthProperty().bind(ScrollPane.widthProperty());
@@ -42,6 +48,10 @@ FlowPane fp;
 
 		GuiElemente.setScrollPane(ScrollPane);
 		GuiElemente.setFlowPane(fp);
+		GuiElemente.setMain(Main);
+		GuiElemente.setanchorpane(anchorpane);
+		GuiElemente.sethbox(hbox);
+		GuiElemente.setvbox(vbox);
 		bimage.fitWidthProperty().bind(Main.widthProperty());
 		bimage.fitHeightProperty().bind(Main.heightProperty());
 		bimage.setPreserveRatio(false);

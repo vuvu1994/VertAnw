@@ -3,20 +3,26 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import org.apache.commons.io.FileUtils;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.CacheHint;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 
 public class MediaObjekt {
 	String Name;
@@ -27,7 +33,7 @@ public class MediaObjekt {
 	int sizew = 0;
 	int sizeh = 0;
 	VBox vb;
-
+	ImageView iv;
 	public MediaObjekt(){
 		
 	}
@@ -62,13 +68,14 @@ public class MediaObjekt {
 		File file = new File(Bild);
 		image = new Image(file.toURI().toString());
 		
-		ImageView iv = new ImageView(image);
+		iv = new ImageView(image);
 		iv.setFitWidth(300);
 		iv.setFitHeight(450);
 		iv.setPreserveRatio(false);
 		iv.setSmooth(true);
 		iv.setCache(true);
 		iv.setCacheHint(CacheHint.QUALITY);
+
 		vb.getChildren().add(iv);
 
 		Text tname = new Text(Name);
@@ -84,24 +91,59 @@ public class MediaObjekt {
 	
 		bu.toFront();
 		vb.toBack();
-	
 		
+		final ContextMenu contextMenu = new ContextMenu();
+		MenuItem cover = new MenuItem("Cover");
+		MenuItem playlist = new MenuItem("Playlist");
+		
+		contextMenu.getItems().addAll(cover, playlist);
+		
+		bu.setContextMenu(contextMenu);
+		bu.setOnMousePressed(new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(MouseEvent event) {
+		        if (event.isSecondaryButtonDown()) {
+		            contextMenu.show(bu, event.getScreenX(), event.getScreenY());
+		        }
+		    }
+		});
 		bu.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 				try {
 					System.out.println("Eventtyp bei MediaObjekt: " + e.getEventType());
-					
+					MediaPlayer.createMediaPlayer(Path+Name);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
+		cover.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override
+		    public void handle(ActionEvent event) {
+		        setCover();
+		    }
+		});
 
 	}
 	
 	public AnchorPane getObjekt() {
 		return AM;
+	}
+	
+	public void setCover(){
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Cover auswählen");
+		File file = fileChooser.showOpenDialog(GuiElemente.getMain().getScene().getWindow());
+		iv.setImage(new Image(file.toURI().toString()));
+		
+		File dest = new File("Cover/"+Name+".jpg");
+		try {
+		    FileUtils.copyFile(file, dest);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+
 	}
 }
