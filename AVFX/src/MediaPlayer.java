@@ -1,4 +1,6 @@
 import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -7,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -24,6 +27,16 @@ public class MediaPlayer {
 	 public static void createMediaPlayer(String datei){
 		 
 		 media = new Media(new File(datei).toURI().toString());
+		 createElements();
+		 }
+	 
+
+	 public static void createMediaPlayerwithURL(String datei){
+		 media = new Media(datei);
+		 createElements();
+		 }
+	 
+	 public static void createElements(){
 		 mediaPlayer = new javafx.scene.media.MediaPlayer(media);
 		 mediaView = new MediaView(mediaPlayer);
 		 
@@ -60,11 +73,13 @@ public class MediaPlayer {
 		 m.setBottomAnchor(hb, 0.0);
 		 m.setRightAnchor(hb, 0.0);
 		 m.setLeftAnchor(hb, 0.0);
+		 hb.setStyle("-fx-background-color: #6495ED;");
+		 hb.setOpacity(0.0);
 			mediaView.fitWidthProperty().bind(m.widthProperty());
 			mediaView.fitHeightProperty().bind(m.heightProperty());
 			mediaView.setPreserveRatio(false);
 		 mediaPlayer.setAutoPlay(true);
-		 
+	
 
 			Play.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -107,6 +122,7 @@ public class MediaPlayer {
 						System.out.println("Eventtyp bei ende: " + e.getEventType());
 						 mediaPlayer.pause();
 						 GuiElemente.getMain().getChildren().remove(mediaView);
+						 GuiElemente.getMain().getChildren().remove(hb);
 							Platform.runLater(new Runnable() {
 								@Override
 								public void run() {
@@ -122,7 +138,35 @@ public class MediaPlayer {
 					}
 				}
 			});
-		 }
+			hb.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+		        @Override
+		        public void handle(MouseEvent t) {
+		        	Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							hb.setOpacity(1);
+						}
+					});
+		           
+		        }
+		    });
+			hb.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+		        @Override
+		        public void handle(MouseEvent t) {
+		        	Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							hb.setOpacity(0.0);
+						}
+					});
+		        }
+		    });
+			
+			
+	 }
+	 
 	 
 	 
 	 

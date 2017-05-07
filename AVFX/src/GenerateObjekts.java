@@ -13,6 +13,8 @@ import javafx.scene.layout.FlowPane;
 public class GenerateObjekts extends Thread {
 	String[] MediaNamen;
 	MediaObjekt m=null;
+	//String Mediapath = Settings.getMediaPath();
+	String Mediapath = "C:/Users/Denni/Videos/Trailer/";
 	private ArrayList<AnchorPane> Objekte = new ArrayList<AnchorPane>();
 	public GenerateObjekts(){
 		
@@ -31,7 +33,7 @@ public class GenerateObjekts extends Thread {
 		
 	}
 	public void getMedia(){
-		File file = new File("C:/Users/Denni/Videos/Trailer");
+		File file = new File(Mediapath);
 		MediaNamen = file.list(new FilenameFilter() {
 			@Override
 			public boolean accept(File current, String name) {
@@ -47,7 +49,7 @@ public class GenerateObjekts extends Thread {
 					m = new MediaObjekt();
 					m.setName(MediaNamen[i]);
 					m.setBild("Cover/"+MediaNamen[i]+".jpg");
-					m.setPath("C:/Users/Denni/Videos/Trailer/");
+					m.setPath(Mediapath);
 					m.createMediaObjekt();
 					
 					Objekte.add(m.getObjekt());

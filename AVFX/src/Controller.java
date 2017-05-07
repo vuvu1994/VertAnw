@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Random;
 
 import javafx.application.Platform;
@@ -14,6 +15,7 @@ import javafx.scene.CacheHint;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -23,6 +25,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 
 public class Controller {
 @FXML
@@ -66,6 +69,35 @@ HBox hbox;
   public void bibliothek() throws Exception{
 	  fp.getChildren().clear();
 	  new GenerateObjekts().start();
+	  
+  }
+  public void youtube() throws Exception{
+	  fp.getChildren().clear();
+	 InternetBrowser.createWebView();
+	  
+  }
+  
+  public void urlopen() throws Exception{
+	  
+	  TextInputDialog dialog = new TextInputDialog("URL");
+	  dialog.setTitle("Url eingeben");
+	  dialog.setHeaderText("AVFX HTTP Player");
+	  dialog.setContentText("Link zur Datei:");
+
+	  // Traditional way to get the response value.
+	  Optional<String> result = dialog.showAndWait();
+	  if (result.isPresent()){
+	      System.out.println("URL: " + result.get());
+	  }
+	  MediaPlayer.createMediaPlayerwithURL(result.get().toString());
+	  
+  }
+  public void openfile() throws Exception{
+	  
+	  FileChooser fileChooser = new FileChooser();
+	  fileChooser.setTitle("Cover auswählen");
+	  File file = fileChooser.showOpenDialog(GuiElemente.getMain().getScene().getWindow());
+	  MediaPlayer.createMediaPlayer(file.getAbsolutePath().toString());
 	  
   }
   public void exit(){
