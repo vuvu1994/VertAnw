@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 
-<AnchorPane fx:id="Main" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #121212;" stylesheets="@FlowPane.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane fx:id="Main" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #121212;" stylesheets="@FlowPane.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <ImageView fx:id="bimage" fitHeight="600.0" fitWidth="893.0" layoutX="7.0" opacity="0.22" pickOnBounds="true">
          <image>
@@ -21,6 +21,16 @@
       </ImageView>
       <HBox fx:id="hbox" alignment="CENTER_RIGHT" layoutX="111.0" opacity="0.75" prefHeight="55.0" prefWidth="864.0" style="-fx-background-color: #6495ED;" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <Button mnemonicParsing="false" onAction="#youtubeBackwards" text="Zurück">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#youtubeForwards" text="Vorwärts">
+               <HBox.margin>
+                  <Insets right="300.0" />
+               </HBox.margin>
+            </Button>
             <Button mnemonicParsing="false" onAction="#urlopen" text="Link öffnen">
                <HBox.margin>
                   <Insets right="20.0" />
@@ -31,7 +41,7 @@
                   <Insets right="20.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefWidth="70.0" text="Vollbild">
+            <Button mnemonicParsing="false" text="Vollbild">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
@@ -58,7 +68,7 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" text="Einstellungen" />
+            <Button mnemonicParsing="false" onAction="#einstellungen" prefHeight="50.0" prefWidth="90.0" text="Einstellungen" />
             <ProgressBar prefWidth="90.0" progress="0.0">
                <padding>
                   <Insets top="30.0" />
