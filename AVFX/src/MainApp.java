@@ -26,8 +26,9 @@ public class MainApp extends Application {
 		primaryStage.setResizable(true);
 		primaryStage.show();
 		primaryStage.setFullScreenExitHint("");
-		primaryStage.setFullScreen(true);
-
+		primaryStage.setFullScreen(false);
+		primaryStage.setWidth(1140);
+		primaryStage.setHeight(720);
 	}
 
 }

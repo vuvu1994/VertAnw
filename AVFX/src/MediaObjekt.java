@@ -66,6 +66,10 @@ public class MediaObjekt {
 		AM.getChildren().add(hb);
 		AM.getChildren().add(bu);
 		File file = new File(Bild);
+		if (!file.exists()){
+			System.out.println("Cover nicht vorhanden");
+			file = new File("Cover/platzhaltervideo.png");
+		}
 		image = new Image(file.toURI().toString());
 		
 		iv = new ImageView(image);
