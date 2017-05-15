@@ -14,7 +14,7 @@ public class GenerateObjekts extends Thread {
 	String[] MediaNamen;
 	MediaObjekt m=null;
 	//String Mediapath = Settings.getMediaPath();
-	String Mediapath = "C:/Users/Denni/Videos/Trailer/";
+	String Mediapath = "C:/Users/Vural/Desktop/IT-Organisation";
 	private ArrayList<AnchorPane> Objekte = new ArrayList<AnchorPane>();
 	public GenerateObjekts(){
 		
