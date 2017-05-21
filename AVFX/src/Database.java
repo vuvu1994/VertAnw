@@ -19,7 +19,7 @@ public class Database {
 		Class.forName("org.h2.Driver");
 		//Datenbank erzeugen und Verbindung zur Datenbank herstellen
 		JdbcConnectionPool cp = JdbcConnectionPool.create(
-	            "jdbc:h2:file:C:/Users/Vural/Desktop;", "", "");
+	            "jdbc:h2:file:C:/Users/Denni/Desktop;", "", "");
 		conn = cp.getConnection(); 
 
 	} catch (ClassNotFoundException | SQLException e) {

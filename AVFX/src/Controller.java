@@ -44,6 +44,8 @@ public class Controller {
 	VBox vbox;
 	@FXML
 	HBox hbox;
+	@FXML
+	Button exit;
 
 	public void initialize() throws InterruptedException, SQLException {
 		Settings.createProperties();
@@ -67,6 +69,7 @@ public class Controller {
 		Database.addtoMedia("TestName");
 		Database.addtoMedia("TestName2");
 		System.out.println(Database.getAllMedia());
+		
 		// Database test Ende
 	}
 
