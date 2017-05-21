@@ -5,6 +5,7 @@ import java.util.Observable;
 
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.NodeOrientation;
@@ -32,7 +33,7 @@ public class MediaPlayer {
 	 private static Duration duration;
 	 static private Slider dauer;
 	 static private Slider volumeSlider;
-	 
+	 static boolean backpressed = false;
 	 public static void createMediaPlayer(String datei){
 		 
 		 media = new Media(new File(datei).toURI().toString());
@@ -248,9 +249,28 @@ public class MediaPlayer {
 			back.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent e) {
-					double currentzeit = mediaPlayer.getCurrentTime().toSeconds();
-					currentzeit = currentzeit - 5.0;
-					mediaPlayer.seek(Duration.seconds(currentzeit));
+					if (!backpressed){
+	            		backpressed = true;
+	            	}else{
+	            		backpressed = false;
+	            	}
+					 Task task = new Task<Void>() {
+				            protected Void call() throws Exception {
+				            	
+				            	while (backpressed){
+				            	double currentzeit = mediaPlayer.getCurrentTime().toSeconds();
+								currentzeit = currentzeit - 0.1;
+								mediaPlayer.seek(Duration.seconds(currentzeit));
+				                
+				            	}
+								return null;
+				            }
+				        };
+				        Thread th = new Thread(task);
+				        th.setDaemon(true);
+				        th.start();
+					
+					
 				}
 			});
 			

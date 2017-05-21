@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 
-<AnchorPane fx:id="Main" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #121212;" stylesheets="@FlowPane.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane fx:id="Main" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #121212;" stylesheets="@FlowPane.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <ImageView fx:id="bimage" fitHeight="600.0" fitWidth="893.0" layoutX="7.0" opacity="0.22" pickOnBounds="true">
          <image>
@@ -41,7 +41,7 @@
                   <Insets right="20.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Vollbild">
+            <Button mnemonicParsing="false" onAction="#fullscreen" text="Vollbild">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>

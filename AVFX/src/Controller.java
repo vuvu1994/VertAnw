@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.CacheHint;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
@@ -28,6 +29,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class Controller {
 	@FXML
@@ -132,6 +134,16 @@ public class Controller {
 	public void exit() {
 		System.out.println("EXIT");
 		System.exit(0);
+	}
+	
+	public void fullscreen(){
+		Scene scene =  (Scene) GuiElemente.getMain().getScene();
+		 Stage stage = (Stage) scene.getWindow();
+		 if (stage.isFullScreen()){
+			 stage.setFullScreen(false);
+		 }else{
+		 stage.setFullScreen(true);
+		 }
 	}
 
 }
