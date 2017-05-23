@@ -1,8 +1,11 @@
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Observable;
 
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.NodeOrientation;
@@ -20,14 +23,17 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class MediaPlayer {
 
 	 static MediaView mediaView;
 	 static Media media;
 	 static javafx.scene.media.MediaPlayer mediaPlayer;
-	 
-	 
+	 private static Duration duration;
+	 static private Slider dauer;
+	 static private Slider volumeSlider;
+	 static boolean backpressed = false;
 	 public static void createMediaPlayer(String datei){
 		 
 		 media = new Media(new File(datei).toURI().toString());
@@ -72,9 +78,9 @@ public class MediaPlayer {
 		 Image forwardI=new Image(new File("Controls/forward.png").toURI().toString());
 		 ImageView forwardIV=new ImageView(forwardI);
 		 Button forward = new Button("",forwardIV);
-		 Slider dauer = new Slider();
+		 dauer = new Slider();
 		 dauer.setPrefWidth(500);
-		 Slider laut = new Slider();
+		 volumeSlider = new Slider();
 		 Image fullI=new Image(new File("Controls/fullscreen.png").toURI().toString());
 		 ImageView fullIV=new ImageView(fullI);
 		 Button fullscreen = new Button("",fullIV);
@@ -87,7 +93,7 @@ public class MediaPlayer {
 		 hb.getChildren().add(dauer);
 		 hb2.getChildren().add(fullscreen);
 		 hb2.getChildren().add(ende);
-		 hb2.getChildren().add(laut);
+		 hb2.getChildren().add(volumeSlider);
 		 
 		 hb.setAlignment(Pos.CENTER_LEFT);
 		 hb2.setAlignment(Pos.CENTER_RIGHT);
@@ -107,15 +113,16 @@ public class MediaPlayer {
 		 ap.setLeftAnchor(hb, 0.0);
 		 ap.setRightAnchor(hb2, 0.0);
 		 m.setBottomAnchor(ap, 0.0);
-		 
+		
 		 
 			mediaView.fitWidthProperty().bind(m.widthProperty());
 			mediaView.fitHeightProperty().bind(m.heightProperty());
 			mediaView.setPreserveRatio(false);
-		 mediaPlayer.setAutoPlay(true);
+			mediaPlayer.setAutoPlay(true);
 		 ap.prefWidthProperty().bind(m.widthProperty());
 		bgIV.fitWidthProperty().bind(m.widthProperty());
 		bgIV.setFitHeight(100);
+		
 		
 			Play.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -204,11 +211,117 @@ public class MediaPlayer {
 					});
 		        }
 		    });
+			forward.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent e) {
+					try {
+						if (mediaPlayer.getRate() > 1){
+							mediaPlayer.setRate(1.0);
+						}else {
+						mediaPlayer.setRate(4.0);
+						}
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+			mediaPlayer.setOnReady(new Runnable() {
+	            public void run() {
+	                duration = mediaPlayer.getMedia().getDuration();
+	                updateValues();
+	            }
+	        });
+			
+			
+			
+			mediaPlayer.currentTimeProperty().addListener(new InvalidationListener() 
+	        {
+			
+				@Override
+				public void invalidated(javafx.beans.Observable observable) {
+					// TODO Auto-generated method stub
+					 updateValues();
+				}
+
+				
+	        });
+			back.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent e) {
+					if (!backpressed){
+	            		backpressed = true;
+	            	}else{
+	            		backpressed = false;
+	            	}
+					 Task task = new Task<Void>() {
+				            protected Void call() throws Exception {
+				            	
+				            	while (backpressed){
+				            	double currentzeit = mediaPlayer.getCurrentTime().toSeconds();
+								currentzeit = currentzeit - 0.1;
+								mediaPlayer.seek(Duration.seconds(currentzeit));
+				                
+				            	}
+								return null;
+				            }
+				        };
+				        Thread th = new Thread(task);
+				        th.setDaemon(true);
+				        th.start();
+					
+					
+				}
+			});
+			
+			dauer.valueProperty().addListener(new InvalidationListener() {
+
+				@Override
+				public void invalidated(javafx.beans.Observable observable) {
+					// TODO Auto-generated method stub
+					  if (dauer.isValueChanging()) {
+					       // multiply duration by percentage calculated by slider position
+					          mediaPlayer.seek(duration.multiply(dauer.getValue() / 100.0));
+					       }
+				}
+			});
+			
+			volumeSlider.valueProperty().addListener(new InvalidationListener() {
+			    
+
+				@Override
+				public void invalidated(javafx.beans.Observable observable) {
+					// TODO Auto-generated method stub
+					 if (volumeSlider.isValueChanging()) {
+				           mediaPlayer.setVolume(volumeSlider.getValue() / 100.0);
+				       }
+				}
+			});
 			
 			
 	 }
 	 
-	 
+	 public static void updateValues() {
+		  
+	     Platform.runLater(new Runnable() {
+	        public void run() {
+	          Duration currentTime = mediaPlayer.getCurrentTime();
+	        
+	          dauer.setDisable(duration.isUnknown());
+	          if (!dauer.isDisabled() 
+	            && duration.greaterThan(Duration.ZERO) 
+	            && !dauer.isValueChanging()) {
+	             dauer.setValue(currentTime.divide(duration).toMillis()
+	                  * 100.0);
+	          }
+	          if (!volumeSlider.isValueChanging()) {
+	            volumeSlider.setValue((int)Math.round(mediaPlayer.getVolume() 
+	                  * 100));
+         }
+	        }
+	     });
+	  
+	}
 	 
 	 
 }
