@@ -13,8 +13,7 @@ import javafx.scene.layout.FlowPane;
 public class GenerateObjekts extends Thread {
 	String[] MediaNamen;
 	MediaObjekt m=null;
-	//String Mediapath = Settings.getMediaPath();
-	String Mediapath = "C:/Users/Denni/Videos/Trailer/";
+	String Mediapath = Settings.getFirstVideothek();
 	private ArrayList<AnchorPane> Objekte = new ArrayList<AnchorPane>();
 	public GenerateObjekts(){
 		
