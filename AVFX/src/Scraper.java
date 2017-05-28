@@ -5,6 +5,5 @@ public class Scraper {
 
     public void test(){
 
-        System.out.println();
     }
 }
