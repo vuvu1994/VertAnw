@@ -119,6 +119,8 @@ public class MediaPlayer {
 			mediaView.fitHeightProperty().bind(m.heightProperty());
 			mediaView.setPreserveRatio(false);
 			mediaPlayer.setAutoPlay(true);
+			//If Wert ungleich null
+			//mediaPlayer.setStartTime(Aus der Datenbanauslesehen);
 		 ap.prefWidthProperty().bind(m.widthProperty());
 		bgIV.fitWidthProperty().bind(m.widthProperty());
 		bgIV.setFitHeight(100);
@@ -306,7 +308,10 @@ public class MediaPlayer {
 	     Platform.runLater(new Runnable() {
 	        public void run() {
 	          Duration currentTime = mediaPlayer.getCurrentTime();
-	        
+	        //Double Cast und in die Datenbank schreiben und
+				//eine Funktion um den Wert abzuholen
+
+
 	          dauer.setDisable(duration.isUnknown());
 	          if (!dauer.isDisabled() 
 	            && duration.greaterThan(Duration.ZERO) 
