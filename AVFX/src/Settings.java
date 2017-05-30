@@ -10,7 +10,6 @@ import java.util.Properties;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -69,7 +68,7 @@ public class Settings {
 	public static void createProperties() {
 		File file = new File("settings.xml");
 		if (file.exists()) {
-
+			return;
 		} else {
 			prop.setProperty("1. Audiothek", "C:");
 			prop.setProperty("2. Audiothek", "D:");

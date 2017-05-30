@@ -131,6 +131,11 @@ public class Controller {
 
 	}
 
+	public void radio() throws Exception{
+	fp.getChildren().clear();
+	Radio.createRadioElements();
+	}
+
 	public void exit() {
 		System.out.println("EXIT");
 		System.exit(0);

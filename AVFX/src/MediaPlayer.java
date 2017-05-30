@@ -119,6 +119,7 @@ public class MediaPlayer {
 			mediaView.fitHeightProperty().bind(m.heightProperty());
 			mediaView.setPreserveRatio(false);
 			mediaPlayer.setAutoPlay(true);
+
 			//If Wert ungleich null
 			//mediaPlayer.setStartTime(Aus der Datenbanauslesehen);
 		 ap.prefWidthProperty().bind(m.widthProperty());
