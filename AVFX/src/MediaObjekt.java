@@ -137,7 +137,7 @@ public class MediaObjekt {
 	
 	public void setCover(){
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Cover auswählen");
+		fileChooser.setTitle("Cover auswï¿½hlen");
 		File file = fileChooser.showOpenDialog(GuiElemente.getMain().getScene().getWindow());
 		iv.setImage(new Image(file.toURI().toString()));
 		
