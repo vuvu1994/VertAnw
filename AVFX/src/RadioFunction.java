@@ -18,7 +18,6 @@ public class RadioFunction extends Thread{
 
            // Connection
            URLConnection urlConnection = new URL("http://wdr-wdr5-live.icecast.wdr.de/wdr/wdr5/live/mp3/128/stream.mp3").openConnection();
-
            urlConnection.connect();
 
            // Playing

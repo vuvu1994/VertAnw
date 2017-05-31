@@ -11,7 +11,7 @@ import javafx.scene.layout.HBox;
  */
 public class Radio {
 
-
+static boolean playerstarted = false;
 
     public static void createRadioElements(){
         FlowPane fp = GuiElemente.getFlowPane();
@@ -31,14 +31,17 @@ public class Radio {
         hbox.getChildren().addAll(buttonRadioPlay, buttonRadioStop);
 
         fp.getChildren().add(hbox);
-
         RadioFunction rf = new RadioFunction();
+        rf.start();
+        playerstarted = true;
 
         buttonRadioPlay.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
-                rf.start();
+                if (!playerstarted) {
+                    RadioFunction rf = new RadioFunction();
+                    rf.start();
+                }
             }
         });
 
@@ -47,6 +50,7 @@ public class Radio {
             public void handle(ActionEvent event) {
 
             RadioFunction.player.close();
+            playerstarted = false;
             }
         });
     }
