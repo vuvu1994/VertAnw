@@ -50,7 +50,7 @@ public class Controller {
 	Button exit;
 
 	public void initialize() throws InterruptedException, SQLException {
-		Settings.createProperties();
+
 		fp.prefWidthProperty().bind(ScrollPane.widthProperty());
 		fp.prefHeightProperty().bind(ScrollPane.heightProperty());
 		fp.setStyle("-fx-background-color: transparent;");
@@ -125,10 +125,15 @@ public class Controller {
 	public void openfile() throws Exception {
 
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Cover auswählen");
+		fileChooser.setTitle("Cover auswï¿½hlen");
 		File file = fileChooser.showOpenDialog(GuiElemente.getMain().getScene().getWindow());
 		MediaPlayer.createMediaPlayer(file.getAbsolutePath().toString());
 
+	}
+
+	public void radio() throws Exception{
+	fp.getChildren().clear();
+	Radio.createRadioElements();
 	}
 
 	public void exit() {

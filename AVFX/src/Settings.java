@@ -7,12 +7,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
@@ -67,7 +68,7 @@ public class Settings {
 	public static void createProperties() {
 		File file = new File("settings.xml");
 		if (file.exists()) {
-
+			return;
 		} else {
 			prop.setProperty("1. Audiothek", "C:");
 			prop.setProperty("2. Audiothek", "D:");
@@ -78,8 +79,78 @@ public class Settings {
 			prop.setProperty("FontSize", "12");
 			prop.setProperty("FontColor", "blau");
 			prop.setProperty("PicSize", "klein");
+			prop.setProperty("1Live","http://wdr-1live-live.icecast.wdr.de/wdr/1live/live/mp3/128/stream.mp3");
+			prop.setProperty("WDR2","http://wdr-wdr2-rheinruhr.icecast.wdr.de/wdr/wdr2/rheinruhr/mp3/128/stream.mp3");
+			prop.setProperty("WDR5","http://wdr-wdr5-live.icecast.wdr.de/wdr/wdr5/live/mp3/128/stream.mp3");
 			save();
 		}
+	}
+	//////////////////////////////////////////////////////////////////////////////////////////////////
+	static Label labelAudio = new Label("Wï¿½hle ersten Audio Ordner");
+	static Label labelAudio2 = new Label("Wï¿½hle zweiten Audio Ordner");
+	static Label labelAudio3 = new Label("Wï¿½hle dritter Audio Ordner");
+	static Label labelVideo = new Label("Wï¿½hle ersten Video Ordner");
+	static Label labelVideo2 = new Label("Wï¿½hle zweiten Video Ordner");
+	static Label labelVideo3 = new Label("Wï¿½hle dritten Video Ordner");
+	static Label labelFontSize = new Label("Wï¿½hle eine Schrifft grï¿½ï¿½e");
+	static Label labelFontColor = new Label("Wï¿½hle Schriftfarbe");
+	static Label labelPicSize = new Label("Wï¿½hle Bild grï¿½ï¿½e");
+	static Label label1live = new Label("1Live Link");
+	static Label labelWdr2 = new Label("WDR2 Link");
+	static Label labelWdr5 = new Label("WDR5 Link");
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////
+	static Button buttonAudio = new Button(getFistAudiothek());
+	static Button buttonAudio2 = new Button(getSecondAudiothek());
+	static Button buttonAudio3 = new Button(getThirdAudiothek());
+	static Button buttonVideo = new Button(getFirstVideothek());
+	static Button buttonVideo2 = new Button(getSecondVideothek());
+	static Button buttonVideo3 = new Button(getThirdVideothek());
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+
+	static TextField text1live = new TextField(getText1live());
+	static TextField textWdr2 = new TextField(getTextWdr2());
+	static TextField textWdr5 = new TextField(getTextWdr5());
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	public static void setText1live(String fa) {
+
+		prop.setProperty("1Live", fa);
+		save();
+
+	}
+
+	public static String getText1live() {
+		load();
+		String s = prop.getProperty("1Live");
+		return s;
+	}
+
+	public static void setTextWdr2(String fa) {
+
+		prop.setProperty("WDR2", fa);
+		save();
+
+	}
+
+	public static String getTextWdr2 () {
+		load();
+		String s = prop.getProperty("WDR2");
+		return s;
+	}
+
+	public static void setTextWdr5(String fa) {
+
+		prop.setProperty("WDR5", fa);
+		save();
+
+	}
+
+	public static String getTextWdr5 () {
+		load();
+		String s = prop.getProperty("WDR5");
+		return s;
 	}
 
 	public static void setFistAudiothek(String fa) {
@@ -198,50 +269,20 @@ public class Settings {
 		String s = prop.getProperty("PicSize");
 		return s;
 	}
-	//////////////////////////////////////////////////////////////////////////////////////////////////
-	static Label labelAudio = new Label("Wähle ersten Audio Ordner");
-	static Label labelAudio2 = new Label("Wähle zweiten Audio Ordner");
-	static Label labelAudio3 = new Label("Wähle dritter Audio Ordner");
-	static Label labelVideo = new Label("Wähle ersten Video Ordner");
-	static Label labelVideo2 = new Label("Wähle zweiten Video Ordner");
-	static Label labelVideo3 = new Label("Wähle dritten Video Ordner");
-	static Label labelFontSize = new Label("Wähle eine Schrifft größe");
-	static Label labelFontColor = new Label("Wähle Schriftfarbe");
-	static Label labelPicSize = new Label("Wähle Bild größe");
-
-	//////////////////////////////////////////////////////////////////////////////////////////////////
-	static Button buttonAudio = new Button(getFistAudiothek());
-	static Button buttonAudio2 = new Button(getSecondAudiothek());
-	static Button buttonAudio3 = new Button(getThirdAudiothek());
-	static Button buttonVideo = new Button(getFirstVideothek());
-	static Button buttonVideo2 = new Button(getSecondVideothek());
-	static Button buttonVideo3 = new Button(getThirdVideothek());
-
-	//////////////////////////////////////////////////////////////////////////////////////////////////
-	static ComboBox<String> dropFontSize = new ComboBox();
-	static ComboBox<String> dropFontColor = new ComboBox();
-	static ComboBox<String> dropPicSize = new ComboBox();
-	
 
 	
 	public static void createElements() {
-		
-		dropFontSize.getItems().addAll("12", "14", "16", "18", "20", "22", "24", "26");
-		dropFontSize.setValue(getFontSize());
 
-		dropFontColor.getItems().addAll("blau", "rot", "grün");
-		dropFontColor.setValue(getFontColor());
 
-		dropPicSize.getItems().addAll("klein", "mittel", "groß");
-		dropPicSize.setValue(getPicSize());
-		
 		FlowPane fp = GuiElemente.getFlowPane();
 		GridPane gp = new GridPane();
 
-		gp.setVgap(85);
+		gp.setVgap(30);
 		gp.setHgap(10);
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 		gp.getChildren().add(labelAudio);
 		gp.setConstraints(labelAudio, 0, 0);
 
@@ -260,14 +301,14 @@ public class Settings {
 		gp.getChildren().add(labelVideo3);
 		gp.setConstraints(labelVideo3, 0, 5);
 
-		gp.getChildren().add(labelFontSize);
-		gp.setConstraints(labelFontSize, 0, 6);
+		gp.getChildren().add(label1live);
+		gp.setConstraints(label1live, 0, 6);
 
-		gp.getChildren().add(labelFontColor);
-		gp.setConstraints(labelFontColor, 0, 7);
+		gp.getChildren().add(labelWdr2);
+		gp.setConstraints(labelWdr2, 0, 7);
 
-		gp.getChildren().add(labelPicSize);
-		gp.setConstraints(labelPicSize, 0, 8);
+		gp.getChildren().add(labelWdr5);
+		gp.setConstraints(labelWdr5, 0, 8);
 
 		gp.getChildren().add(buttonAudio);
 		gp.setConstraints(buttonAudio, 1, 0);
@@ -287,14 +328,14 @@ public class Settings {
 		gp.getChildren().add(buttonVideo3);
 		gp.setConstraints(buttonVideo3, 1, 5);
 
-		gp.getChildren().add(dropFontSize);
-		gp.setConstraints(dropFontSize, 1, 6);
+		gp.getChildren().add(text1live);
+		gp.setConstraints(text1live, 1, 6);
 
-		gp.getChildren().add(dropFontColor);
-		gp.setConstraints(dropFontColor, 1, 7);
+		gp.getChildren().add(textWdr2);
+		gp.setConstraints(textWdr2, 1, 7);
 
-		gp.getChildren().add(dropPicSize);
-		gp.setConstraints(dropPicSize, 1, 8);
+		gp.getChildren().add(textWdr5);
+		gp.setConstraints(textWdr5, 1, 8);
 
 		fp.getChildren().add(gp);
 
@@ -304,23 +345,64 @@ public class Settings {
 		chooser(buttonVideo);
 		chooser(buttonVideo2);
 		chooser(buttonVideo3);
-	
+
+
+		text1live.setOnKeyPressed(new EventHandler<KeyEvent>()
+		{
+			@Override
+			public void handle(KeyEvent ke)
+			{
+				if (ke.getCode().equals(KeyCode.ENTER))
+				{
+					setText1live(text1live.getText());
+				}
+			}
+		});
+		textWdr2.setOnKeyPressed(new EventHandler<KeyEvent>()
+		{
+			@Override
+			public void handle(KeyEvent ke)
+			{
+				if (ke.getCode().equals(KeyCode.ENTER))
+				{
+					setText1live(textWdr2.getText());
+				}
+			}
+		});
+		textWdr5.setOnKeyPressed(new EventHandler<KeyEvent>()
+		{
+			@Override
+			public void handle(KeyEvent ke)
+			{
+				if (ke.getCode().equals(KeyCode.ENTER))
+				{
+					setText1live(textWdr5.getText());
+				}
+			}
+		});
 	}
 
-	public static void chooser(Button btn){
+	public static void chooser(Button btn) throws NullPointerException{
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
-			public void handle(ActionEvent arg0) {
+			public void handle(ActionEvent arg0) throws NullPointerException {
 				DirectoryChooser chooser = new DirectoryChooser();
 				File file = chooser.showDialog(GuiElemente.getMain().getScene().getWindow());
 				btn.setText(file.toString());
-				setFistAudiothek(btn.getText());
-				setSecondAudiothek(btn.getText());
-				setThirdAudiothek(btn.getText());
-				setFirstVideothek(btn.getText());
-				setSecondVideothek(btn.getText());
-				setThirdVideothek(btn.getText());
+				if (arg0.getSource()== buttonAudio){
+					setFistAudiothek(btn.getText());
+				}else if(arg0.getSource()== buttonAudio2){
+					setSecondAudiothek(btn.getText());
+				}else if(arg0.getSource()== buttonAudio3){
+					setThirdAudiothek(btn.getText());
+				}else if(arg0.getSource()== buttonVideo){
+					setFirstVideothek(btn.getText());
+				}else if(arg0.getSource()== buttonVideo2){
+					setSecondVideothek(btn.getText());
+				}else if(arg0.getSource()== buttonVideo3){
+					setThirdVideothek(btn.getText());
+				}
 			}
 		});
 	}

@@ -17,7 +17,7 @@ public class MainApp extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException, InterruptedException {
-
+		Settings.createProperties();
 		Parent root = FXMLLoader.load(getClass().getResource("Gui.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Media Player");
