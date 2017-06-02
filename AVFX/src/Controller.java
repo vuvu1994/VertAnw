@@ -10,15 +10,14 @@ import java.util.Random;
 
 import javafx.application.Platform;
 import javafx.beans.property.Property;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.CacheHint;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -48,9 +47,17 @@ public class Controller {
 	HBox hbox;
 	@FXML
 	Button exit;
+	@FXML
+	ComboBox radioComboBox;
+
+	ObservableList<String> radioList = FXCollections.observableArrayList("1Live","WDR2","WDR5");
+
+	static String comboBoxValue;
+
 
 	public void initialize() throws InterruptedException, SQLException {
 
+		radioComboBox.setItems(radioList);
 		fp.prefWidthProperty().bind(ScrollPane.widthProperty());
 		fp.prefHeightProperty().bind(ScrollPane.heightProperty());
 		fp.setStyle("-fx-background-color: transparent;");
@@ -140,7 +147,7 @@ public class Controller {
 		System.out.println("EXIT");
 		System.exit(0);
 	}
-	
+
 	public void fullscreen(){
 		Scene scene =  (Scene) GuiElemente.getMain().getScene();
 		 Stage stage = (Stage) scene.getWindow();
@@ -150,5 +157,13 @@ public class Controller {
 		 stage.setFullScreen(true);
 		 }
 	}
+
+
+	public void radioComboBox(ActionEvent event){
+
+		comboBoxValue = radioComboBox.getValue().toString();
+
+	}
+
 
 }

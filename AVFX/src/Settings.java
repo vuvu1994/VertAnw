@@ -65,7 +65,9 @@ public class Settings {
 	}
 
 	// Creates a Property with default values if there is no XML File
+
 	public static void createProperties() {
+
 		File file = new File("settings.xml");
 		if (file.exists()) {
 			return;

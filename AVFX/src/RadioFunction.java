@@ -11,13 +11,26 @@ import java.net.URLConnection;
  */
 public class RadioFunction extends Thread{
         static AdvancedPlayer player;
-
+        static String spec = "";
 
     public synchronized void run() {
+
        try{
 
-           // Connection
-           URLConnection urlConnection = new URL("http://wdr-wdr5-live.icecast.wdr.de/wdr/wdr5/live/mp3/128/stream.mp3").openConnection();
+           if (Controller.comboBoxValue == null) {
+               Radio.playerstarted = false;
+               System.out.println(Controller.comboBoxValue);
+           } else if (Controller.comboBoxValue == "1Live") {
+               spec = Settings.getText1live();
+           } else if (Controller.comboBoxValue == "WDR2") {
+               spec = Settings.getTextWdr2();
+           } else if (Controller.comboBoxValue == "WDR5") {
+               spec = Settings.getTextWdr5();
+           }
+
+            // Connection
+           URLConnection urlConnection = new URL(spec).openConnection();
+
            urlConnection.connect();
 
            // Playing
@@ -31,7 +44,9 @@ public class RadioFunction extends Thread{
 
        }
     }
-
+    public void close(){
+    player.close();
+    }
 
 
 }

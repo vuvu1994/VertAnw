@@ -32,8 +32,6 @@ static boolean playerstarted = false;
 
         fp.getChildren().add(hbox);
         RadioFunction rf = new RadioFunction();
-        rf.start();
-        playerstarted = true;
 
         buttonRadioPlay.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -41,6 +39,7 @@ static boolean playerstarted = false;
                 if (!playerstarted) {
                     RadioFunction rf = new RadioFunction();
                     rf.start();
+                    playerstarted = true;
                 }
             }
         });
@@ -49,7 +48,7 @@ static boolean playerstarted = false;
             @Override
             public void handle(ActionEvent event) {
 
-            RadioFunction.player.close();
+            rf.close();
             playerstarted = false;
             }
         });
