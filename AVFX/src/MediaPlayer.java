@@ -1,6 +1,7 @@
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Observable;
 
 import javafx.application.Platform;
@@ -34,9 +35,18 @@ public class MediaPlayer {
 	 static private Slider dauer;
 	 static private Slider volumeSlider;
 	 static boolean backpressed = false;
+	 static String mediaName;
 	 public static void createMediaPlayer(String datei){
-		 
+		 //kürzung des String alle Leerzeichen weg + Datei Pfad weg
 		 media = new Media(new File(datei).toURI().toString());
+		 int temp=datei.lastIndexOf("\\")+1;
+		 mediaName =datei.substring(temp);
+		 mediaName=mediaName.replaceAll(" ","");
+		 try {
+			 Database.addtoMedia(mediaName);
+		 } catch (SQLException e) {
+			 e.printStackTrace();
+		 }
 		 createElements();
 		 }
 	 
@@ -309,8 +319,9 @@ public class MediaPlayer {
 	     Platform.runLater(new Runnable() {
 	        public void run() {
 	          Duration currentTime = mediaPlayer.getCurrentTime();
-	        //Double Cast und in die Datenbank schreiben und
-				//eine Funktion um den Wert abzuholen
+				Database.updateaktuell(mediaName, currentTime.toSeconds());
+
+
 
 
 	          dauer.setDisable(duration.isUnknown());

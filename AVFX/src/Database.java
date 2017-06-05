@@ -19,7 +19,7 @@ public class Database {
 		Class.forName("org.h2.Driver");
 		//Datenbank erzeugen und Verbindung zur Datenbank herstellen
 		JdbcConnectionPool cp = JdbcConnectionPool.create(
-	            "jdbc:h2:file:C:/Users/Denni/Desktop;", "", "");
+	            "jdbc:h2:file:C:/Users/Vural/Desktop/TestAudioVideoJavaFX/TestDatabase", "", "");
 		conn = cp.getConnection(); 
 
 	} catch (ClassNotFoundException | SQLException e) {
@@ -27,7 +27,7 @@ public class Database {
 		e.printStackTrace();
 	}
 	}
-	//Rückgabe der Vorhanden Tabelle ( falls keine Vorhanden ist Fehlermeldung)
+	//Rï¿½ckgabe der Vorhanden Tabelle ( falls keine Vorhanden ist Fehlermeldung)
 	public static void getTable() throws SQLException{
 		DatabaseMetaData md = conn.getMetaData(); 
 		ResultSet rs = md.getTables(null, null, "%", null);
@@ -52,7 +52,7 @@ public class Database {
 	      
 	}
 
-	//Hinzufügen aller Elemente die sich in dem Lokalen Verzeichnis befinden	
+	//Hinzufï¿½gen aller Elemente die sich in dem Lokalen Verzeichnis befinden	
 	public static void addtoMedia(String Name) throws SQLException{
 		Statement stmt = conn.createStatement();
 		ArrayList test = getAllMedia();
@@ -83,7 +83,7 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
-		//  Aktualisieren der Länger der Audio / Video Dateien
+		//  Aktualisieren der Lï¿½nger der Audio / Video Dateien
 		public static void updateDauer(String Name,Double Max) {
 			Statement stmt;
 			try {
@@ -102,7 +102,7 @@ public class Database {
 		
 		
 	}
-	//Rückgabe aller Audio / Video Elemente im Lokalen Verzeichnis um diese in dei ArrayListe zu Speichern 
+	//Rï¿½ckgabe aller Audio / Video Elemente im Lokalen Verzeichnis um diese in dei ArrayListe zu Speichern 
 	public static ArrayList getAllMedia() throws SQLException{
 		ArrayList all= new ArrayList();
 		Statement stmt = conn.createStatement();
@@ -120,7 +120,7 @@ public class Database {
        
         return all;
 	}
-	//Rückgabe des Namens der Aktuell ausgewählten Audio / Video Datei
+	//Rï¿½ckgabe des Namens der Aktuell ausgewï¿½hlten Audio / Video Datei
 	public static String getaktuell(String Name) throws SQLException{
 		ArrayList all= new ArrayList();
 		Statement stmt = conn.createStatement();
@@ -140,7 +140,7 @@ public class Database {
        }
         return all.get(0).toString();
 	}
-	////Rückgabe der Dauer der Aktuellen ausgewählten Audio / Video Datei
+	////Rï¿½ckgabe der Dauer der Aktuellen ausgewï¿½hlten Audio / Video Datei
 	public static String getDauer(String Name) throws SQLException{
 		ArrayList all= new ArrayList();
 		Statement stmt = conn.createStatement();

@@ -115,7 +115,8 @@ public class MediaObjekt {
 			public void handle(ActionEvent e) {
 				try {
 					System.out.println("Eventtyp bei MediaObjekt: " + e.getEventType());
-					MediaPlayer.createMediaPlayer(Path+Name);
+					//Bug Fix Datei Namen Vural
+					MediaPlayer.createMediaPlayer(Path+"\\"+Name);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
