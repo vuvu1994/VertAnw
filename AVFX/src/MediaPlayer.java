@@ -100,7 +100,6 @@ public class MediaPlayer {
 
 		 }
 
-
 		 public static void createRadio(String live){
 			 media = new Media(live);
 			 mediaPlayer = new javafx.scene.media.MediaPlayer(media);
