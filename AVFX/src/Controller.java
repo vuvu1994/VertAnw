@@ -171,8 +171,9 @@ public class Controller {
 
 		comboBoxValue = radioComboBox.getValue().toString();
 		File filesize = new File("test.mp3");
-		FileUtils.forceDelete(filesize);
-
+		if (filesize.exists()) {
+			FileUtils.forceDelete(filesize);
+		}
 
 
 		Thread t1 = new Thread(new Runnable() {
