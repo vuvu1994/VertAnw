@@ -12,8 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 
-<AnchorPane fx:id="Main" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #121212;" stylesheets="@FlowPane.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane fx:id="Main" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #121212;" stylesheets="@FlowPane.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
+      <HBox prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0" />
       <ImageView fx:id="bimage" fitHeight="600.0" fitWidth="893.0" layoutX="7.0" opacity="0.22" pickOnBounds="true">
          <image>
             <Image url="@bg.png" />
@@ -68,6 +69,11 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </Button>
+            <Button fx:id="Playlist" mnemonicParsing="false" onAction="#playlist" prefHeight="50.0" prefWidth="90.0" text="Playlist">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Button>
             <Button mnemonicParsing="false" onAction="#youtube" prefHeight="50.0" prefWidth="90.0" text="Youtube">
                <VBox.margin>
                   <Insets bottom="20.0" />
@@ -88,7 +94,7 @@
             <Insets top="20.0" />
          </padding>
       </VBox>
-      <AnchorPane fx:id="anchorpane" layoutX="111.0" layoutY="55.0" prefHeight="545.0" prefWidth="789.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
+      <AnchorPane fx:id="anchorpane" layoutX="111.0" layoutY="55.0" prefHeight="545.0" prefWidth="789.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="85.0">
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -100,9 +106,6 @@
                               <Insets left="30.0" />
                            </padding></FlowPane>
                      </content>
-                     <padding>
-                        <Insets top="20.0" />
-                     </padding>
                   </ScrollPane>
                </children>
             </AnchorPane>

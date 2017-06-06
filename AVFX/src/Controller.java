@@ -1,17 +1,22 @@
 import java.awt.FlowLayout;
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.file.Files;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 
 import javafx.application.Platform;
 import javafx.beans.property.Property;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,9 +31,12 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 
 public class Controller {
 	@FXML
@@ -78,8 +86,9 @@ public class Controller {
 		Database.addtoMedia("TestName");
 		Database.addtoMedia("TestName2");
 		System.out.println(Database.getAllMedia());
-		
-		// Database test Ende
+
+
+
 	}
 
 	public void bibliothek() throws Exception {
@@ -139,8 +148,7 @@ public class Controller {
 	}
 
 	public void radio() throws Exception{
-	fp.getChildren().clear();
-	Radio.createRadioElements();
+
 	}
 
 	public void exit() {
@@ -159,11 +167,62 @@ public class Controller {
 	}
 
 
-	public void radioComboBox(ActionEvent event){
+	public void radioComboBox(ActionEvent event) throws Exception {
 
 		comboBoxValue = radioComboBox.getValue().toString();
+		File filesize = new File("test.mp3");
+		FileUtils.forceDelete(filesize);
 
+
+
+		Thread t1 = new Thread(new Runnable() {
+			public void run()
+			{
+				String url = "";
+				switch (comboBoxValue) {
+					case "1Live":  url = Settings.getText1live();
+						break;
+					case "WDR2":  url = Settings.getTextWdr2();
+						break;
+					case "WDR5":  url = Settings.getTextWdr5();
+						break;
+					default: url= "Invalid";
+						break;
+				}
+				try {
+					URLConnection urlConnection = new URL(url).openConnection();
+					urlConnection.connect();
+
+					File file =new File("test.mp3");
+					OutputStream outputStream = new FileOutputStream(file);
+					IOUtils.copy(urlConnection.getInputStream(), outputStream);
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+
+
+			}});
+		t1.start();
+		Thread.sleep(200);
+
+	MediaPlayer.createMediaPlayer("test.mp3");
+									//FX Stuff done here
+
+
+		//outputStream.close();
+	//
 	}
+
+	public void playlist(){
+		fp.getChildren().clear();
+		GeneratePlaylist pl = new GeneratePlaylist();
+		pl.readfiles();
+		pl.create();
+	}
+
+
 
 
 }

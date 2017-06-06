@@ -14,7 +14,12 @@ public class GuiElemente {
   static AnchorPane anchorpane;
   static HBox hbox;
   static VBox vbox;
+  static Boolean playlist = false;
+  static Playlist pl;
 
+
+
+    static boolean livestream = false;
   public static ArrayList MediaDatein = new ArrayList();
   public static void setMain(AnchorPane main){
 	  Main = main;
@@ -58,4 +63,20 @@ public class GuiElemente {
   public ArrayList getMediaDatein(){
 	  return MediaDatein;
   }
+  public static void setPlaylist(Playlist p){
+      pl = p;
+  }
+  public static Playlist getPlaylist(){
+      return pl;
+  }
+  public static void Playlistactivated(boolean b){
+      playlist = b;
+  }
+    public static boolean isLivestream() {
+        return livestream;
+    }
+
+    public static void setLivestream(boolean livestream) {
+        GuiElemente.livestream = livestream;
+    }
 }

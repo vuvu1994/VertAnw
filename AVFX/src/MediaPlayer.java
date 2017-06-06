@@ -1,11 +1,14 @@
 import java.io.File;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Observable;
+import java.util.concurrent.CountDownLatch;
 
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
+import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -35,31 +38,87 @@ public class MediaPlayer {
 	 static private Slider dauer;
 	 static private Slider volumeSlider;
 	 static boolean backpressed = false;
-	 static String mediaName;
+	 static ArrayList<String> playlist;
+	 static boolean playlistactive = false;
+	 static int FileinPlaylist = 0;
+
+	 public static void createMediaPlayerwithPlaylist(ArrayList al){
+	 	playlist = al;
+	 	playlistactive=true;
+		 media = new Media(new File(playlist.get(FileinPlaylist)).toURI().toString());
+		 createElements();
+		 FileinPlaylist++;
+	 }
 	 public static void createMediaPlayer(String datei){
-		 //kürzung des String alle Leerzeichen weg + Datei Pfad weg
+
 		 media = new Media(new File(datei).toURI().toString());
-		 int temp=datei.lastIndexOf("\\")+1;
-		 mediaName =datei.substring(temp);
-		 mediaName=mediaName.replaceAll(" ","");
-		 try {
-			 Database.addtoMedia(mediaName);
-		 } catch (SQLException e) {
-			 e.printStackTrace();
-		 }
+		 System.out.println(datei);
 		 createElements();
 		 }
-	 
+
 
 	 public static void createMediaPlayerwithURL(String datei){
-		 media = new Media(datei);
-		 createElements();
+		 Service<Void> service = new Service<Void>() {
+			 @Override
+			 protected Task<Void> createTask() {
+				 return new Task<Void>() {
+					 @Override
+					 protected Void call() throws Exception {
+						 //Background work
+						 final CountDownLatch latch = new CountDownLatch(1);
+						 Platform.runLater(new Runnable() {
+							 @Override
+							 public void run() {
+								 try{
+									 //FX Stuff done here
+									 media = new Media(datei);
+									 createElements();
+								 }finally{
+									 latch.countDown();
+								 }
+							 }
+						 });
+						 latch.await();
+						 //Keep with the background work
+						 return null;
+					 }
+				 };
+			 }
+		 };
+		 service.start();
+
+
 		 }
-	 
+	public static void createMediaPlayerwithURLlive(InputStream datei){
+		//media = new Media(datei);
+		//createElements();
+	}
+
+		 public static void createRadio(String live){
+			 media = new Media(live);
+			 mediaPlayer = new javafx.scene.media.MediaPlayer(media);
+			 mediaView = new MediaView(mediaPlayer);
+			 AnchorPane m = GuiElemente.getMain();
+			 m.getChildren().add(mediaView);
+			 mediaView.fitWidthProperty().bind(m.widthProperty());
+			 mediaView.fitHeightProperty().bind(m.heightProperty());
+			 mediaView.setPreserveRatio(false);
+			 mediaPlayer.setAutoPlay(false);
+			 Platform.runLater(new Runnable() {
+				 @Override
+				 public void run() {
+
+					 GuiElemente.gethbox().setVisible(false);
+					 GuiElemente.getanchorpane().setVisible(false);
+					 GuiElemente.getvbox().setVisible(false);
+				 }
+			 });
+			mediaPlayer.onReadyProperty().set(() ->mediaPlayer.play());
+		 }
 	 public static void createElements(){
 		 mediaPlayer = new javafx.scene.media.MediaPlayer(media);
 		 mediaView = new MediaView(mediaPlayer);
-		 
+
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
@@ -82,21 +141,26 @@ public class MediaPlayer {
 		 Image playI=new Image(new File("Controls/pause.png").toURI().toString());
 		 ImageView playIV=new ImageView(playI);
 		 Button Play = new Button("",playIV);
+		 Play.setStyle("-fx-background-color: transparent;");
 		 Image backI=new Image(new File("Controls/back.png").toURI().toString());
 		 ImageView backIV=new ImageView(backI);
 		 Button back = new Button("",backIV);
+		 back.setStyle("-fx-background-color: transparent;");
 		 Image forwardI=new Image(new File("Controls/forward.png").toURI().toString());
 		 ImageView forwardIV=new ImageView(forwardI);
 		 Button forward = new Button("",forwardIV);
+		 forward.setStyle("-fx-background-color: transparent;");
 		 dauer = new Slider();
 		 dauer.setPrefWidth(500);
 		 volumeSlider = new Slider();
 		 Image fullI=new Image(new File("Controls/fullscreen.png").toURI().toString());
 		 ImageView fullIV=new ImageView(fullI);
 		 Button fullscreen = new Button("",fullIV);
+		 fullscreen.setStyle("-fx-background-color: transparent;");
 		 Image endeI=new Image(new File("Controls/exit.png").toURI().toString());
 		 ImageView endeIV=new ImageView(endeI);
 		 Button ende = new Button("",endeIV);
+		 ende.setStyle("-fx-background-color: transparent;");
 		 hb.getChildren().add(Play);
 		 hb.getChildren().add(back);
 		 hb.getChildren().add(forward);
@@ -110,7 +174,7 @@ public class MediaPlayer {
 		 ap.getChildren().add(hb);
 		 ap.getChildren().add(hb2);
 		 AnchorPane m = GuiElemente.getMain();
-		 
+
 		 m.getChildren().add(mediaView);
 		 m.getChildren().add(ap);
 		 
@@ -124,7 +188,7 @@ public class MediaPlayer {
 		 ap.setRightAnchor(hb2, 0.0);
 		 m.setBottomAnchor(ap, 0.0);
 		
-		 
+
 			mediaView.fitWidthProperty().bind(m.widthProperty());
 			mediaView.fitHeightProperty().bind(m.heightProperty());
 			mediaView.setPreserveRatio(false);
@@ -135,7 +199,18 @@ public class MediaPlayer {
 		 ap.prefWidthProperty().bind(m.widthProperty());
 		bgIV.fitWidthProperty().bind(m.widthProperty());
 		bgIV.setFitHeight(100);
-		
+		mediaPlayer.setOnEndOfMedia(new Runnable() {
+			 @Override
+			 public void run() {
+				 if (playlistactive&& playlist.size()>FileinPlaylist) {
+					 mediaPlayer.dispose();
+					 GuiElemente.getMain().getChildren().remove(mediaView);
+					 GuiElemente.getMain().getChildren().remove(ap);
+					 createMediaPlayer(playlist.get(FileinPlaylist));
+					 FileinPlaylist++;
+				 }
+			 }
+		 });
 		
 			Play.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -182,7 +257,7 @@ public class MediaPlayer {
 				public void handle(ActionEvent e) {
 					try {
 						System.out.println("Eventtyp bei ende: " + e.getEventType());
-						 mediaPlayer.pause();
+						 mediaPlayer.dispose();
 						 GuiElemente.getMain().getChildren().remove(mediaView);
 						 GuiElemente.getMain().getChildren().remove(ap);
 							Platform.runLater(new Runnable() {
@@ -193,6 +268,9 @@ public class MediaPlayer {
 									GuiElemente.getvbox().setVisible(true);
 								}
 							});
+							if(GuiElemente.isLivestream()){
+
+							}
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -241,8 +319,8 @@ public class MediaPlayer {
 			});
 			mediaPlayer.setOnReady(new Runnable() {
 	            public void run() {
-	                duration = mediaPlayer.getMedia().getDuration();
-	                updateValues();
+	              //  duration = mediaPlayer.getMedia().getDuration();
+	               // updateValues();
 	            }
 	        });
 			
@@ -254,7 +332,7 @@ public class MediaPlayer {
 				@Override
 				public void invalidated(javafx.beans.Observable observable) {
 					// TODO Auto-generated method stub
-					 updateValues();
+					// updateValues();
 				}
 
 				
@@ -319,9 +397,8 @@ public class MediaPlayer {
 	     Platform.runLater(new Runnable() {
 	        public void run() {
 	          Duration currentTime = mediaPlayer.getCurrentTime();
-				Database.updateaktuell(mediaName, currentTime.toSeconds());
-
-
+	        //Double Cast und in die Datenbank schreiben und
+				//eine Funktion um den Wert abzuholen
 
 
 	          dauer.setDisable(duration.isUnknown());

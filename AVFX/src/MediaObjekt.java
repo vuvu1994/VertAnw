@@ -23,6 +23,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
+import javax.print.attribute.standard.Media;
+
 public class MediaObjekt {
 	String Name;
 	String Path;
@@ -114,9 +116,14 @@ public class MediaObjekt {
 			@Override
 			public void handle(ActionEvent e) {
 				try {
-					System.out.println("Eventtyp bei MediaObjekt: " + e.getEventType());
-					//Bug Fix Datei Namen Vural
-					MediaPlayer.createMediaPlayer(Path+"\\"+Name);
+					if (!GuiElemente.playlist) {
+						System.out.println("Eventtyp bei MediaObjekt: " + e.getEventType());
+						MediaPlayer.createMediaPlayer(Path + Name);
+					}else{
+
+						Playlist pl = GuiElemente.getPlaylist();
+						pl.add(Path);
+					}
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -135,7 +142,10 @@ public class MediaObjekt {
 	public AnchorPane getObjekt() {
 		return AM;
 	}
-	
+
+	public MediaObjekt getMediaObjekt(){
+		return this;
+	}
 	public void setCover(){
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Cover ausw�hlen");

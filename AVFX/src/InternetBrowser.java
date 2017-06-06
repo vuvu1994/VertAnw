@@ -20,7 +20,7 @@ public class InternetBrowser {
 
 	public static void createWebView() {
 
-		engine.load("https://www.youtube.com");
+		engine.load("http://www.chip.de/artikel/Webradio-Live-Stream-Alle-Sender-im-ueberblick_56137550.html");
 
 		VBox Vb = new VBox();
 
