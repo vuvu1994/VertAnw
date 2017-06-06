@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,6 +27,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import java.sql.SQLException;
 
 public class MediaPlayer {
 
@@ -42,6 +42,8 @@ public class MediaPlayer {
 	 static boolean playlistactive = false;
 	 static int FileinPlaylist = 0;
 
+	static String mediaName;
+
 	 public static void createMediaPlayerwithPlaylist(ArrayList al){
 	 	playlist = al;
 	 	playlistactive=true;
@@ -52,6 +54,14 @@ public class MediaPlayer {
 	 public static void createMediaPlayer(String datei){
 
 		 media = new Media(new File(datei).toURI().toString());
+		 int temp=datei.lastIndexOf("\\")+1;
+		 mediaName =datei.substring(temp);
+		 mediaName=mediaName.replaceAll(" ","");
+		 try {
+			 Database.addtoMedia(mediaName);
+		 } catch (SQLException e) {
+			 e.printStackTrace();
+		 }
 		 System.out.println(datei);
 		 createElements();
 		 }
@@ -89,10 +99,7 @@ public class MediaPlayer {
 
 
 		 }
-	public static void createMediaPlayerwithURLlive(InputStream datei){
-		//media = new Media(datei);
-		//createElements();
-	}
+
 
 		 public static void createRadio(String live){
 			 media = new Media(live);
@@ -319,8 +326,8 @@ public class MediaPlayer {
 			});
 			mediaPlayer.setOnReady(new Runnable() {
 	            public void run() {
-	              //  duration = mediaPlayer.getMedia().getDuration();
-	               // updateValues();
+	                duration = mediaPlayer.getMedia().getDuration();
+	                updateValues();
 	            }
 	        });
 			
@@ -332,7 +339,7 @@ public class MediaPlayer {
 				@Override
 				public void invalidated(javafx.beans.Observable observable) {
 					// TODO Auto-generated method stub
-					// updateValues();
+					 updateValues();
 				}
 
 				
@@ -397,8 +404,9 @@ public class MediaPlayer {
 	     Platform.runLater(new Runnable() {
 	        public void run() {
 	          Duration currentTime = mediaPlayer.getCurrentTime();
-	        //Double Cast und in die Datenbank schreiben und
-				//eine Funktion um den Wert abzuholen
+				Database.updateaktuell(mediaName, currentTime.toSeconds());
+
+
 
 
 	          dauer.setDisable(duration.isUnknown());
