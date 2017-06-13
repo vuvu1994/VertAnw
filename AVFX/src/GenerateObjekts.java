@@ -13,7 +13,7 @@ import javafx.scene.layout.FlowPane;
 public class GenerateObjekts extends Thread {
 	String[] MediaNamen;
 	MediaObjekt m=null;
-	String Mediapath = Settings.getFirstVideothek();
+	String Mediapath ="C:\\Users\\Vural\\Desktop\\TestAudioVideoJavaFX";
 	private ArrayList<AnchorPane> Objekte = new ArrayList<AnchorPane>();
 	public GenerateObjekts(){
 		
@@ -32,6 +32,19 @@ public class GenerateObjekts extends Thread {
 		
 	}
 	public void getMedia(){
+		//Wird später benötigt für die Rückgabe einer ArrayList
+		Settings list = new Settings();
+		ArrayList al = list.readDirectories("Audiothek");
+		String alString = al.toString();
+		String [] helper = alString.split(",");
+
+		for(int i = 0; helper.length>i; i++) {
+			String helper2 = helper[i].toString();
+			helper2 = helper2.replace("[", "");
+			helper2 = helper2.replace("]", "");
+			helper2 = helper2.trim();
+		}
+
 		File file = new File(Mediapath);
 		MediaNamen = file.list(new FilenameFilter() {
 			@Override

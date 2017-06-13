@@ -61,7 +61,8 @@ public class Controller {
 	ObservableList<String> radioList = FXCollections.observableArrayList("1Live","WDR2","WDR5");
 
 	static String comboBoxValue;
-
+	GeneraretSettings settings = new GeneraretSettings();
+	Settings radioURI = new Settings();
 
 	public void initialize() throws InterruptedException, SQLException {
 
@@ -119,7 +120,14 @@ public class Controller {
 
 	public void einstellungen() throws Exception {
 		fp.getChildren().clear();
-		Settings.createElements();
+
+		GeneraretSettings settings = new GeneraretSettings();
+		Settings radioSettings = new Settings("Radio");
+		radioSettings.createRadioSettings();
+		radioSettings.draw();
+
+		settings.readfiles();
+		settings.createEntries();
 	}
 
 	public void urlopen() throws Exception {
@@ -144,10 +152,6 @@ public class Controller {
 		fileChooser.setTitle("Cover ausw�hlen");
 		File file = fileChooser.showOpenDialog(GuiElemente.getMain().getScene().getWindow());
 		MediaPlayer.createMediaPlayer(file.getAbsolutePath().toString());
-
-	}
-
-	public void radio() throws Exception{
 
 	}
 
@@ -181,11 +185,12 @@ public class Controller {
 			{
 				String url = "";
 				switch (comboBoxValue) {
-					case "1Live":  url = Settings.getText1live();
+					//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+					case "1Live":  url = radioURI.getText1live();
 						break;
-					case "WDR2":  url = Settings.getTextWdr2();
+					case "WDR2":  url = radioURI.getTextWdr2();
 						break;
-					case "WDR5":  url = Settings.getTextWdr5();
+					case "WDR5":  url = radioURI.getTextWdr5();
 						break;
 					default: url= "Invalid";
 						break;
@@ -222,8 +227,6 @@ public class Controller {
 		pl.readfiles();
 		pl.create();
 	}
-
-
 
 
 }

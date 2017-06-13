@@ -43,6 +43,7 @@ public class MediaPlayer {
 	 static int FileinPlaylist = 0;
 
 	static String mediaName;
+	static char charMediaName;
 
 	 public static void createMediaPlayerwithPlaylist(ArrayList al){
 	 	playlist = al;
@@ -54,15 +55,17 @@ public class MediaPlayer {
 	 public static void createMediaPlayer(String datei){
 
 		 media = new Media(new File(datei).toURI().toString());
-		 int temp=datei.lastIndexOf("\\")+1;
+		 int temp=datei.lastIndexOf("/")+1;
 		 mediaName =datei.substring(temp);
+
 		 mediaName=mediaName.replaceAll(" ","");
 		 try {
 			 Database.addtoMedia(mediaName);
-		 } catch (SQLException e) {
+			 } catch (SQLException e) {
 			 e.printStackTrace();
-		 }
-		 System.out.println(datei);
+			 }
+
+
 		 createElements();
 		 }
 
