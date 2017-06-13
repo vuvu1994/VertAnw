@@ -13,7 +13,7 @@ import javafx.scene.layout.FlowPane;
 public class GenerateObjekts extends Thread {
 	String[] MediaNamen;
 	MediaObjekt m=null;
-	String Mediapath ="C:\\Users\\Vural\\Desktop\\TestAudioVideoJavaFX";
+	String Mediapath ="C:\\Users\\Denni\\Videos\\Trailer";
 	private ArrayList<AnchorPane> Objekte = new ArrayList<AnchorPane>();
 	public GenerateObjekts(){
 		

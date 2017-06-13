@@ -16,7 +16,7 @@ public class GuiElemente {
   static VBox vbox;
   static Boolean playlist = false;
   static Playlist pl;
-
+  static HBox navigationbar;
 
 
     static boolean livestream = false;
@@ -36,6 +36,12 @@ public class GuiElemente {
   public static HBox gethbox(){
 	  return hbox;
   }
+    public static HBox getNavigationbar(){
+        return navigationbar;
+    }
+    public static void setNavigationbar(HBox hb){
+        navigationbar = hb;
+    }
   public static void setScrollPane(ScrollPane scrollpane){
 	  ScrollPane = scrollpane;
   }

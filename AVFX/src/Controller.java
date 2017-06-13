@@ -57,6 +57,9 @@ public class Controller {
 	Button exit;
 	@FXML
 	ComboBox radioComboBox;
+	@FXML
+	HBox navigationbar;
+
 
 	ObservableList<String> radioList = FXCollections.observableArrayList("1Live","WDR2","WDR5");
 
@@ -72,12 +75,7 @@ public class Controller {
 		fp.setStyle("-fx-background-color: transparent;");
 		ScrollPane.setStyle("-fx-background-color: transparent;");
 
-		GuiElemente.setScrollPane(ScrollPane);
-		GuiElemente.setFlowPane(fp);
-		GuiElemente.setMain(Main);
-		GuiElemente.setanchorpane(anchorpane);
-		GuiElemente.sethbox(hbox);
-		GuiElemente.setvbox(vbox);
+		setGuiElemente();
 		bimage.fitWidthProperty().bind(Main.widthProperty());
 		bimage.fitHeightProperty().bind(Main.heightProperty());
 		bimage.setPreserveRatio(false);
@@ -90,6 +88,16 @@ public class Controller {
 
 
 
+	}
+
+	private void setGuiElemente() {
+		GuiElemente.setScrollPane(ScrollPane);
+		GuiElemente.setFlowPane(fp);
+		GuiElemente.setMain(Main);
+		GuiElemente.setanchorpane(anchorpane);
+		GuiElemente.sethbox(hbox);
+		GuiElemente.setvbox(vbox);
+		GuiElemente.setNavigationbar(navigationbar);
 	}
 
 	public void bibliothek() throws Exception {

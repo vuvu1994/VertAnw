@@ -122,7 +122,8 @@ public class MediaObjekt {
 					}else{
 
 						Playlist pl = GuiElemente.getPlaylist();
-						pl.add(Path);
+
+						pl.add(Path+ Name);
 					}
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
