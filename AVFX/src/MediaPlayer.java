@@ -222,6 +222,7 @@ public class MediaPlayer {
 			 @Override
 			 public void run() {
 				 Database.updateaktuell(media.getSource(), null);
+
 				 if (playlistactive&& playlist.size()>FileinPlaylist) {
 					 mediaPlayer.dispose();
 					 GuiElemente.getMain().getChildren().remove(mediaView);
@@ -276,8 +277,13 @@ public class MediaPlayer {
 				@Override
 				public void handle(ActionEvent e) {
 					try {
+						//GuiElemente.getRadiostream().kill();
 						System.out.println("Eventtyp bei ende: " + e.getEventType());
-						 mediaPlayer.dispose();
+						mediaPlayer.stop();
+						mediaView.setMediaPlayer(null);
+						  mediaPlayer.dispose();
+						System.gc();
+						mediaPlayer.dispose();
 						 GuiElemente.getMain().getChildren().remove(mediaView);
 						 GuiElemente.getMain().getChildren().remove(ap);
 							Platform.runLater(new Runnable() {

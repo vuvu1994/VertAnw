@@ -17,9 +17,15 @@ public class GuiElemente {
   static Boolean playlist = false;
   static Playlist pl;
   static HBox navigationbar;
-
+static RadioStream rs;
 
     static boolean livestream = false;
+  public static RadioStream getRadiostream(){
+    return rs;
+  }
+  public static void setRadioStream(RadioStream t){
+    rs= t;
+  }
   public static ArrayList MediaDatein = new ArrayList();
   public static void setMain(AnchorPane main){
 	  Main = main;

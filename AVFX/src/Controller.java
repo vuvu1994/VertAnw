@@ -66,7 +66,8 @@ public class Controller {
 	static String comboBoxValue;
 	GeneraretSettings settings = new GeneraretSettings();
 	Settings radioURI = new Settings();
-
+	Thread t1;
+	private int radio = 1;
 	public void initialize() throws InterruptedException, SQLException {
 
 		radioComboBox.setItems(radioList);
@@ -85,7 +86,13 @@ public class Controller {
 		Database.addtoMedia("TestName");
 		Database.addtoMedia("TestName2");
 		System.out.println(Database.getAllMedia());
-
+		if (new File("Radio").exists()) {
+			try {
+				FileUtils.deleteDirectory(new File("Radio"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 
 
 	}
@@ -98,6 +105,7 @@ public class Controller {
 		GuiElemente.sethbox(hbox);
 		GuiElemente.setvbox(vbox);
 		GuiElemente.setNavigationbar(navigationbar);
+
 	}
 
 	public void bibliothek() throws Exception {
@@ -182,15 +190,14 @@ public class Controller {
 	public void radioComboBox(ActionEvent event) throws Exception {
 
 		comboBoxValue = radioComboBox.getValue().toString();
-		File filesize = new File("test.mp3");
-		if (filesize.exists()) {
-			FileUtils.forceDelete(filesize);
+		File directory = new File("Radio");
+
+		if (!directory.exists()){
+			directory.mkdirs();
 		}
 
 
-		Thread t1 = new Thread(new Runnable() {
-			public void run()
-			{
+
 				String url = "";
 				switch (comboBoxValue) {
 					//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -203,30 +210,14 @@ public class Controller {
 					default: url= "Invalid";
 						break;
 				}
-				try {
-					URLConnection urlConnection = new URL(url).openConnection();
-					urlConnection.connect();
-
-					File file =new File("test.mp3");
-					OutputStream outputStream = new FileOutputStream(file);
-					IOUtils.copy(urlConnection.getInputStream(), outputStream);
-
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-
-
-			}});
-		t1.start();
-		Thread.sleep(200);
-
-	MediaPlayer.createMediaPlayer("test.mp3");
+				RadioStream rs = new RadioStream(url,radio+"");
+				GuiElemente.setRadioStream(rs);
+				GuiElemente.getRadiostream().start();
+				Thread.sleep(2000);
+				MediaPlayer.createMediaPlayer("Radio/"+radio+".mp3");
 									//FX Stuff done here
-
-
-		//outputStream.close();
-	//
+				++radio;
+				//rs.kill();
 	}
 
 	public void playlist(){

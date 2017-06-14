@@ -4,10 +4,12 @@ import java.io.IOException;
 import javax.swing.filechooser.FileSystemView;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class MainApp extends Application {
 
@@ -31,6 +33,13 @@ public class MainApp extends Application {
 		primaryStage.setFullScreen(false);
 		primaryStage.setWidth(1140);
 		primaryStage.setHeight(720);
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent we) {
+				System.out.println("Stage is closing");
+				System.out.println("EXIT");
+				System.exit(0);
+			}
+		});
 	}
 
 }
