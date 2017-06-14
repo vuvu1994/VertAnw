@@ -34,7 +34,10 @@ public class GenerateObjekts extends Thread {
 	public void getMedia(){
 		//Wird später benötigt für die Rückgabe einer ArrayList
 		Settings list = new Settings();
-		ArrayList al = list.readDirectories("Audiothek");
+		// In al befinden sich alle Pfade die die Arraylist beeinhaltet
+		ArrayList al = list.readDirectories("Mediathek");
+
+		//Abfagen der unerwünschten Zeichen "["  und "]" Nur verwenden falls nötig ansonsten einfach Löschen
 		String alString = al.toString();
 		String [] helper = alString.split(",");
 
