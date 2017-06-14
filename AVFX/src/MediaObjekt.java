@@ -68,6 +68,9 @@ public class MediaObjekt {
 		AM.getChildren().add(bu);
 		File file = new File(Bild);
 		if (!file.exists()){
+			WebScraper.getData(Name);
+		}
+		if (!file.exists()){
 			System.out.println("Cover nicht vorhanden");
 			file = new File("Cover/platzhaltervideo.png");
 		}
