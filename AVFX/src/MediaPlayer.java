@@ -41,7 +41,7 @@ public class MediaPlayer {
 	 static ArrayList<String> playlist;
 	 static boolean playlistactive = false;
 	 static int FileinPlaylist = 0;
-
+	static boolean started =false;
 	static String mediaName;
 	static char charMediaName;
 
@@ -49,25 +49,34 @@ public class MediaPlayer {
 	 	playlist = al;
 	 	playlistactive=true;
 		 media = new Media(new File(playlist.get(FileinPlaylist)).toURI().toString());
-		 createElements();
+		 try {
+			 createElements();
+		 } catch (SQLException e) {
+			 e.printStackTrace();
+		 }
 		 FileinPlaylist++;
 	 }
 	 public static void createMediaPlayer(String datei){
 
 		 media = new Media(new File(datei).toURI().toString());
-		 int temp=datei.lastIndexOf("/")+1;
-		 mediaName =datei.substring(temp);
 
-		 mediaName=mediaName.replaceAll(" ","");
+
+
+
+
+
 		 try {
-			 Database.addtoMedia(mediaName);
-			 } catch (SQLException e) {
-			 e.printStackTrace();
+			 createElements();
+			 try {
+				 System.out.println(media.getSource());
+				 Database.addtoMedia(media.getSource());
+			 } catch (Exception e) {
+				 e.printStackTrace();
 			 }
-
-
-		 createElements();
+		 } catch (SQLException e) {
+			 e.printStackTrace();
 		 }
+	 }
 
 
 	 public static void createMediaPlayerwithURL(String datei){
@@ -86,7 +95,9 @@ public class MediaPlayer {
 									 //FX Stuff done here
 									 media = new Media(datei);
 									 createElements();
-								 }finally{
+								 } catch (SQLException e) {
+									 e.printStackTrace();
+								 } finally{
 									 latch.countDown();
 								 }
 							 }
@@ -124,7 +135,8 @@ public class MediaPlayer {
 			 });
 			mediaPlayer.onReadyProperty().set(() ->mediaPlayer.play());
 		 }
-	 public static void createElements(){
+	 public static void createElements() throws SQLException {
+		 	started = false;
 		 mediaPlayer = new javafx.scene.media.MediaPlayer(media);
 		 mediaView = new MediaView(mediaPlayer);
 
@@ -203,8 +215,6 @@ public class MediaPlayer {
 			mediaView.setPreserveRatio(false);
 			mediaPlayer.setAutoPlay(true);
 
-			//If Wert ungleich null
-			//mediaPlayer.setStartTime(Aus der Datenbanauslesehen);
 		 ap.prefWidthProperty().bind(m.widthProperty());
 		bgIV.fitWidthProperty().bind(m.widthProperty());
 		bgIV.setFitHeight(100);
@@ -397,8 +407,9 @@ public class MediaPlayer {
 				       }
 				}
 			});
-			
-			
+
+
+
 	 }
 	 
 	 public static void updateValues() {
@@ -406,7 +417,20 @@ public class MediaPlayer {
 	     Platform.runLater(new Runnable() {
 	        public void run() {
 	          Duration currentTime = mediaPlayer.getCurrentTime();
-				Database.updateaktuell(mediaName, currentTime.toSeconds());
+	          if (!started) {
+	          	started = true;
+				  String Stringstartzeit = null;
+				  try {
+					  Stringstartzeit = Database.getaktuell(media.getSource());
+				  } catch (SQLException e) {
+					  e.printStackTrace();
+				  }
+				  System.out.println("Startzeit " + Stringstartzeit);
+				  Double startzeitDouble = Double.parseDouble(Stringstartzeit);
+				  mediaPlayer.seek(Duration.seconds(startzeitDouble));
+				  System.out.println("WHY THE FUCK");
+			  }
+				Database.updateaktuell(media.getSource(), currentTime.toSeconds());
 
 
 
