@@ -221,6 +221,7 @@ public class MediaPlayer {
 		mediaPlayer.setOnEndOfMedia(new Runnable() {
 			 @Override
 			 public void run() {
+				 Database.updateaktuell(media.getSource(), null);
 				 if (playlistactive&& playlist.size()>FileinPlaylist) {
 					 mediaPlayer.dispose();
 					 GuiElemente.getMain().getChildren().remove(mediaView);

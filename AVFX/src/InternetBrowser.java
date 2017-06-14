@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -20,14 +21,15 @@ public class InternetBrowser {
 
 	public static void createWebView() {
 
-		engine.load("http://www.chip.de/artikel/Webradio-Live-Stream-Alle-Sender-im-ueberblick_56137550.html");
+		engine.load("http://www.youtube.de");
 
 		VBox Vb = new VBox();
-
+		//Vb.setAlignment(Pos.CENTER);
 		Vb.getChildren().addAll(myWebView);
 		FlowPane fp = GuiElemente.getFlowPane();
-		myWebView.setPrefWidth(fp.getPrefWidth() - 30);
-		myWebView.setPrefHeight(fp.getPrefHeight() - 20);
+		myWebView.prefWidthProperty().bind(fp.widthProperty());
+		myWebView.prefHeightProperty().bind(fp.heightProperty());
+
 		fp.getChildren().clear();
 		fp.getChildren().add(Vb);
 
