@@ -1,4 +1,5 @@
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -18,8 +19,10 @@ public class Database {
 		//Laden des Treibers
 		Class.forName("org.h2.Driver");
 		//Datenbank erzeugen und Verbindung zur Datenbank herstellen
+		File path = new File("Datenbank");
+		path.getAbsolutePath();
 		JdbcConnectionPool cp = JdbcConnectionPool.create(
-	            "jdbc:h2:file:C:/Users/Denni/Desktop/AVFX", "", "");
+	            "jdbc:h2:file:"+path.getAbsolutePath(), "", "");
 		conn = cp.getConnection(); 
 
 	} catch (ClassNotFoundException | SQLException e) {
