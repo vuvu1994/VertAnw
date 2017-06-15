@@ -67,8 +67,11 @@ public class MediaObjekt {
 		AM.getChildren().add(hb);
 		AM.getChildren().add(bu);
 		File file = new File(Bild);
-		if (!file.exists()){
-			WebScraper.getData(Name);
+		Settings settings = new Settings();
+		if (settings.getScrapper()) {
+			if (!file.exists()) {
+				WebScraper.getData(Name);
+			}
 		}
 		if (!file.exists()){
 			System.out.println("Cover nicht vorhanden");
