@@ -104,10 +104,10 @@ public class MediaObjekt {
 		vb.toBack();
 		
 		final ContextMenu contextMenu = new ContextMenu();
-		MenuItem cover = new MenuItem("Cover");
-		MenuItem playlist = new MenuItem("Playlist");
+		MenuItem cover = new MenuItem("Cover setzen");
+		MenuItem scraper = new MenuItem("Cover automatisch suchen");
 		
-		contextMenu.getItems().addAll(cover, playlist);
+		contextMenu.getItems().addAll(cover, scraper);
 		
 		bu.setContextMenu(contextMenu);
 		bu.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -142,6 +142,28 @@ public class MediaObjekt {
 		    public void handle(ActionEvent event) {
 		        setCover();
 		    }
+		});
+		scraper.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("tut was");
+				File dest = new File("Cover/"+Name+".jpg");
+				try {
+					FileUtils.forceDelete(dest);
+				} catch (IOException e) {
+					System.out.println("keine Datei gefunden");
+				}
+
+				WebScraper.getData(Name);
+
+
+				if (dest.exists()) {
+					iv.setImage(new Image(dest.toURI().toString()));
+				}else{
+					iv.setImage(new Image(new File("Cover/platzhaltervideo.png").toURI().toString()));
+				}
+
+			}
 		});
 
 	}
