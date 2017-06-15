@@ -148,7 +148,6 @@ public class MediaPlayer {
 				public void run() {
 					GuiElemente.gethbox().setVisible(false);
 					GuiElemente.getanchorpane().setVisible(false);
-					GuiElemente.getvbox().setVisible(false);
 				}
 			});
 	

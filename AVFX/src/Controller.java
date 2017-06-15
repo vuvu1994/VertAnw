@@ -187,7 +187,10 @@ public class Controller {
 	public void openfile() throws Exception {
 
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Cover ausw�hlen");
+		fileChooser.setTitle("Media auswählen");
+		FileChooser.ExtensionFilter extFilter =
+				new FileChooser.ExtensionFilter("Media Datein", "*.mp4","*.mp3","*.wav","*.flv");
+		fileChooser.getExtensionFilters().add(extFilter);
 		File file = fileChooser.showOpenDialog(GuiElemente.getMain().getScene().getWindow());
 		MediaPlayer.createMediaPlayer(file.getAbsolutePath().toString());
 
