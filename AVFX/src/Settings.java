@@ -2,6 +2,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -264,6 +265,8 @@ public class Settings {
 		HBox hb = new HBox();
 		Button b1 = new Button("Hinzufügen");
 		Button b2 = new Button ("Entfernen");
+		hb.setSpacing(10);
+		hb.setPadding(new Insets(5,5,5,5));
 		hb.getChildren().add(b1);
 		hb.getChildren().add(b2);
 		vb.getChildren().add(hb);
