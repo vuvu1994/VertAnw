@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Created by Vural on 07.06.2017.
  */
-public class GeneraretSettings {
+public class GenerateSettings {
 
     private Settings settings;
     private String path = "Settings/";

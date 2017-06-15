@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="Main" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #121212;" stylesheets="@FlowPane.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane fx:id="Main" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #121212;" stylesheets="@FlowPane.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <ImageView fx:id="bimage" fitHeight="600.0" fitWidth="893.0" layoutX="7.0" opacity="0.22" pickOnBounds="true">
          <image>
@@ -19,16 +19,6 @@
       </ImageView>
       <HBox fx:id="hbox" alignment="CENTER_RIGHT" layoutX="406.0" opacity="0.75" prefHeight="64.0" prefWidth="519.0" style="-fx-background-color: #6495ED;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#youtubeBackwards" text="Zurück">
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#youtubeForwards" text="Vorwärts">
-               <HBox.margin>
-                  <Insets right="100.0" />
-               </HBox.margin>
-            </Button>
             <ComboBox fx:id="radioComboBox" onAction="#radioComboBox" prefHeight="31.0" prefWidth="219.0" promptText="Wähle Radiosender">
                <HBox.margin>
                   <Insets right="20.0" />

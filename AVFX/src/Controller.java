@@ -1,42 +1,23 @@
-import java.awt.FlowLayout;
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.file.Files;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Optional;
-import java.util.Random;
-import java.util.concurrent.CountDownLatch;
 
 import javafx.application.Platform;
-import javafx.beans.property.Property;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.CacheHint;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 
 public class Controller {
 	@FXML
@@ -78,7 +59,7 @@ public class Controller {
 	ObservableList<String> radioList = FXCollections.observableArrayList("1Live","WDR2","WDR5");
 
 	static String comboBoxValue;
-	GeneraretSettings settings = new GeneraretSettings();
+	GenerateSettings settings = new GenerateSettings();
 	Settings radioURI = new Settings();
 	Thread t1;
 	private int radio = 1;
@@ -173,25 +154,13 @@ public class Controller {
 
 	}
 
-	public void youtubeBackwards() throws Exception {
 
-		Platform.runLater(() -> {
-			InternetBrowser.engine.executeScript("history.back()");
-		});
-
-	}
-
-	public void youtubeForwards() {
-		Platform.runLater(() -> {
-			InternetBrowser.engine.executeScript("history.forward()");
-		});
-	}
 
 	public void einstellungen() throws Exception {
 		fp.getChildren().clear();
 
-		GeneraretSettings settings = new GeneraretSettings();
-		Settings radioSettings = new Settings("Radio");
+		GenerateSettings settings = new GenerateSettings();
+		Settings radioSettings = new Settings("Allgemeine Einstellungen");
 		radioSettings.createRadioSettings();
 		radioSettings.draw();
 

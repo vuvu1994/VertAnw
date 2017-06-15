@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,7 +20,12 @@ public class InternetBrowser {
 	static WebView myWebView = new WebView();
 	static WebEngine engine = myWebView.getEngine();
 	public static void createWebView() {
+		Button zurück = new Button("Zurück");
+		Button vorwärts = new Button("Vorwärts");
 		GuiElemente.getNavigationbar().getChildren().clear();
+		GuiElemente.getNavigationbar().setSpacing(10);
+		GuiElemente.getNavigationbar().getChildren().add(zurück);
+		GuiElemente.getNavigationbar().getChildren().add(vorwärts);
 		InternetBrowser.removeWebView();
 		GuiElemente.setYoutube(true);
 		engine.load("http://www.youtube.de");
@@ -27,8 +33,26 @@ public class InternetBrowser {
 		myWebView.prefHeightProperty().bind(GuiElemente.getanchorpane().heightProperty());
 		myWebView.prefWidthProperty().bind(GuiElemente.getanchorpane().widthProperty());
 
+		zurück.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				Platform.runLater(() -> {
+					InternetBrowser.engine.executeScript("history.back()");
+				});
+			}
+		});
+
+		vorwärts.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				Platform.runLater(() -> {
+					InternetBrowser.engine.executeScript("history.forward()");
+				});
+			}
+		});
 
 	}
+
 	public static void removeWebView(){
 		if (GuiElemente.getYoutube()) {
 			myWebView.getEngine().load(null);

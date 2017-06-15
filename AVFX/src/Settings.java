@@ -30,7 +30,7 @@ public class Settings {
 	public static OutputStream output;
 	public static InputStream input;
 
-	public Settings(String Name){ //Ändern von NEWSetting in den KlassenNamen
+	public Settings(String Name){
 		this.Name = Name;
 		InternetBrowser.removeWebView();
 		GuiElemente.getNavigationbar().getChildren().clear();
@@ -85,7 +85,7 @@ public class Settings {
 			prop.setProperty("1Live","http://wdr-1live-live.icecast.wdr.de/wdr/1live/live/mp3/128/stream.mp3");
 			prop.setProperty("WDR2","http://wdr-wdr2-rheinruhr.icecast.wdr.de/wdr/wdr2/rheinruhr/mp3/128/stream.mp3");
 			prop.setProperty("WDR5","http://wdr-wdr5-live.icecast.wdr.de/wdr/wdr5/live/mp3/128/stream.mp3");
-			prop.setProperty("Scrapper", "true");
+			prop.setProperty("Scraper", "true");
 			save();
 		}
 	}
@@ -128,14 +128,14 @@ public class Settings {
 	}
 	public void setScrapper(String fa) {
 
-		prop.setProperty("Scrapper", fa);
+		prop.setProperty("Scraper", fa);
 		save();
 
 	}
 
 	public boolean getScrapper () {
 		load();
-		boolean s = Boolean.valueOf(prop.getProperty("Scrapper"));
+		boolean s = Boolean.valueOf(prop.getProperty("Scraper"));
 		return s;
 	}
 
@@ -216,7 +216,7 @@ public class Settings {
 		TextField text1live = new TextField(getText1live());
 		TextField textWdr2 = new TextField(getTextWdr2());
 		TextField textWdr5 = new TextField(getTextWdr5());
-		CheckBox checkBoxScrapper = new CheckBox("Scrapper aktivieren/deaktivieren");
+		CheckBox checkBoxScrapper = new CheckBox("Scraper aktivieren/deaktivieren");
 		checkBoxScrapper.setSelected(getScrapper());
 
 

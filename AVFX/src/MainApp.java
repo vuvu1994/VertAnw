@@ -1,7 +1,4 @@
-import java.io.File;
 import java.io.IOException;
-
-import javax.swing.filechooser.FileSystemView;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -21,7 +18,7 @@ public class MainApp extends Application {
 	public void start(Stage primaryStage) throws IOException, InterruptedException {
 		Settings einstellungen = new Settings();
 		einstellungen.createRadioProperties();
-		GeneraretSettings.createMediaSetting();
+		GenerateSettings.createMediaSetting();
 		Parent root = FXMLLoader.load(getClass().getResource("Gui.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Media Player");
