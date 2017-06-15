@@ -88,13 +88,13 @@ public class MediaPlayer {
 				 return new Task<Void>() {
 					 @Override
 					 protected Void call() throws Exception {
-						 //Background work
+
 						 final CountDownLatch latch = new CountDownLatch(1);
 						 Platform.runLater(new Runnable() {
 							 @Override
 							 public void run() {
 								 try{
-									 //FX Stuff done here
+
 									 media = new Media(datei);
 									 createElements();
 								 } catch (SQLException e) {
@@ -133,7 +133,7 @@ public class MediaPlayer {
 
 					 GuiElemente.gethbox().setVisible(false);
 					 GuiElemente.getanchorpane().setVisible(false);
-					 GuiElemente.getvbox().setVisible(false);
+
 				 }
 			 });
 			mediaPlayer.onReadyProperty().set(() ->mediaPlayer.play());

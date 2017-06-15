@@ -24,16 +24,20 @@ public class GenerateObjekts extends Thread {
 
 ;	private ArrayList<AnchorPane> Objekte = new ArrayList<AnchorPane>();
 	public GenerateObjekts(){
+
         GuiElemente.getProgressBar().setVisible(true);
 		InternetBrowser.removeWebView();
 		if (!GuiElemente.playlist) {
 			GuiElemente.getNavigationbar().getChildren().clear();
 			Button Video = new Button("Video");
 			Button Audio = new Button("Audio");
+			Audio.setOpacity(0.5);
 			Video.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent e) {
 					try {
+						Audio.setOpacity(0.5);
+						Video.setOpacity(1);
 						whichpath = 0;
 						MediaNamen = null;
 						Media.clear();
@@ -52,6 +56,8 @@ public class GenerateObjekts extends Thread {
 				@Override
 				public void handle(ActionEvent e) {
 					try {
+						Audio.setOpacity(1);
+						Video.setOpacity(0.5);
 						whichpath = 1;
 						MediaNamen = null;
 						Media.clear();
