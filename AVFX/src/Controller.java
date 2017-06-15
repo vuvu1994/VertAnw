@@ -60,6 +60,20 @@ public class Controller {
 	@FXML
 	HBox navigationbar;
 
+	@FXML
+	Button bibliothek;
+	@FXML
+	Button youtube;
+	@FXML
+	Button einstellungen;
+	@FXML
+	Button openfile;
+	@FXML
+	Button openlink;
+	@FXML
+	Button fullscreen;
+	@FXML
+	Button playlist;
 
 	ObservableList<String> radioList = FXCollections.observableArrayList("1Live","WDR2","WDR5");
 
@@ -93,8 +107,6 @@ public class Controller {
 				e.printStackTrace();
 			}
 		}
-
-
 	}
 
 	private void setGuiElemente() {
@@ -106,6 +118,47 @@ public class Controller {
 		GuiElemente.setvbox(vbox);
 		GuiElemente.setNavigationbar(navigationbar);
 
+		//Grafiken Navigation START
+
+		Image bibliothekI=new Image(new File("Navigation/Bibliothek.png").toURI().toString());
+		ImageView bibliothekIV=new ImageView(bibliothekI);
+		bibliothek.setGraphic(bibliothekIV);
+		bibliothek.setStyle("-fx-background-color: transparent;");
+
+		Image youtubeI=new Image(new File("Navigation/Youtube.png").toURI().toString());
+		ImageView youtubeIV=new ImageView(youtubeI);
+		youtube.setGraphic(youtubeIV);
+		youtube.setStyle("-fx-background-color: transparent;");
+
+		Image einstellungenI=new Image(new File("Navigation/Einstellungen.png").toURI().toString());
+		ImageView einstellungenIV=new ImageView(einstellungenI);
+		einstellungen.setGraphic(einstellungenIV);
+		einstellungen.setStyle("-fx-background-color: transparent;");
+
+		Image openfileI=new Image(new File("Navigation/openfile.png").toURI().toString());
+		ImageView openfileIV=new ImageView(openfileI);
+		openfile.setGraphic(openfileIV);
+		openfile.setStyle("-fx-background-color: transparent;");
+
+		Image openlinkI=new Image(new File("Navigation/openlink.png").toURI().toString());
+		ImageView openlinkIV=new ImageView(openlinkI);
+		openlink.setGraphic(openlinkIV);
+		openlink.setStyle("-fx-background-color: transparent;");
+
+		Image fullscreenI=new Image(new File("Navigation/fullscreen.png").toURI().toString());
+		ImageView fullscreenIV=new ImageView(fullscreenI);
+		fullscreen.setGraphic(fullscreenIV);
+		fullscreen.setStyle("-fx-background-color: transparent;");
+
+		Image exitI=new Image(new File("Navigation/exit.png").toURI().toString());
+		ImageView exitIV=new ImageView(exitI);
+		exit.setGraphic(exitIV);
+		exit.setStyle("-fx-background-color: transparent;");
+
+		Image playlistI=new Image(new File("Navigation/playlist.png").toURI().toString());
+		ImageView playlistIV=new ImageView(playlistI);
+		playlist.setGraphic(playlistIV);
+		playlist.setStyle("-fx-background-color: transparent;");
 	}
 
 	public void bibliothek() throws Exception {
