@@ -17,6 +17,7 @@ public class GuiElemente {
   static Boolean playlist = false;
   static Playlist pl;
   static HBox navigationbar;
+  static Boolean Youtube= false;
 static RadioStream rs;
 
     static boolean livestream = false;
@@ -87,8 +88,13 @@ static RadioStream rs;
     public static boolean isLivestream() {
         return livestream;
     }
-
     public static void setLivestream(boolean livestream) {
         GuiElemente.livestream = livestream;
+    }
+    public static void setYoutube(Boolean b){
+      Youtube = b;
+    }
+    public static Boolean getYoutube(){
+      return Youtube;
     }
 }

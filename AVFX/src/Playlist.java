@@ -39,10 +39,11 @@ private VBox vb;
     public Playlist(String Name){
         this.Name = Name;
 
-
+        InternetBrowser.removeWebView();
     }
 
     public void create(){
+
         pl = this;
         vb = new VBox();
         vb.setStyle("-fx-background-color: rgba(0, 0, 0, 0.4);");

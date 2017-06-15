@@ -240,6 +240,7 @@ public class Controller {
 	}
 
 
+
 	public void radioComboBox(ActionEvent event) throws Exception {
 
 		comboBoxValue = radioComboBox.getValue().toString();

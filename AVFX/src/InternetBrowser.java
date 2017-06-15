@@ -18,22 +18,22 @@ import javafx.stage.Stage;
 public class InternetBrowser {
 	static WebView myWebView = new WebView();
 	static WebEngine engine = myWebView.getEngine();
-	static ScrollPane sp = new ScrollPane();
-	static VBox vb = new VBox();
 	public static void createWebView() {
-
+		GuiElemente.getNavigationbar().getChildren().clear();
+		InternetBrowser.removeWebView();
+		GuiElemente.setYoutube(true);
 		engine.load("http://www.youtube.de");
-
-		vb.getChildren().addAll(myWebView);
-		sp = GuiElemente.getScrollPane();
-		sp.setContent(vb);
-		myWebView.prefHeightProperty().bind(sp.heightProperty());
-		myWebView.prefWidthProperty().bind(sp.widthProperty());
+		GuiElemente.getanchorpane().getChildren().add(myWebView);
+		myWebView.prefHeightProperty().bind(GuiElemente.getanchorpane().heightProperty());
+		myWebView.prefWidthProperty().bind(GuiElemente.getanchorpane().widthProperty());
 
 
 	}
-
-	public static void closeWebview(){
-		vb.getChildren().clear();
+	public static void removeWebView(){
+		if (GuiElemente.getYoutube()) {
+			myWebView.getEngine().load(null);
+			GuiElemente.getanchorpane().getChildren().remove(myWebView);
+		}
 	}
+
 }

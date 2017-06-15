@@ -136,6 +136,7 @@ public class MediaPlayer {
 			mediaPlayer.onReadyProperty().set(() ->mediaPlayer.play());
 		 }
 	 public static void createElements() throws SQLException {
+		 	InternetBrowser.removeWebView();
 		 	started = false;
 		 mediaPlayer = new javafx.scene.media.MediaPlayer(media);
 		 mediaView = new MediaView(mediaPlayer);

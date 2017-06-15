@@ -32,7 +32,8 @@ public class Settings {
 
 	public Settings(String Name){ //Ändern von NEWSetting in den KlassenNamen
 		this.Name = Name;
-
+		InternetBrowser.removeWebView();
+		GuiElemente.getNavigationbar().getChildren().clear();
 	}
 
 	public Settings(){

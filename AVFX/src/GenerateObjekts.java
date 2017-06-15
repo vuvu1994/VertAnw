@@ -24,6 +24,7 @@ public class GenerateObjekts extends Thread {
 
 ;	private ArrayList<AnchorPane> Objekte = new ArrayList<AnchorPane>();
 	public GenerateObjekts(){
+		InternetBrowser.removeWebView();
 		if (!GuiElemente.playlist) {
 			GuiElemente.getNavigationbar().getChildren().clear();
 			Button Video = new Button("Video");

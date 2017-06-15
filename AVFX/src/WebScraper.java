@@ -10,11 +10,11 @@ import java.io.*;
  */
 public class WebScraper {
 
-    public static String getFirstGoogleLink(String suche){
+    private static String getFirstGoogleLink(String suche){
         Document doc;
         String googleSuche = "https://www.google.de/search?q=" + suche.replace(" ","+");
         try{
-            doc = Jsoup.connect(googleSuche).userAgent("Mozilla").ignoreHttpErrors(true).timeout(20000).get();
+            doc = Jsoup.connect(googleSuche).userAgent("Mozilla").ignoreHttpErrors(true).timeout(10000).get();
             //System.out.println(doc);
             String Link = StringUtils.substringBetween(doc.toString(),"url?q=","&amp").replace("%3F","?").replace("%3D","=");
             return Link;
@@ -35,20 +35,15 @@ public class WebScraper {
                 System.out.println("LinK: "+l);
                 //bild download
                 if (l.contains("imdb")) {
-                    doc = Jsoup.connect(l).userAgent("Mozilla").ignoreHttpErrors(true).timeout(20000).get();
+                    doc = Jsoup.connect(l).userAgent("Mozilla").ignoreHttpErrors(true).timeout(10000).get();
                     //System.out.println(doc);
                  String bild = StringUtils.substringBetween(doc.toString(), "src=\"https://images-na.ssl-images-amazon.com/images/M/", "\"");
                     bild = "https://images-na.ssl-images-amazon.com/images/M/" + bild;
                     Connection.Response resultImageResponse = Jsoup.connect(bild)
                             .ignoreContentType(true).execute();
                     FileOutputStream out = (new FileOutputStream(new File("Cover/" + Name + ".jpg")));
-                    out.write(resultImageResponse.bodyAsBytes());  // resultImageResponse.body() is where the image's contents are.
+                    out.write(resultImageResponse.bodyAsBytes());
                     out.close();
-
-
-
-
-
                 }
             }
 
