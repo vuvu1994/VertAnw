@@ -57,7 +57,7 @@ public class MediaPlayer {
 		 FileinPlaylist++;
 	 }
 	 public static void createMediaPlayer(String datei){
-
+		 playlistactive=false;
 		 media = new Media(new File(datei).toURI().toString());
 
 
@@ -80,6 +80,7 @@ public class MediaPlayer {
 
 
 	 public static void createMediaPlayerwithURL(String datei){
+		 playlistactive=false;
 		 Service<Void> service = new Service<Void>() {
 			 @Override
 			 protected Task<Void> createTask() {
@@ -115,6 +116,7 @@ public class MediaPlayer {
 		 }
 
 		 public static void createRadio(String live){
+			 playlistactive=false;
 			 media = new Media(live);
 			 mediaPlayer = new javafx.scene.media.MediaPlayer(media);
 			 mediaView = new MediaView(mediaPlayer);
@@ -144,7 +146,6 @@ public class MediaPlayer {
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
-					
 					GuiElemente.gethbox().setVisible(false);
 					GuiElemente.getanchorpane().setVisible(false);
 					GuiElemente.getvbox().setVisible(false);
@@ -223,7 +224,6 @@ public class MediaPlayer {
 			 @Override
 			 public void run() {
 				 Database.updateaktuell(media.getSource(), null);
-
 				 if (playlistactive&& playlist.size()>FileinPlaylist) {
 					 mediaPlayer.dispose();
 					 GuiElemente.getMain().getChildren().remove(mediaView);
