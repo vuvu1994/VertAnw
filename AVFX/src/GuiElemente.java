@@ -1,3 +1,4 @@
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.ArrayList;
@@ -19,8 +20,15 @@ public class GuiElemente {
   static HBox navigationbar;
   static Boolean Youtube= false;
 static RadioStream rs;
+static ProgressBar progress;
 
     static boolean livestream = false;
+    public static ProgressBar getProgressBar(){
+      return progress;
+    }
+    public static void setProgressBar(ProgressBar p){
+      progress =p;
+    }
   public static RadioStream getRadiostream(){
     return rs;
   }

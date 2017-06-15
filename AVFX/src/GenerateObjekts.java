@@ -24,6 +24,7 @@ public class GenerateObjekts extends Thread {
 
 ;	private ArrayList<AnchorPane> Objekte = new ArrayList<AnchorPane>();
 	public GenerateObjekts(){
+        GuiElemente.getProgressBar().setVisible(true);
 		InternetBrowser.removeWebView();
 		if (!GuiElemente.playlist) {
 			GuiElemente.getNavigationbar().getChildren().clear();
@@ -93,6 +94,7 @@ public class GenerateObjekts extends Thread {
 		Media.clear();
 		Objekte.clear();
 		for (int i =0;i<path.size();i++) {
+
 			File file = new File(path.get(i).toString());
 			MediaNamen = file.list(new FilenameFilter() {
 				@Override
@@ -103,7 +105,8 @@ public class GenerateObjekts extends Thread {
 			if (!(MediaNamen ==null)) {
 				System.out.println("Soviel: " + MediaNamen.length);
 				for (int j = 0; j < MediaNamen.length; j++) {
-					if (MediaNamen[j].contains(".mp4") ^ MediaNamen[j].contains(".aiff") ^ MediaNamen[j].contains(".flv") ^ MediaNamen[j].contains(".mp3") ^ MediaNamen[j].contains(".wav")) {
+
+                    if (MediaNamen[j].contains(".mp4") ^ MediaNamen[j].contains(".aiff") ^ MediaNamen[j].contains(".flv") ^ MediaNamen[j].contains(".mp3") ^ MediaNamen[j].contains(".wav")) {
 						Media.add(MediaNamen[j].toString());
 						m = new MediaObjekt();
 						m.setName(MediaNamen[j].toString());
@@ -129,7 +132,7 @@ public class GenerateObjekts extends Thread {
 						System.out.println(Objekte.size());
 						
 						fp.getChildren().addAll(Objekte);
-				
+                        GuiElemente.getProgressBar().setVisible(false);
 					}
 				});
 	}

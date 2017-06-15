@@ -55,7 +55,8 @@ public class Controller {
 	Button fullscreen;
 	@FXML
 	Button playlist;
-
+	@FXML
+	ProgressBar progress;
 	ObservableList<String> radioList = FXCollections.observableArrayList("1Live","WDR2","WDR5");
 
 	static String comboBoxValue;
@@ -75,12 +76,9 @@ public class Controller {
 		bimage.fitWidthProperty().bind(Main.widthProperty());
 		bimage.fitHeightProperty().bind(Main.heightProperty());
 		bimage.setPreserveRatio(false);
-		// Database test
+
 		Database.getDatabase();
 		Database.createTable();
-		Database.addtoMedia("TestName");
-		Database.addtoMedia("TestName2");
-		System.out.println(Database.getAllMedia());
 		if (new File("Radio").exists()) {
 			try {
 				FileUtils.deleteDirectory(new File("Radio"));
@@ -98,7 +96,7 @@ public class Controller {
 		GuiElemente.sethbox(hbox);
 		GuiElemente.setvbox(vbox);
 		GuiElemente.setNavigationbar(navigationbar);
-
+		GuiElemente.setProgressBar(progress);
         //Buttons für Navi
 
 		Image bibliothekI=new Image(new File("Navigation/Bibliothek.png").toURI().toString());
