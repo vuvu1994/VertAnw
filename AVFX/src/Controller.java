@@ -169,12 +169,12 @@ public class Controller {
 		dialog.setHeaderText("AVFX HTTP Player");
 		dialog.setContentText("Link zur Datei:");
 
-		// Traditional way to get the response value.
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()) {
 			System.out.println("URL: " + result.get());
+			MediaPlayer.createMediaPlayerwithURL(result.get().toString());
 		}
-		MediaPlayer.createMediaPlayerwithURL(result.get().toString());
+
 
 	}
 

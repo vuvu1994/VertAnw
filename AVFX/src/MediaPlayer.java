@@ -38,6 +38,7 @@ public class MediaPlayer {
 	 static private Slider dauer;
 	 static private Slider volumeSlider;
 	 static boolean backpressed = false;
+	 static boolean forwardpressed = false;
 	 static ArrayList<String> playlist;
 	 static boolean playlistactive = false;
 	 static int FileinPlaylist = 0;
@@ -237,16 +238,21 @@ public class MediaPlayer {
 				@Override
 				public void handle(ActionEvent e) {
 					try {
-						System.out.println("Eventtyp bei Play: " + e.getEventType());
-						if (mediaPlayer.getStatus().toString()=="PLAYING"){
-						System.out.println(mediaPlayer.getStatus());
-						mediaPlayer.pause();
-						Play.setText("");
-						playIV.setImage(new Image(new File("Controls/play.png").toURI().toString()));
+						if (!forwardpressed&&!backpressed) {
+							System.out.println("Eventtyp bei Play: " + e.getEventType());
+							if (mediaPlayer.getStatus().toString() == "PLAYING") {
+								System.out.println(mediaPlayer.getStatus());
+								mediaPlayer.pause();
+								Play.setText("");
+								playIV.setImage(new Image(new File("Controls/play.png").toURI().toString()));
+							} else {
+								mediaPlayer.play();
+								playIV.setImage(new Image(new File("Controls/pause.png").toURI().toString()));
+
+							}
 						}else{
-						mediaPlayer.play();
-						playIV.setImage(new Image(new File("Controls/pause.png").toURI().toString()));
-					
+							forwardpressed = false;
+							backpressed = false;
 						}
 						
 					} catch (Exception e1) {
@@ -291,7 +297,6 @@ public class MediaPlayer {
 								public void run() {
 									GuiElemente.gethbox().setVisible(true);
 									GuiElemente.getanchorpane().setVisible(true);
-									GuiElemente.getvbox().setVisible(true);
 								}
 							});
 							if(GuiElemente.isLivestream()){
@@ -331,17 +336,28 @@ public class MediaPlayer {
 			forward.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent e) {
-					try {
-						if (mediaPlayer.getRate() > 1){
-							mediaPlayer.setRate(1.0);
-						}else {
-						mediaPlayer.setRate(4.0);
+
+					forwardpressed  = true;
+
+					Task task = new Task<Void>() {
+						protected Void call() throws Exception {
+
+							while (forwardpressed ){
+								double currentzeit = mediaPlayer.getCurrentTime().toSeconds();
+								currentzeit = currentzeit + 0.1;
+								mediaPlayer.seek(Duration.seconds(currentzeit));
+
+							}
+							return null;
 						}
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					};
+					Thread th = new Thread(task);
+					th.setDaemon(true);
+					th.start();
+
+
 				}
+
 			});
 			mediaPlayer.setOnReady(new Runnable() {
 	            public void run() {
@@ -366,11 +382,8 @@ public class MediaPlayer {
 			back.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent e) {
-					if (!backpressed){
-	            		backpressed = true;
-	            	}else{
-	            		backpressed = false;
-	            	}
+
+					backpressed = true;
 					 Task task = new Task<Void>() {
 				            protected Void call() throws Exception {
 				            	
@@ -435,7 +448,7 @@ public class MediaPlayer {
 				  System.out.println("Startzeit " + Stringstartzeit);
 				  Double startzeitDouble = Double.parseDouble(Stringstartzeit);
 				  mediaPlayer.seek(Duration.seconds(startzeitDouble));
-				  System.out.println("WHY THE FUCK");
+
 			  }
 				Database.updateaktuell(media.getSource(), currentTime.toSeconds());
 

@@ -79,7 +79,6 @@ public class Database {
 
 	        stmt.executeUpdate(sql);
 	        stmt.close();
-	        System.out.println("Inserted records into the table...");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
