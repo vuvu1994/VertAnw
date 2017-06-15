@@ -118,7 +118,7 @@ public class Controller {
 		GuiElemente.setvbox(vbox);
 		GuiElemente.setNavigationbar(navigationbar);
 
-
+        //Buttons für Navi
 
 		Image bibliothekI=new Image(new File("Navigation/Bibliothek.png").toURI().toString());
 		ImageView bibliothekIV=new ImageView(bibliothekI);
