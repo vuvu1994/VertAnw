@@ -100,19 +100,21 @@ public class GenerateObjekts extends Thread {
 					return new File(current, name).isFile();
 				}
 			});
-			System.out.println("Soviel: "+MediaNamen.length);
-			for (int j=0;j<MediaNamen.length;j++) {
-				if(MediaNamen[j].contains(".mp4")  ^ MediaNamen[j].contains(".aiff") ^MediaNamen[j].contains(".flv")^MediaNamen[j].contains(".mp3")  ^ MediaNamen[j].contains(".wav") ) {
-					Media.add(MediaNamen[j].toString());
-					m = new MediaObjekt();
-					m.setName(MediaNamen[j].toString());
-					m.setBild("Cover/" + MediaNamen[j].toString() + ".jpg");
-					m.setPath(path.get(i) + "/");
-					m.createMediaObjekt();
-					Objekte.add(m.getObjekt());
+			if (!(MediaNamen ==null)) {
+				System.out.println("Soviel: " + MediaNamen.length);
+				for (int j = 0; j < MediaNamen.length; j++) {
+					if (MediaNamen[j].contains(".mp4") ^ MediaNamen[j].contains(".aiff") ^ MediaNamen[j].contains(".flv") ^ MediaNamen[j].contains(".mp3") ^ MediaNamen[j].contains(".wav")) {
+						Media.add(MediaNamen[j].toString());
+						m = new MediaObjekt();
+						m.setName(MediaNamen[j].toString());
+						m.setBild("Cover/" + MediaNamen[j].toString() + ".jpg");
+						m.setPath(path.get(i) + "/");
+						m.createMediaObjekt();
+						Objekte.add(m.getObjekt());
+					}
 				}
+				System.out.println("Soviel Media: " + Media.size());
 			}
-			System.out.println("Soviel Media: "+Media.size());
 		}
 	}
 	
