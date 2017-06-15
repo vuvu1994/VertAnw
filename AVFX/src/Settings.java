@@ -2,10 +2,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
@@ -14,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
+import sun.awt.SunHints;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -85,6 +83,7 @@ public class Settings {
 			prop.setProperty("1Live","http://wdr-1live-live.icecast.wdr.de/wdr/1live/live/mp3/128/stream.mp3");
 			prop.setProperty("WDR2","http://wdr-wdr2-rheinruhr.icecast.wdr.de/wdr/wdr2/rheinruhr/mp3/128/stream.mp3");
 			prop.setProperty("WDR5","http://wdr-wdr5-live.icecast.wdr.de/wdr/wdr5/live/mp3/128/stream.mp3");
+			prop.setProperty("Scrapper", "true");
 			save();
 		}
 	}
@@ -123,6 +122,18 @@ public class Settings {
 	public String getTextWdr5 () {
 		load();
 		String s = prop.getProperty("WDR5");
+		return s;
+	}
+	public void setScrapper(String fa) {
+
+		prop.setProperty("Scrapper", fa);
+		save();
+
+	}
+
+	public boolean getScrapper () {
+		load();
+		boolean s = Boolean.valueOf(prop.getProperty("Scrapper"));
 		return s;
 	}
 
@@ -184,7 +195,7 @@ public class Settings {
 
 	public void createHelper(){
 		vb = new VBox();
-		vb.setPrefHeight(320);
+		vb.setPrefHeight(400);
 		vb.setSpacing(15);
 		vb.setStyle("-fx-background-color: rgba(0, 0, 0, 0.4);");
 		Text name = new Text();
@@ -203,6 +214,9 @@ public class Settings {
 		TextField text1live = new TextField(getText1live());
 		TextField textWdr2 = new TextField(getTextWdr2());
 		TextField textWdr5 = new TextField(getTextWdr5());
+		CheckBox checkBoxScrapper = new CheckBox("Scrapper aktivieren/deaktivieren");
+		checkBoxScrapper.setSelected(getScrapper());
+
 
 		text1live.textProperty().addListener(new ChangeListener<String>() {
 			@Override
@@ -228,7 +242,17 @@ public class Settings {
 
 			}
 		});
-		vb.getChildren().addAll(label1live,text1live,labelWdr2,textWdr2,labelWdr5,textWdr5);
+
+		checkBoxScrapper.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            public void changed(ObservableValue<? extends Boolean> ov,
+                                Boolean old_val, Boolean new_val) {
+                String s = String.valueOf(checkBoxScrapper.isSelected());
+                setScrapper(s);
+            }
+        });
+
+
+        vb.getChildren().addAll(label1live,text1live,labelWdr2,textWdr2,labelWdr5,textWdr5,checkBoxScrapper);
 	}
 
 
