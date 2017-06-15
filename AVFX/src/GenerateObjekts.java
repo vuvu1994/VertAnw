@@ -82,9 +82,7 @@ public class GenerateObjekts extends Thread {
 		
 	}
 	public void getMedia() throws IOException {
-		//Wird später benötigt für die Rückgabe einer ArrayList
 		Settings list = new Settings();
-		// In al befinden sich alle Pfade die die Arraylist beeinhaltet
 		path.clear();
 		if (whichpath == 0 ) {
 			path = list.readDirectories("Mediathek");
