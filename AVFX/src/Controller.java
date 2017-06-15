@@ -124,10 +124,6 @@ public class Controller {
 		openlink.setGraphic(openlinkIV);
 		openlink.setStyle("-fx-background-color: transparent;");
 
-		Image fullscreenI=new Image(new File("Navigation/fullscreen.png").toURI().toString());
-		ImageView fullscreenIV=new ImageView(fullscreenI);
-		fullscreen.setGraphic(fullscreenIV);
-		fullscreen.setStyle("-fx-background-color: transparent;");
 
 		Image exitI=new Image(new File("Navigation/exit.png").toURI().toString());
 		ImageView exitIV=new ImageView(exitI);
@@ -199,15 +195,7 @@ public class Controller {
 		System.exit(0);
 	}
 
-	public void fullscreen(){
-		Scene scene =  (Scene) GuiElemente.getMain().getScene();
-		 Stage stage = (Stage) scene.getWindow();
-		 if (stage.isFullScreen()){
-			 stage.setFullScreen(false);
-		 }else{
-		 stage.setFullScreen(true);
-		 }
-	}
+
 
 
 

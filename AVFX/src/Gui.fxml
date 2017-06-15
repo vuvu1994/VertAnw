@@ -41,14 +41,6 @@
                   <Insets left="-10.0" top="17.0" />
                </padding>
             </Button>
-            <Button fx:id="fullscreen" mnemonicParsing="false" onAction="#fullscreen">
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-               <padding>
-                  <Insets left="-10.0" />
-               </padding>
-            </Button>
             <Button fx:id="exit" mnemonicParsing="false" onAction="#exit">
                <HBox.margin>
                   <Insets right="20.0" />
