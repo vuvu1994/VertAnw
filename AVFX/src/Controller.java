@@ -202,14 +202,17 @@ public class Controller {
 
 
 
-	public void radioComboBox(ActionEvent event) throws Exception {
+	public void radioComboBox(ActionEvent event)  {
 
-		comboBoxValue = radioComboBox.getValue().toString();
-		File directory = new File("Radio");
 
-		if (!directory.exists()){
-			directory.mkdirs();
-		}
+		radioComboBox.showingProperty().addListener((obs, wasShowing, isShowing) -> {
+			if (! isShowing) {
+				comboBoxValue = radioComboBox.getValue().toString();
+				File directory = new File("Radio");
+
+				if (!directory.exists()){
+					directory.mkdirs();
+				}
 
 
 
@@ -229,12 +232,19 @@ public class Controller {
 				GuiElemente.setRadioStream(rs);
 				GuiElemente.getRadiostream().start();
 				File size = new File("Radio/"+radio+".mp3");
-				while (size.length() < 100000){
-					Thread.sleep(10);
+				while (size.length() < 70000){
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 				MediaPlayer.createMediaPlayer("Radio/"+radio+".mp3");
-									//FX Stuff done here
+				//FX Stuff done here
 				++radio;
+			}
+		});
+
 
 	}
 
