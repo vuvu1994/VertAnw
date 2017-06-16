@@ -320,7 +320,9 @@ public class MediaPlayer {
 				@Override
 				public void handle(ActionEvent e) {
 					try {
-						GuiElemente.getRadiostream().kill();
+						if (GuiElemente.getRadioAktiv() ){
+							GuiElemente.getRadiostream().kill();
+						}
 						System.out.println("Eventtyp bei ende: " + e.getEventType());
 
 						mediaView.setMediaPlayer(null);
