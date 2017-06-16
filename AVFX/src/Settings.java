@@ -86,6 +86,7 @@ public class Settings {
 			prop.setProperty("WDR2","http://wdr-wdr2-rheinruhr.icecast.wdr.de/wdr/wdr2/rheinruhr/mp3/128/stream.mp3");
 			prop.setProperty("WDR5","http://wdr-wdr5-live.icecast.wdr.de/wdr/wdr5/live/mp3/128/stream.mp3");
 			prop.setProperty("Scraper", "true");
+			prop.setProperty("Videoformat", "true");
 			save();
 		}
 	}
@@ -138,8 +139,18 @@ public class Settings {
 		boolean s = Boolean.valueOf(prop.getProperty("Scraper"));
 		return s;
 	}
+	public void setVideoformat(String fa) {
 
+		prop.setProperty("Videoformat", fa);
+		save();
 
+	}
+
+	public boolean getVideoformat () {
+		load();
+		boolean s = Boolean.valueOf(prop.getProperty("Videoformat"));
+		return s;
+	}
 
 	public ArrayList<String> readIntoArrayList (){
 		Scanner s = null;
@@ -218,6 +229,8 @@ public class Settings {
 		TextField textWdr5 = new TextField(getTextWdr5());
 		CheckBox checkBoxScrapper = new CheckBox("Scraper aktivieren/deaktivieren");
 		checkBoxScrapper.setSelected(getScrapper());
+		CheckBox checkboxVideoformat = new CheckBox("Videoformat beibehalten");
+		checkboxVideoformat.setSelected(getVideoformat());
 
 
 		text1live.textProperty().addListener(new ChangeListener<String>() {
@@ -253,8 +266,15 @@ public class Settings {
             }
         });
 
+		checkboxVideoformat.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			public void changed(ObservableValue<? extends Boolean> ov,
+								Boolean old_val, Boolean new_val) {
+				String s = String.valueOf(checkboxVideoformat.isSelected());
+				setVideoformat(s);
+			}
+		});
 
-        vb.getChildren().addAll(label1live,text1live,labelWdr2,textWdr2,labelWdr5,textWdr5,checkBoxScrapper);
+        vb.getChildren().addAll(label1live,text1live,labelWdr2,textWdr2,labelWdr5,textWdr5,checkBoxScrapper,checkboxVideoformat);
 	}
 
 
