@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -5,6 +6,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -34,7 +37,6 @@ public class MainApp extends Application {
 		primaryStage.setHeight(720);
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
-				System.out.println("Stage is closing");
 				System.out.println("EXIT");
 				System.exit(0);
 			}
