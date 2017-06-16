@@ -48,9 +48,13 @@ public class MediaPlayer {
 
 
 	 public static void createMediaPlayerwithPlaylist(ArrayList al){
-	 	playlist = al;
+
+			playlist = al;
+
 	 	playlistactive=true;
+
 		 media = new Media(new File(playlist.get(FileinPlaylist)).toURI().toString());
+
 		 try {
 			 createElements();
 		 } catch (SQLException e) {
@@ -61,12 +65,6 @@ public class MediaPlayer {
 	 public static void createMediaPlayer(String datei){
 		 playlistactive=false;
 		 media = new Media(new File(datei).toURI().toString());
-
-
-
-
-
-
 		 try {
 			 createElements();
 			 try {
@@ -79,6 +77,15 @@ public class MediaPlayer {
 			 e.printStackTrace();
 		 }
 	 }
+	public static void createMediaPlayerRadio(String datei){
+		playlistactive=false;
+		media = new Media(new File(datei).toURI().toString());
+		try {
+			createElements();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 
 	 public static void createMediaPlayerwithURL(String datei){
@@ -227,11 +234,19 @@ public class MediaPlayer {
 			 	if (!repeat ) {
 					Database.updateaktuell(media.getSource(), null);
 					if (playlistactive && playlist.size() > FileinPlaylist) {
+
+						mediaView.setMediaPlayer(null);
 						mediaPlayer.dispose();
+						System.gc();
 						GuiElemente.getMain().getChildren().remove(mediaView);
 						GuiElemente.getMain().getChildren().remove(ap);
+						GuiElemente.getMain().getChildren().remove(center);
+						System.out.println("File in Playlist: "+playlist.get(FileinPlaylist));
+
 						createMediaPlayer(playlist.get(FileinPlaylist));
 						FileinPlaylist++;
+						playlistactive = true;
+
 					}
 				}else{
 			 		mediaPlayer.seek(Duration.seconds(0));
@@ -305,13 +320,13 @@ public class MediaPlayer {
 				@Override
 				public void handle(ActionEvent e) {
 					try {
-						//GuiElemente.getRadiostream().kill();
+						GuiElemente.getRadiostream().kill();
 						System.out.println("Eventtyp bei ende: " + e.getEventType());
-						mediaPlayer.stop();
+
 						mediaView.setMediaPlayer(null);
+						mediaPlayer.stop();
 						  mediaPlayer.dispose();
 						System.gc();
-						mediaPlayer.dispose();
 						 GuiElemente.getMain().getChildren().remove(mediaView);
 						 GuiElemente.getMain().getChildren().remove(ap);
 						GuiElemente.getMain().getChildren().remove(center);

@@ -22,34 +22,38 @@ public class RadioStream extends Thread{
     }
     public void run(){
 
-        try {
+            while(!Thread.currentThread().isInterrupted()) {
+                try {
 
-            input = new URL(url).openStream();
+                    input = new URL(url).openStream();
 
-                byte[] buffer = new byte[input.available()];
-                input.read(buffer);
+                    byte[] buffer = new byte[input.available()];
+                    input.read(buffer);
 
-                File targetFile = new File("Radio/"+name+".mp3");
-                java.nio.file.Files.copy(
-                    input,
-                    targetFile.toPath(),
-                    StandardCopyOption.REPLACE_EXISTING);
+                    File targetFile = new File("Radio/"+name+".mp3");
+                    java.nio.file.Files.copy(
+                            input,
+                            targetFile.toPath(),
+                            StandardCopyOption.REPLACE_EXISTING);
 
-            IOUtils.closeQuietly(input);
-           input.close();
+                    IOUtils.closeQuietly(input);
+                    input.close();
 
-            System.out.println("Closed");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                    System.out.println("Closed");
+                } catch (IOException e) {
+                   System.out.println("Closed RadioStream");
+                }
+            }
+
+
 
 
     }
 
     public void kill(){
-
+interrupt();
         System.gc();
-        Thread.currentThread().stop();
+
 
     }
 }

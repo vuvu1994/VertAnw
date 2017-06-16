@@ -60,7 +60,6 @@ public class Controller {
 	@FXML
 	ProgressBar progress;
 	ObservableList<String> radioList = FXCollections.observableArrayList("1Live","WDR2","WDR5");
-
 	static String comboBoxValue;
 	GenerateSettings settings = new GenerateSettings();
 	Settings radioURI = new Settings();
@@ -100,6 +99,7 @@ public class Controller {
 		GuiElemente.setvbox(vbox);
 		GuiElemente.setNavigationbar(navigationbar);
 		GuiElemente.setProgressBar(progress);
+		GuiElemente.setRadioAktiv(false);
         //Buttons für Navi
 
 		Image bibliothekI=new Image(new File("Navigation/Bibliothek.png").toURI().toString());
@@ -205,47 +205,57 @@ public class Controller {
 	public void radioComboBox(ActionEvent event)  {
 
 
-		radioComboBox.showingProperty().addListener((obs, wasShowing, isShowing) -> {
-			if (! isShowing) {
-				comboBoxValue = radioComboBox.getValue().toString();
-				File directory = new File("Radio");
-
-				if (!directory.exists()){
-					directory.mkdirs();
-				}
+		if (!GuiElemente.getRadioAktiv()) {
+			GuiElemente.setRadioAktiv(true);
+			radioComboBox.showingProperty().addListener((obs, wasShowing, isShowing) -> {
+				if (!isShowing) {
 
 
+					comboBoxValue = radioComboBox.getValue().toString();
+					File directory = new File("Radio");
 
-				String url = "";
-				switch (comboBoxValue) {
-
-					case "1Live":  url = radioURI.getText1live();
-						break;
-					case "WDR2":  url = radioURI.getTextWdr2();
-						break;
-					case "WDR5":  url = radioURI.getTextWdr5();
-						break;
-					default: url= "Invalid";
-						break;
-				}
-				RadioStream rs = new RadioStream(url,radio+"");
-				GuiElemente.setRadioStream(rs);
-				GuiElemente.getRadiostream().start();
-				File size = new File("Radio/"+radio+".mp3");
-				while (size.length() < 70000){
-					try {
-						Thread.sleep(10);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+					if (!directory.exists()) {
+						directory.mkdirs();
 					}
+
+
+					String url = "";
+					switch (comboBoxValue) {
+
+						case "1Live":
+							url = radioURI.getText1live();
+							break;
+						case "WDR2":
+							url = radioURI.getTextWdr2();
+							break;
+						case "WDR5":
+							url = radioURI.getTextWdr5();
+							break;
+						default:
+							url = "Invalid";
+							break;
+					}
+
+					RadioStream rs = new RadioStream(url, radio + "");
+					GuiElemente.setRadioStream(rs);
+					GuiElemente.getRadiostream().start();
+					File size = new File("Radio/" + radio + ".mp3");
+					while (size.length() < 90000) {
+						try {
+							Thread.sleep(10);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					MediaPlayer.createMediaPlayerRadio("Radio/" + radio + ".mp3");
+					//FX Stuff done here
+					++radio;
 				}
-				MediaPlayer.createMediaPlayer("Radio/"+radio+".mp3");
-				//FX Stuff done here
-				++radio;
-			}
-		});
 
 
+			});
+
+		}
 	}
 
 	public void playlist(){

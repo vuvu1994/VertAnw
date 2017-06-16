@@ -136,10 +136,16 @@ public class Database {
            
             System.out.println(rs.getString(1));
         }
+        try {
 
-       if (all.get(0) ==null){
-    	   return "1";
-       }
+				if (all.get(0) == null) {
+					return "1";
+				}
+
+		}catch (Exception e){
+        	System.out.println("Kein Datenbank eintrag");
+        	return "0";
+		}
         return all.get(0).toString();
 	}
 	////R�ckgabe der Dauer der Aktuellen ausgew�hlten Audio / Video Datei

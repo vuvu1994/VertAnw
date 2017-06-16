@@ -21,7 +21,7 @@ public class GuiElemente {
   static Boolean Youtube= false;
 static RadioStream rs;
 static ProgressBar progress;
-
+static Boolean RadioAktiv = false;
     static boolean livestream = false;
     public static ProgressBar getProgressBar(){
       return progress;
@@ -31,6 +31,12 @@ static ProgressBar progress;
     }
   public static RadioStream getRadiostream(){
     return rs;
+  }
+  public static Boolean getRadioAktiv (){
+   return RadioAktiv;
+  }
+  public static void setRadioAktiv(Boolean r){
+    RadioAktiv = r;
   }
   public static void setRadioStream(RadioStream t){
     rs= t;
