@@ -86,7 +86,7 @@ public class Settings {
 			prop.setProperty("WDR2","http://wdr-wdr2-rheinruhr.icecast.wdr.de/wdr/wdr2/rheinruhr/mp3/128/stream.mp3");
 			prop.setProperty("WDR5","http://wdr-wdr5-live.icecast.wdr.de/wdr/wdr5/live/mp3/128/stream.mp3");
 			prop.setProperty("Scraper", "false");
-			prop.setProperty("Videoformat", "false");
+			prop.setProperty("Videoformat", "true");
 			save();
 		}
 	}
