@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -352,6 +353,7 @@ public class MediaPlayer {
 					});
 		        }
 		    });
+
 			forward.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent e) {
@@ -454,7 +456,23 @@ public class MediaPlayer {
 				       }
 				}
 			});
-
+		 mediaView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			 @Override
+			 public void handle(MouseEvent mouseEvent) {
+				 if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+					 if(mouseEvent.getClickCount() == 2){
+						 System.out.println("Double clicked");
+						 Scene scene =  (Scene) GuiElemente.getMain().getScene();
+						 Stage stage = (Stage) scene.getWindow();
+						 if (stage.isFullScreen()){
+							 stage.setFullScreen(false);
+						 }else{
+							 stage.setFullScreen(true);
+						 }
+					 }
+				 }
+			 }
+		 });
 
 
 	 }
