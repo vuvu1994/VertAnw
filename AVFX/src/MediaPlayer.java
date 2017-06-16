@@ -210,7 +210,12 @@ public class MediaPlayer {
 
 			mediaView.fitWidthProperty().bind(m.widthProperty());
 			mediaView.fitHeightProperty().bind(m.heightProperty());
-			mediaView.setPreserveRatio(true);
+			Settings settings = new Settings();
+			if (settings.getVideoformat()) {
+				mediaView.setPreserveRatio(true);
+			}else{
+				mediaView.setPreserveRatio(false);
+			}
 			mediaPlayer.setAutoPlay(true);
 
 		 ap.prefWidthProperty().bind(m.widthProperty());
