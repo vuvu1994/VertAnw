@@ -215,7 +215,7 @@ public class Controller {
 
 				String url = "";
 				switch (comboBoxValue) {
-					//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 					case "1Live":  url = radioURI.getText1live();
 						break;
 					case "WDR2":  url = radioURI.getTextWdr2();
@@ -228,11 +228,14 @@ public class Controller {
 				RadioStream rs = new RadioStream(url,radio+"");
 				GuiElemente.setRadioStream(rs);
 				GuiElemente.getRadiostream().start();
-				Thread.sleep(2000);
+				File size = new File("Radio/"+radio+".mp3");
+				while (size.length() < 100000){
+					Thread.sleep(10);
+				}
 				MediaPlayer.createMediaPlayer("Radio/"+radio+".mp3");
 									//FX Stuff done here
 				++radio;
-				//rs.kill();
+
 	}
 
 	public void playlist(){

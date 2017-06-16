@@ -308,6 +308,7 @@ public class MediaPlayer {
 						mediaPlayer.dispose();
 						 GuiElemente.getMain().getChildren().remove(mediaView);
 						 GuiElemente.getMain().getChildren().remove(ap);
+						GuiElemente.getMain().getChildren().remove(center);
 							Platform.runLater(new Runnable() {
 								@Override
 								public void run() {
