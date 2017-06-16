@@ -28,7 +28,9 @@ public class MainApp extends Application {
 		primaryStage.show();
 		primaryStage.setFullScreenExitHint("");
 		primaryStage.setFullScreen(false);
-		primaryStage.setWidth(1140);
+		primaryStage.setMinWidth(1138);
+		primaryStage.setMinHeight(640);
+		primaryStage.setWidth(1280);
 		primaryStage.setHeight(720);
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {

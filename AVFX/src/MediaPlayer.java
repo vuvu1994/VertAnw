@@ -43,8 +43,8 @@ public class MediaPlayer {
 	 static boolean playlistactive = false;
 	 static int FileinPlaylist = 0;
 	static boolean started =false;
-	static String mediaName;
-	static char charMediaName;
+	static boolean repeat = false;
+
 
 	 public static void createMediaPlayerwithPlaylist(ArrayList al){
 	 	playlist = al;
@@ -116,31 +116,11 @@ public class MediaPlayer {
 
 		 }
 
-		 public static void createRadio(String live){
-			 playlistactive=false;
-			 media = new Media(live);
-			 mediaPlayer = new javafx.scene.media.MediaPlayer(media);
-			 mediaView = new MediaView(mediaPlayer);
-			 AnchorPane m = GuiElemente.getMain();
-			 m.getChildren().add(mediaView);
-			 mediaView.fitWidthProperty().bind(m.widthProperty());
-			 mediaView.fitHeightProperty().bind(m.heightProperty());
-			 mediaView.setPreserveRatio(false);
-			 mediaPlayer.setAutoPlay(false);
-			 Platform.runLater(new Runnable() {
-				 @Override
-				 public void run() {
 
-					 GuiElemente.gethbox().setVisible(false);
-					 GuiElemente.getanchorpane().setVisible(false);
-
-				 }
-			 });
-			mediaPlayer.onReadyProperty().set(() ->mediaPlayer.play());
-		 }
 	 public static void createElements() throws SQLException {
 		 	backpressed = false;
 		 	forwardpressed = false;
+		 	repeat = false;
 		 	InternetBrowser.removeWebView();
 		 	started = false;
 		 mediaPlayer = new javafx.scene.media.MediaPlayer(media);
@@ -171,10 +151,12 @@ public class MediaPlayer {
 		 ImageView backIV=new ImageView(backI);
 		 Button back = new Button("",backIV);
 		 back.setStyle("-fx-background-color: transparent;");
+		 back.setOpacity(0.4);
 		 Image forwardI=new Image(new File("Controls/forward.png").toURI().toString());
 		 ImageView forwardIV=new ImageView(forwardI);
 		 Button forward = new Button("",forwardIV);
 		 forward.setStyle("-fx-background-color: transparent;");
+		 forward.setOpacity(0.4);
 		 dauer = new Slider();
 		 dauer.setPrefWidth(500);
 		 volumeSlider = new Slider();
@@ -186,10 +168,16 @@ public class MediaPlayer {
 		 ImageView endeIV=new ImageView(endeI);
 		 Button ende = new Button("",endeIV);
 		 ende.setStyle("-fx-background-color: transparent;");
+		 Image repeatI=new Image(new File("Controls/repeat.png").toURI().toString());
+		 ImageView repeatIV=new ImageView(repeatI);
+		 Button repeatButton = new Button("",repeatIV);
+		 repeatButton.setStyle("-fx-background-color: transparent;");
+		 repeatButton.setOpacity(0.4);
 		 hb.getChildren().add(Play);
 		 hb.getChildren().add(back);
 		 hb.getChildren().add(forward);
 		 hb.getChildren().add(dauer);
+		 hb.getChildren().add(repeatButton);
 		 hb2.getChildren().add(fullscreen);
 		 hb2.getChildren().add(ende);
 		 hb2.getChildren().add(volumeSlider);
@@ -199,8 +187,13 @@ public class MediaPlayer {
 		 ap.getChildren().add(hb);
 		 ap.getChildren().add(hb2);
 		 AnchorPane m = GuiElemente.getMain();
-
-		 m.getChildren().add(mediaView);
+		 HBox center = new HBox();
+		 center.getChildren().add(mediaView);
+		 center.setAlignment(Pos.CENTER);
+		 center.prefWidthProperty().bind(m.widthProperty());
+		 center.prefHeightProperty().bind(m.heightProperty());
+		 center.setStyle("-fx-background-color: #000000;");
+		 m.getChildren().add(center);
 		 m.getChildren().add(ap);
 		 
 		
@@ -216,7 +209,7 @@ public class MediaPlayer {
 
 			mediaView.fitWidthProperty().bind(m.widthProperty());
 			mediaView.fitHeightProperty().bind(m.heightProperty());
-			mediaView.setPreserveRatio(false);
+			mediaView.setPreserveRatio(true);
 			mediaPlayer.setAutoPlay(true);
 
 		 ap.prefWidthProperty().bind(m.widthProperty());
@@ -225,14 +218,18 @@ public class MediaPlayer {
 		mediaPlayer.setOnEndOfMedia(new Runnable() {
 			 @Override
 			 public void run() {
-				 Database.updateaktuell(media.getSource(), null);
-				 if (playlistactive&& playlist.size()>FileinPlaylist) {
-					 mediaPlayer.dispose();
-					 GuiElemente.getMain().getChildren().remove(mediaView);
-					 GuiElemente.getMain().getChildren().remove(ap);
-					 createMediaPlayer(playlist.get(FileinPlaylist));
-					 FileinPlaylist++;
-				 }
+			 	if (!repeat ) {
+					Database.updateaktuell(media.getSource(), null);
+					if (playlistactive && playlist.size() > FileinPlaylist) {
+						mediaPlayer.dispose();
+						GuiElemente.getMain().getChildren().remove(mediaView);
+						GuiElemente.getMain().getChildren().remove(ap);
+						createMediaPlayer(playlist.get(FileinPlaylist));
+						FileinPlaylist++;
+					}
+				}else{
+			 		mediaPlayer.seek(Duration.seconds(0));
+				}
 			 }
 		 });
 		
@@ -281,6 +278,23 @@ public class MediaPlayer {
 					}
 				}
 			});
+		 repeatButton.setOnAction(new EventHandler<ActionEvent>() {
+			 @Override
+			 public void handle(ActionEvent e) {
+				 try {
+					 if (!repeat) {
+						 repeat = true;
+						 repeatButton.setOpacity(1);
+					 }else{
+					 	repeat = false;
+						 repeatButton.setOpacity(0.3);
+					 }
+				 } catch (Exception e1) {
+					 // TODO Auto-generated catch block
+					 e1.printStackTrace();
+				 }
+			 }
+		 });
 			ende.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent e) {
@@ -301,9 +315,13 @@ public class MediaPlayer {
 									GuiElemente.getanchorpane().setVisible(true);
 								}
 							});
-							if(GuiElemente.isLivestream()){
-
-							}
+						Scene scene =  (Scene) GuiElemente.getMain().getScene();
+						Stage stage = (Stage) scene.getWindow();
+						if (stage.isFullScreen()){
+							stage.setFullScreen(false);
+						}else{
+							stage.setFullScreen(true);
+						}
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -345,11 +363,15 @@ public class MediaPlayer {
 						protected Void call() throws Exception {
 
 							while (forwardpressed ){
+								if (forward.getOpacity()<1) {
+									forward.setOpacity(1);
+								}
 								double currentzeit = mediaPlayer.getCurrentTime().toSeconds();
 								currentzeit = currentzeit + 0.1;
 								mediaPlayer.seek(Duration.seconds(currentzeit));
 
 							}
+							forward.setOpacity(0.4);
 							return null;
 						}
 					};
@@ -390,11 +412,15 @@ public class MediaPlayer {
 				            protected Void call() throws Exception {
 				            	
 				            	while (backpressed){
+									if (back.getOpacity()<1) {
+										back.setOpacity(1);
+									}
 				            	double currentzeit = mediaPlayer.getCurrentTime().toSeconds();
 								currentzeit = currentzeit - 0.1;
 								mediaPlayer.seek(Duration.seconds(currentzeit));
 				                
 				            	}
+				            	back.setOpacity(0.4);
 								return null;
 				            }
 				        };
