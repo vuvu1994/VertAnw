@@ -320,8 +320,6 @@ public class MediaPlayer {
 						Stage stage = (Stage) scene.getWindow();
 						if (stage.isFullScreen()){
 							stage.setFullScreen(false);
-						}else{
-							stage.setFullScreen(true);
 						}
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
