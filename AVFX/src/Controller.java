@@ -37,12 +37,9 @@ public class Controller {
 	@FXML
 	HBox hbox;
 	@FXML
-	Button exit;
-	@FXML
 	ComboBox radioComboBox;
 	@FXML
 	HBox navigationbar;
-
 	@FXML
 	Button bibliothek;
 	@FXML
@@ -53,8 +50,6 @@ public class Controller {
 	Button openfile;
 	@FXML
 	Button openlink;
-	@FXML
-	Button fullscreen;
 	@FXML
 	Button playlist;
 	@FXML
@@ -127,12 +122,6 @@ public class Controller {
 		openlink.setGraphic(openlinkIV);
 		openlink.setStyle("-fx-background-color: transparent;");
 
-
-		Image exitI=new Image(new File("Navigation/exit.png").toURI().toString());
-		ImageView exitIV=new ImageView(exitI);
-		exit.setGraphic(exitIV);
-		exit.setStyle("-fx-background-color: transparent;");
-
 		Image playlistI=new Image(new File("Navigation/playlist.png").toURI().toString());
 		ImageView playlistIV=new ImageView(playlistI);
 		playlist.setGraphic(playlistIV);
@@ -193,10 +182,7 @@ public class Controller {
 
 	}
 
-	public void exit() {
-		System.out.println("EXIT");
-		System.exit(0);
-	}
+
 
 
 
