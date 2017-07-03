@@ -233,6 +233,7 @@ public class MediaPlayer {
 			 public void run() {
 			 	if (!repeat ) {
 					Database.updateaktuell(media.getSource(), null);
+					checkPlaylistFile();
 					if (playlistactive && playlist.size() > FileinPlaylist) {
 
 						mediaView.setMediaPlayer(null);
@@ -498,8 +499,18 @@ public class MediaPlayer {
 
 
 	 }
-	 
-	 public static void updateValues() {
+
+	private static void checkPlaylistFile() {
+		if (playlistactive && playlist.size() > FileinPlaylist) {
+            String checkFileString = playlist.get(FileinPlaylist);
+            File checkFile = new File(checkFileString);
+            if (!checkFile.exists()) {
+                FileinPlaylist++;
+            }
+        }
+	}
+
+	public static void updateValues() {
 		  
 	     Platform.runLater(new Runnable() {
 	        public void run() {

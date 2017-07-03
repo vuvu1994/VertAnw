@@ -126,6 +126,7 @@ public class Controller {
 		ImageView playlistIV=new ImageView(playlistI);
 		playlist.setGraphic(playlistIV);
 		playlist.setStyle("-fx-background-color: transparent;");
+		GuiElemente.getNavigationbar().setSpacing(5);
 	}
 
 	public void bibliothek() throws Exception {

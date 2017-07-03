@@ -134,8 +134,7 @@ private VBox vb;
                     GuiElemente.getNavigationbar().getChildren().add(extern);
                     new GenerateObjekts().start();
                 } catch (Exception e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
+
                 }
             }
         });
@@ -151,8 +150,8 @@ private VBox vb;
                     }
                  writeToFile(safelist);
                 } catch (Exception e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
+
+
                 }
             }
         });
@@ -166,8 +165,8 @@ private VBox vb;
                     pl.readfiles();
                     pl.create();
                 } catch (Exception e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
+
+
                 }
             }
         });

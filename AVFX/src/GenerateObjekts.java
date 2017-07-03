@@ -117,7 +117,7 @@ public class GenerateObjekts extends Thread {
 						m = new MediaObjekt();
 						m.setName(MediaNamen[j].toString());
 						m.setBild("Cover/" + MediaNamen[j].toString() + ".jpg");
-						m.setPath(path.get(i) + "/");
+						m.setPath(path.get(i) + "\\");
 						m.createMediaObjekt();
 						Objekte.add(m.getObjekt());
 					}

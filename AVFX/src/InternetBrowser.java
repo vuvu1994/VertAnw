@@ -23,7 +23,6 @@ public class InternetBrowser {
 		Button zurück = new Button("Zurück");
 		Button vorwärts = new Button("Vorwärts");
 		GuiElemente.getNavigationbar().getChildren().clear();
-		GuiElemente.getNavigationbar().setSpacing(10);
 		GuiElemente.getNavigationbar().getChildren().add(zurück);
 		GuiElemente.getNavigationbar().getChildren().add(vorwärts);
 		InternetBrowser.removeWebView();
