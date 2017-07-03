@@ -5,14 +5,17 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.concurrent.CountDownLatch;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -497,6 +500,14 @@ public class MediaPlayer {
 			 }
 		 });
 
+
+		 PauseTransition idle = new PauseTransition(Duration.seconds(1));
+		 idle.setOnFinished(e -> mediaView.setCursor(Cursor.NONE));
+
+		 mediaView.addEventHandler(Event.ANY, e -> {
+		 	 idle.playFromStart();
+			 mediaView.setCursor(Cursor.DEFAULT);
+		 });
 
 	 }
 

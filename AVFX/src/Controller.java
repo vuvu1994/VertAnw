@@ -1,4 +1,5 @@
 import java.io.*;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -68,7 +69,11 @@ public class Controller {
 		fp.setStyle("-fx-background-color: transparent;");
 		ScrollPane.setStyle("-fx-background-color: transparent;");
 
-		setGuiElemente();
+		try {
+			setGuiElemente();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 		bimage.fitWidthProperty().bind(Main.widthProperty());
 		bimage.fitHeightProperty().bind(Main.heightProperty());
 		bimage.setPreserveRatio(false);
@@ -85,7 +90,7 @@ public class Controller {
 
 	}
 
-	private void setGuiElemente() {
+	private void setGuiElemente() throws URISyntaxException {
 		GuiElemente.setScrollPane(ScrollPane);
 		GuiElemente.setFlowPane(fp);
 		GuiElemente.setMain(Main);
@@ -96,8 +101,8 @@ public class Controller {
 		GuiElemente.setProgressBar(progress);
 		GuiElemente.setRadioAktiv(false);
         //Buttons für Navi
-
-		Image bibliothekI=new Image(new File("Navigation/Bibliothek.png").toURI().toString());
+		ClassLoader cl = getClass().getClassLoader();
+		Image bibliothekI=new Image(new File(cl.getResource("./Bibliothek.png").getFile()).toURI().toString());
 		ImageView bibliothekIV=new ImageView(bibliothekI);
 		bibliothek.setGraphic(bibliothekIV);
 		bibliothek.setStyle("-fx-background-color: transparent;");
