@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class GuiElemente {
@@ -25,6 +26,7 @@ static RadioStream rs;
 static Stage stage;
 static ProgressBar progress;
 static Boolean RadioAktiv = false;
+static Text status;
     static boolean livestream = false;
     public static ProgressBar getProgressBar(){
       return progress;
@@ -120,5 +122,12 @@ static Boolean RadioAktiv = false;
   }
   public static Stage getStage(){
     return stage;
+  }
+
+  public static void setStatus(Text t){
+    status = t;
+  }
+  public static Text getStatus(){
+    return status;
   }
 }

@@ -141,11 +141,7 @@ public class MediaObjekt {
 						Playlist pl = GuiElemente.getPlaylist();
 
 						pl.add(Path+ Name);
-						String toastMsg = Name+ " hinzugefügt";
-						int toastMsgTime = 500;
-						int fadeInTime = 200;
-						int fadeOutTime= 200;
-						Toast.makeText(GuiElemente.getStage(), toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
+						Status.make(Name + " hinzugefügt");
 					}
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block

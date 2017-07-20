@@ -107,6 +107,7 @@ private VBox vb;
                                 GeneratePlaylist pl = new GeneratePlaylist();
                                 pl.readfiles();
                                 pl.create();
+                                Status.make("Playlist gespeichert");
                             } catch (Exception e1) {
                                 // TODO Auto-generated catch block
                                 e1.printStackTrace();

@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.commons.io.FileUtils;
@@ -55,6 +56,8 @@ public class Controller {
 	Button playlist;
 	@FXML
 	ProgressBar progress;
+	@FXML
+	Text status;
 	ObservableList<String> radioList = FXCollections.observableArrayList("1Live","WDR2","WDR5");
 	static String comboBoxValue;
 	GenerateSettings settings = new GenerateSettings();
@@ -84,7 +87,7 @@ public class Controller {
 			try {
 				FileUtils.deleteDirectory(new File("Radio"));
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println ("Konnte nicht gelöscht werden");
 			}
 		}
 
@@ -100,7 +103,7 @@ public class Controller {
 		GuiElemente.setNavigationbar(navigationbar);
 		GuiElemente.setProgressBar(progress);
 		GuiElemente.setRadioAktiv(false);
-
+		GuiElemente.setStatus(status);
         //Buttons für Navi
 		ClassLoader cl = getClass().getClassLoader();
 		Image bibliothekI=new Image(new File(cl.getResource("./Bibliothek.png").getFile()).toURI().toString());

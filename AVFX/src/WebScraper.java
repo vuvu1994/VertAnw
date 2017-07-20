@@ -20,7 +20,7 @@ public class WebScraper {
             return Link;
         }
         catch (IOException e) {
-            e.printStackTrace();
+           System.out.println ("Keine Internetverbindung");
         }
         return "";
     }
@@ -44,11 +44,7 @@ public class WebScraper {
                     FileOutputStream out = (new FileOutputStream(new File("Cover/" + Name + ".jpg")));
                     out.write(resultImageResponse.bodyAsBytes());
                     out.close();
-                    String toastMsg = "Bild gefunden";
-                    int toastMsgTime = 500;
-                    int fadeInTime = 200;
-                    int fadeOutTime= 200;
-                    Toast.makeText(GuiElemente.getStage(), toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
+                    Status.make("Bild gefunden");
                 }
             }
 
@@ -56,6 +52,7 @@ public class WebScraper {
         }
         catch (Exception e) {
             System.out.println("Konnte Bild nicht downloaden");
+            Status.make("Kein Bild gefunden");
         }
 
     }
