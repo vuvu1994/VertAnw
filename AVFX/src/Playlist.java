@@ -65,7 +65,8 @@ private VBox vb;
         hb.getChildren().add(b3);
         hb.getChildren().add(b4);
         vb.getChildren().add(hb);
-        vb.setAlignment(Pos.CENTER);
+        hb.setAlignment(Pos.CENTER);
+        hb.setSpacing(2);
         try {
             new File("Playlist/"+Name+".txt").createNewFile();
         } catch (IOException e) {
@@ -109,7 +110,7 @@ private VBox vb;
                                 pl.create();
                                 Status.make("Playlist gespeichert");
                             } catch (Exception e1) {
-                                // TODO Auto-generated catch block
+                                
                                 e1.printStackTrace();
                             }
                         }
@@ -126,7 +127,7 @@ private VBox vb;
                                 File file=fileChooser.showOpenDialog(stage);
                                 lv.getItems().add(file.getAbsolutePath());
                             } catch (Exception e1) {
-                                // TODO Auto-generated catch block
+
                                 e1.printStackTrace();
                             }
                         }
