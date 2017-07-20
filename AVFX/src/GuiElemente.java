@@ -8,6 +8,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.FlowPane;
+import javafx.stage.Stage;
+
 public class GuiElemente {
   static AnchorPane Main;
   static ScrollPane ScrollPane;
@@ -20,6 +22,7 @@ public class GuiElemente {
   static HBox navigationbar;
   static Boolean Youtube= false;
 static RadioStream rs;
+static Stage stage;
 static ProgressBar progress;
 static Boolean RadioAktiv = false;
     static boolean livestream = false;
@@ -111,4 +114,11 @@ static Boolean RadioAktiv = false;
     public static Boolean getYoutube(){
       return Youtube;
     }
+
+  public static void setStage(Stage b){
+    stage = b;
+  }
+  public static Stage getStage(){
+    return stage;
+  }
 }

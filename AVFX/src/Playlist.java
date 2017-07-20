@@ -92,7 +92,7 @@ private VBox vb;
                     GuiElemente.Playlistactivated(true);
                     GuiElemente.getFlowPane().getChildren().clear();
                     GuiElemente.getNavigationbar().getChildren().clear();
-                    Button safe = new Button("safe");
+                    Button safe = new Button("Speichern");
                     safe.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent e) {

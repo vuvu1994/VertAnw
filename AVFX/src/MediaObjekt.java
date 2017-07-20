@@ -31,8 +31,8 @@ public class MediaObjekt {
 	String Bild;
 	Image image;
 	AnchorPane AM;
-	int sizew = 0;
-	int sizeh = 0;
+	int sizew = 300;
+	int sizeh = 450;
 	VBox vb;
 	ImageView iv;
 	public MediaObjekt(){
@@ -63,25 +63,36 @@ public class MediaObjekt {
 		vb = new VBox();
 		HBox hb = new HBox();
 		AM = new AnchorPane();
-		
+		if (!Name.contains(".mp3")&& !Name.contains(".wav")) {
+			sizeh = 450;
+			sizew = 300;
+		}else{
+			sizeh = 300;
+			sizew = 300;
+		}
 		AM.getChildren().add(hb);
 		AM.getChildren().add(bu);
 		File file = new File(Bild);
 		Settings settings = new Settings();
-		if (settings.getScrapper()) {
+		if (settings.getScrapper()&& !file.getName().contains(".mp3")&& !file.getName().contains(".wav")) {
 			if (!file.exists()) {
 				WebScraper.getData(Name);
 			}
 		}
-		if (!file.exists()){
+		if (!file.exists() ){
 			System.out.println("Cover nicht vorhanden");
-			file = new File("Cover/platzhaltervideo.png");
+			if (!file.getName().contains(".mp3")&& !file.getName().contains(".wav")) {
+				file = new File("Cover/platzhaltervideo.png");
+			}else{
+				file = new File("Cover/platzhalteraudio.png");
+			}
+
 		}
 		image = new Image(file.toURI().toString());
 		
 		iv = new ImageView(image);
-		iv.setFitWidth(300);
-		iv.setFitHeight(450);
+		iv.setFitWidth(sizew);
+		iv.setFitHeight(sizeh);
 		iv.setPreserveRatio(false);
 		iv.setSmooth(true);
 		iv.setCache(true);
@@ -91,7 +102,7 @@ public class MediaObjekt {
 
 		Text tname = new Text(Name);
 		tname.setFont(Font.font("Verdana", 16));
-		tname.setWrappingWidth(300);
+		tname.setWrappingWidth(sizew);
 		tname.setFill(Color.WHITE);
 		hb.getChildren().add(vb);
 		vb.getChildren().add(tname);
@@ -130,6 +141,11 @@ public class MediaObjekt {
 						Playlist pl = GuiElemente.getPlaylist();
 
 						pl.add(Path+ Name);
+						String toastMsg = Name+ " hinzugefügt";
+						int toastMsgTime = 500;
+						int fadeInTime = 200;
+						int fadeOutTime= 200;
+						Toast.makeText(GuiElemente.getStage(), toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
 					}
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -160,7 +176,12 @@ public class MediaObjekt {
 				if (dest.exists()) {
 					iv.setImage(new Image(dest.toURI().toString()));
 				}else{
-					iv.setImage(new Image(new File("Cover/platzhaltervideo.png").toURI().toString()));
+					if (!Name.contains(".mp3")&& !Name.contains(".wav")) {
+						iv.setImage(new Image(new File("Cover/platzhaltervideo.png").toURI().toString()));
+					}else{
+						iv.setImage(new Image(new File("Cover/platzhalteraudio.png").toURI().toString()));
+					}
+
 				}
 
 			}
@@ -177,7 +198,7 @@ public class MediaObjekt {
 	}
 	public void setCover(){
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Cover ausw�hlen");
+		fileChooser.setTitle("Cover auswählen");
 		File file = fileChooser.showOpenDialog(GuiElemente.getMain().getScene().getWindow());
 		iv.setImage(new Image(file.toURI().toString()));
 		

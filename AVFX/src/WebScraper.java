@@ -44,6 +44,11 @@ public class WebScraper {
                     FileOutputStream out = (new FileOutputStream(new File("Cover/" + Name + ".jpg")));
                     out.write(resultImageResponse.bodyAsBytes());
                     out.close();
+                    String toastMsg = "Bild gefunden";
+                    int toastMsgTime = 500;
+                    int fadeInTime = 200;
+                    int fadeOutTime= 200;
+                    Toast.makeText(GuiElemente.getStage(), toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
                 }
             }
 

@@ -35,6 +35,7 @@ public class MainApp extends Application {
 		primaryStage.setMinHeight(640);
 		primaryStage.setWidth(1280);
 		primaryStage.setHeight(720);
+		GuiElemente.setStage(primaryStage);
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
 				System.out.println("EXIT");

@@ -100,6 +100,7 @@ public class Controller {
 		GuiElemente.setNavigationbar(navigationbar);
 		GuiElemente.setProgressBar(progress);
 		GuiElemente.setRadioAktiv(false);
+
         //Buttons für Navi
 		ClassLoader cl = getClass().getClassLoader();
 		Image bibliothekI=new Image(new File(cl.getResource("./Bibliothek.png").getFile()).toURI().toString());
