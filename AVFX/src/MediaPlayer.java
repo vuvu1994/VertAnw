@@ -268,10 +268,10 @@ public class MediaPlayer {
 								System.out.println(mediaPlayer.getStatus());
 								mediaPlayer.pause();
 								Play.setText("");
-								playIV.setImage(new Image(new File("Controls/play.png").toURI().toString()));
+								playIV.setImage(new Image(cl.getResource("resources/play.png").toExternalForm()));
 							} else {
 								mediaPlayer.play();
-								playIV.setImage(new Image(new File("Controls/pause.png").toURI().toString()));
+								playIV.setImage(new Image(cl.getResource("resources/pause.png").toExternalForm()));
 
 							}
 						}else{
