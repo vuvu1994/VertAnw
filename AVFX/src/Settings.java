@@ -3,6 +3,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -36,9 +37,10 @@ public class Settings {
 		GuiElemente.getNavigationbar().getChildren().clear();
 	}
 
-	public Settings(){
+	public Settings() {
 
 	}
+
 
 	public void save() {
 
@@ -290,6 +292,7 @@ public class Settings {
 		hb.setPadding(new Insets(5,5,5,5));
 		hb.getChildren().add(b1);
 		hb.getChildren().add(b2);
+		hb.setAlignment(Pos.CENTER);
 		vb.getChildren().add(hb);
 
 

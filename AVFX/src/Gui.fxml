@@ -17,7 +17,7 @@
    <children>
       <ImageView fx:id="bimage" fitHeight="600.0" fitWidth="893.0" layoutX="7.0" opacity="0.22" pickOnBounds="true">
          <image>
-            <Image url="@bg.png" />
+            <Image url="@resources/bg.png" />
          </image>
       </ImageView>
       <HBox fx:id="hbox" alignment="CENTER_RIGHT" layoutX="406.0" opacity="0.75" prefHeight="64.0" prefWidth="519.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

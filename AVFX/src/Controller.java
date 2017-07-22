@@ -3,24 +3,19 @@ import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.Optional;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import org.apache.commons.io.FileUtils;
 
 public class Controller {
@@ -106,32 +101,32 @@ public class Controller {
 		GuiElemente.setStatus(status);
         //Buttons für Navi
 		ClassLoader cl = getClass().getClassLoader();
-		Image bibliothekI=new Image(new File(cl.getResource("./Bibliothek.png").getFile()).toURI().toString());
+		Image bibliothekI=new Image(cl.getResource("resources/Bibliothek.png").toExternalForm());
 		ImageView bibliothekIV=new ImageView(bibliothekI);
 		bibliothek.setGraphic(bibliothekIV);
 		bibliothek.setStyle("-fx-background-color: transparent;");
 
-		Image youtubeI=new Image(new File("Navigation/Youtube.png").toURI().toString());
+		Image youtubeI=new Image(cl.getResource("resources/Youtube.png").toExternalForm());
 		ImageView youtubeIV=new ImageView(youtubeI);
 		youtube.setGraphic(youtubeIV);
 		youtube.setStyle("-fx-background-color: transparent;");
 
-		Image einstellungenI=new Image(new File("Navigation/Einstellungen.png").toURI().toString());
+		Image einstellungenI=new Image(cl.getResource("resources/Einstellungen.png").toExternalForm());
 		ImageView einstellungenIV=new ImageView(einstellungenI);
 		einstellungen.setGraphic(einstellungenIV);
 		einstellungen.setStyle("-fx-background-color: transparent;");
 
-		Image openfileI=new Image(new File("Navigation/openfile.png").toURI().toString());
+		Image openfileI=new Image(cl.getResource("resources/openfile.png").toExternalForm());
 		ImageView openfileIV=new ImageView(openfileI);
 		openfile.setGraphic(openfileIV);
 		openfile.setStyle("-fx-background-color: transparent;");
 
-		Image openlinkI=new Image(new File("Navigation/openlink.png").toURI().toString());
+		Image openlinkI=new Image(cl.getResource("resources/openlink.png").toExternalForm());
 		ImageView openlinkIV=new ImageView(openlinkI);
 		openlink.setGraphic(openlinkIV);
 		openlink.setStyle("-fx-background-color: transparent;");
 
-		Image playlistI=new Image(new File("Navigation/playlist.png").toURI().toString());
+		Image playlistI=new Image(cl.getResource("resources/playlist.png").toExternalForm());
 		ImageView playlistIV=new ImageView(playlistI);
 		playlist.setGraphic(playlistIV);
 		playlist.setStyle("-fx-background-color: transparent;");

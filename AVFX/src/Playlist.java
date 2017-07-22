@@ -110,7 +110,7 @@ private VBox vb;
                                 pl.create();
                                 Status.make("Playlist gespeichert");
                             } catch (Exception e1) {
-                                
+
                                 e1.printStackTrace();
                             }
                         }
