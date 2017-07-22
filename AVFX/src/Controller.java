@@ -103,6 +103,8 @@ public class Controller {
 		ClassLoader cl = getClass().getClassLoader();
 		Image bibliothekI=new Image(cl.getResource("resources/Bibliothek.png").toExternalForm());
 		ImageView bibliothekIV=new ImageView(bibliothekI);
+		bibliothekIV.fitWidthProperty().bind(bibliothek.widthProperty());
+		bibliothekIV.fitHeightProperty().bind(bibliothek.heightProperty());
 		bibliothek.setGraphic(bibliothekIV);
 		bibliothek.setStyle("-fx-background-color: transparent;");
 

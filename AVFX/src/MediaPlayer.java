@@ -147,23 +147,23 @@ public class MediaPlayer {
 	
 		
 		 AnchorPane ap = new AnchorPane();
-		 
-		 Image bg=new Image(new File("Controls/bg.jpg").toURI().toString());
+		 ClassLoader cl = MediaPlayer.class.getClassLoader();
+		 Image bg=new Image(cl.getResource("resources/playerbg.jpg").toExternalForm());
 		 ImageView bgIV=new ImageView(bg);	
 		 bgIV.setPreserveRatio(false);
 		 ap.getChildren().add(bgIV);
 		 HBox hb = new HBox();
 		 HBox hb2 = new HBox();
-		 Image playI=new Image(new File("Controls/pause.png").toURI().toString());
+		 Image playI=new Image(cl.getResource("resources/pause.png").toExternalForm());
 		 ImageView playIV=new ImageView(playI);
 		 Button Play = new Button("",playIV);
 		 Play.setStyle("-fx-background-color: transparent;");
-		 Image backI=new Image(new File("Controls/back.png").toURI().toString());
+		 Image backI=new Image(cl.getResource("resources/back.png").toExternalForm());
 		 ImageView backIV=new ImageView(backI);
 		 Button back = new Button("",backIV);
 		 back.setStyle("-fx-background-color: transparent;");
 		 back.setOpacity(0.4);
-		 Image forwardI=new Image(new File("Controls/forward.png").toURI().toString());
+		 Image forwardI=new Image(cl.getResource("resources/forward.png").toExternalForm());
 		 ImageView forwardIV=new ImageView(forwardI);
 		 Button forward = new Button("",forwardIV);
 		 forward.setStyle("-fx-background-color: transparent;");
@@ -171,15 +171,15 @@ public class MediaPlayer {
 		 dauer = new Slider();
 		 dauer.setPrefWidth(500);
 		 volumeSlider = new Slider();
-		 Image fullI=new Image(new File("Controls/fullscreen.png").toURI().toString());
+		 Image fullI=new Image(cl.getResource("resources/fullscreen.png").toExternalForm());
 		 ImageView fullIV=new ImageView(fullI);
 		 Button fullscreen = new Button("",fullIV);
 		 fullscreen.setStyle("-fx-background-color: transparent;");
-		 Image endeI=new Image(new File("Controls/exit.png").toURI().toString());
+		 Image endeI=new Image(cl.getResource("resources/playerexit.png").toExternalForm());
 		 ImageView endeIV=new ImageView(endeI);
 		 Button ende = new Button("",endeIV);
 		 ende.setStyle("-fx-background-color: transparent;");
-		 Image repeatI=new Image(new File("Controls/repeat.png").toURI().toString());
+		 Image repeatI=new Image(cl.getResource("resources/repeat.png").toExternalForm());
 		 ImageView repeatIV=new ImageView(repeatI);
 		 Button repeatButton = new Button("",repeatIV);
 		 repeatButton.setStyle("-fx-background-color: transparent;");
