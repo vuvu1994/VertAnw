@@ -66,13 +66,16 @@
       </AnchorPane>
       <HBox layoutX="-5.0" layoutY="-1.0" prefHeight="64.0" prefWidth="377.0">
          <children>
-            <Button fx:id="bibliothek" mnemonicParsing="false" onAction="#bibliothek" prefHeight="75.0" prefWidth="75.0">
+            <Button fx:id="bibliothek" mnemonicParsing="false" onAction="#bibliothek" prefHeight="90.0" prefWidth="75.0">
                <padding>
                   <Insets left="7.0" top="7.0" />
                </padding>
                <font>
-                  <Font />
+                  <Font size="1.0" />
                </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
             </Button>
             <Button fx:id="playlist" mnemonicParsing="false" onAction="#playlist" prefHeight="50.0" prefWidth="90.0">
                <padding>

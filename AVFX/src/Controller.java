@@ -103,8 +103,8 @@ public class Controller {
 		ClassLoader cl = getClass().getClassLoader();
 		Image bibliothekI=new Image(cl.getResource("resources/Bibliothek.png").toExternalForm());
 		ImageView bibliothekIV=new ImageView(bibliothekI);
-		bibliothekIV.fitWidthProperty().bind(bibliothek.widthProperty());
-		bibliothekIV.fitHeightProperty().bind(bibliothek.heightProperty());
+		bibliothekIV.setPreserveRatio(false);
+
 		bibliothek.setGraphic(bibliothekIV);
 		bibliothek.setStyle("-fx-background-color: transparent;");
 
@@ -178,14 +178,18 @@ public class Controller {
 	}
 
 	public void openfile() throws Exception {
+		try {
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle("Media auswählen");
+			FileChooser.ExtensionFilter extFilter =
+					new FileChooser.ExtensionFilter("Media Datein", "*.mp4", "*.mp3", "*.wav", "*.flv");
+			fileChooser.getExtensionFilters().add(extFilter);
+			File file = fileChooser.showOpenDialog(GuiElemente.getMain().getScene().getWindow());
+			MediaPlayer.createMediaPlayer(file.getAbsolutePath().toString());
 
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Media auswählen");
-		FileChooser.ExtensionFilter extFilter =
-				new FileChooser.ExtensionFilter("Media Datein", "*.mp4","*.mp3","*.wav","*.flv");
-		fileChooser.getExtensionFilters().add(extFilter);
-		File file = fileChooser.showOpenDialog(GuiElemente.getMain().getScene().getWindow());
-		MediaPlayer.createMediaPlayer(file.getAbsolutePath().toString());
+		}catch(Exception e) {
+		System.out.println("Keine Datei ausgewählt");
+		}
 
 	}
 
