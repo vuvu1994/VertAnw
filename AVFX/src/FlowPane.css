@@ -60,9 +60,6 @@
     -fx-padding:0;
 }
 
-.text-area .scroll-bar:vertical {
-    -fx-opacity: 0;
-}
 
 
 .dialog-pane {

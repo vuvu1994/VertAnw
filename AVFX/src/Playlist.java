@@ -184,7 +184,7 @@ private VBox vb;
                     dialog.setHeaderText("Name für Playlist eingeben");
                     dialog.setContentText("Name:");
 
-// Traditional way to get the response value.
+
                     Optional<String> result = dialog.showAndWait();
                     if (result.isPresent()){
                         Playlist n = new Playlist(result.get());

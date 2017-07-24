@@ -200,13 +200,13 @@ public class Controller {
 
 
 	public void radioComboBox(ActionEvent event)  {
-
+		Status.make("Läd Radiostream");
 
 		if (!GuiElemente.getRadioAktiv()) {
 			GuiElemente.setRadioAktiv(true);
 			radioComboBox.showingProperty().addListener((obs, wasShowing, isShowing) -> {
 				if (!isShowing) {
-
+					Status.make("Buffert Radiostream");
 
 					comboBoxValue = radioComboBox.getValue().toString();
 					File directory = new File("Radio");
@@ -237,7 +237,7 @@ public class Controller {
 					GuiElemente.setRadioStream(rs);
 					GuiElemente.getRadiostream().start();
 					File size = new File("Radio/" + radio + ".mp3");
-					while (size.length() < 90000) {
+					while (size.length() < 200000) {
 						try {
 							Thread.sleep(10);
 						} catch (InterruptedException e) {
