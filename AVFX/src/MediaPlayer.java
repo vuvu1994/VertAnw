@@ -55,8 +55,10 @@ public class MediaPlayer {
 			playlist = al;
 
 	 	playlistactive=true;
+		 checkPlaylistFile();
+		 File mediaFile = new File(playlist.get(FileinPlaylist));
 
-		 media = new Media(new File(playlist.get(FileinPlaylist)).toURI().toString());
+		 media = new Media(mediaFile.toURI().toString());
 
 		 try {
 			 createElements();
@@ -330,7 +332,7 @@ public class MediaPlayer {
 						System.out.println("Eventtyp bei ende: " + e.getEventType());
 
 						mediaView.setMediaPlayer(null);
-						mediaPlayer.stop();
+
 						  mediaPlayer.dispose();
 						System.gc();
 						 GuiElemente.getMain().getChildren().remove(mediaView);
@@ -512,13 +514,20 @@ public class MediaPlayer {
 	 }
 
 	private static void checkPlaylistFile() {
-		if (playlistactive && playlist.size() > FileinPlaylist) {
-            String checkFileString = playlist.get(FileinPlaylist);
-            File checkFile = new File(checkFileString);
-            if (!checkFile.exists()) {
-                FileinPlaylist++;
-            }
-        }
+
+		while (true) {
+			if (playlistactive && playlist.size() > FileinPlaylist) {
+				String checkFileString = playlist.get(FileinPlaylist);
+				File checkFile = new File(checkFileString);
+				if (!checkFile.exists()) {
+					FileinPlaylist++;
+				} else {
+					break;
+				}
+			} else {
+				break;
+			}
+		}
 	}
 
 	public static void updateValues() {
@@ -559,6 +568,8 @@ public class MediaPlayer {
 	     });
 	  
 	}
-	 
+	 public static void setFileinPlaylist(int i){
+	 	FileinPlaylist = i;
+	 }
 	 
 }

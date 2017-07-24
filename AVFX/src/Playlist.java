@@ -78,6 +78,7 @@ private VBox vb;
                 try {
                     ArrayList<String> al = new ArrayList<String>();
                     al.addAll(lv.getItems());
+                    MediaPlayer.setFileinPlaylist(0);
                    MediaPlayer.createMediaPlayerwithPlaylist(al);
                 } catch (Exception e1) {
                     // TODO Auto-generated catch block
