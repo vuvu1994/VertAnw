@@ -76,10 +76,12 @@ private VBox vb;
             @Override
             public void handle(ActionEvent e) {
                 try {
-                    ArrayList<String> al = new ArrayList<String>();
-                    al.addAll(lv.getItems());
-                    MediaPlayer.setFileinPlaylist(0);
-                   MediaPlayer.createMediaPlayerwithPlaylist(al);
+                    if (lv.getItems().size() > 0) {
+                        ArrayList<String> al = new ArrayList<String>();
+                        al.addAll(lv.getItems());
+                        MediaPlayer.setFileinPlaylist(0);
+                        MediaPlayer.createMediaPlayerwithPlaylist(al);
+                    }
                 } catch (Exception e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
@@ -121,15 +123,19 @@ private VBox vb;
                         @Override
                         public void handle(ActionEvent e) {
                             try {
+
                                 FileChooser fileChooser = new FileChooser();
                                 fileChooser.setTitle("Open Resource File");
+                                FileChooser.ExtensionFilter extFilter =
+                                        new FileChooser.ExtensionFilter("Media Datein", "*.mp4", "*.mp3", "*.wav", "*.flv");
+                                fileChooser.getExtensionFilters().add(extFilter);
                                 Scene scene =  (Scene) GuiElemente.getMain().getScene();
                                 Stage stage = (Stage) scene.getWindow();
                                 File file=fileChooser.showOpenDialog(stage);
                                 lv.getItems().add(file.getAbsolutePath());
                             } catch (Exception e1) {
 
-                                e1.printStackTrace();
+                                Status.make("Keine Datei ausgewählt");
                             }
                         }
                     });

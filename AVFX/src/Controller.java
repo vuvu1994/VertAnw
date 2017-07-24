@@ -188,7 +188,7 @@ public class Controller {
 			MediaPlayer.createMediaPlayer(file.getAbsolutePath().toString());
 
 		}catch(Exception e) {
-		System.out.println("Keine Datei ausgewählt");
+			Status.make("Keine Datei ausgewählt");
 		}
 
 	}
