@@ -35,6 +35,7 @@ public class MediaObjekt {
 	int sizeh = 450;
 	VBox vb;
 	ImageView iv;
+	ClassLoader cl = getClass().getClassLoader();
 	public MediaObjekt(){
 		
 	}
@@ -82,13 +83,16 @@ public class MediaObjekt {
 		if (!file.exists() ){
 			System.out.println("Cover nicht vorhanden");
 			if (!file.getName().contains(".mp3")&& !file.getName().contains(".wav")) {
-				file = new File("Cover/platzhaltervideo.png");
+				image = new Image(cl.getResource("resources/platzhaltervideo.png").toExternalForm());
 			}else{
-				file = new File("Cover/platzhalteraudio.png");
+				image = new Image(cl.getResource("resources/platzhalteraudio.png").toExternalForm());
 			}
 
+
+		}else{
+			image = new Image(file.toURI().toString());
 		}
-		image = new Image(file.toURI().toString());
+
 		
 		iv = new ImageView(image);
 		iv.setFitWidth(sizew);
@@ -172,10 +176,11 @@ public class MediaObjekt {
 				if (dest.exists()) {
 					iv.setImage(new Image(dest.toURI().toString()));
 				}else{
+
 					if (!Name.contains(".mp3")&& !Name.contains(".wav")) {
-						iv.setImage(new Image(new File("Cover/platzhaltervideo.png").toURI().toString()));
+						iv.setImage(new Image(cl.getResource("resources/platzhaltervideo.png").toExternalForm()));
 					}else{
-						iv.setImage(new Image(new File("Cover/platzhalteraudio.png").toURI().toString()));
+						iv.setImage(new Image(cl.getResource("resources/platzhalteraudio.png").toExternalForm()));
 					}
 
 				}
