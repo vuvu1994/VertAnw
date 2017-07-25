@@ -182,7 +182,6 @@ private VBox vb;
             }
         });
         setNavigationbar();
-
     }
 
     public static void setNavigationbar() {
