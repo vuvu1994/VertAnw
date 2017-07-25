@@ -55,12 +55,13 @@ public class Controller {
 	Text status;
 	ObservableList<String> radioList = FXCollections.observableArrayList("1Live","WDR2","WDR5");
 	static String comboBoxValue;
-	GenerateSettings settings = new GenerateSettings();
 	Settings radioURI = new Settings();
-	Thread t1;
 	private int radio = 1;
 	public void initialize() throws InterruptedException, SQLException {
-
+		File dir = new File("Cover");
+		if (!dir.exists()){
+			dir.mkdir();
+		}
 		radioComboBox.setItems(radioList);
 		fp.prefWidthProperty().bind(ScrollPane.widthProperty());
 		fp.prefHeightProperty().bind(ScrollPane.heightProperty());
