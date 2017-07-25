@@ -1,8 +1,5 @@
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.util.Duration;
+
 
 /**
  * Created by Denni on 21.07.2017.

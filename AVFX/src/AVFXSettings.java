@@ -48,10 +48,10 @@ public class AVFXSettings {
 			prop.storeToXML(output, null);
 			output.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -161,7 +161,7 @@ public class AVFXSettings {
 			e.printStackTrace();
 		}
 		ArrayList<String> list = new ArrayList<String>();
-		//while (s.hasNext()){    list.add(s.next()); } //Für das einlesen von einzelenen Buchstaben nicht Zeilen
+		
 		while (s.hasNextLine()){
 			list.add(s.nextLine());
 		}
@@ -176,7 +176,7 @@ public class AVFXSettings {
 			e.printStackTrace();
 		}
 		ArrayList<String> list = new ArrayList<String>();
-		//while (s.hasNext()){    list.add(s.next()); } //Für das einlesen von einzelenen Buchstaben nicht Zeilen
+		
 		while (s.hasNextLine()){
 			list.add(s.nextLine());
 		}
@@ -285,7 +285,7 @@ public class AVFXSettings {
 		lv = new ListView();
 		vb.getChildren().add(lv);
 		HBox hb = new HBox();
-		Button b1 = new Button("Hinzufügen");
+		Button b1 = new Button("Hinzuf�gen");
 		Button b2 = new Button ("Entfernen");
 		hb.setSpacing(10);
 		hb.setPadding(new Insets(5,5,5,5));
@@ -304,6 +304,7 @@ public class AVFXSettings {
 					File file = chooser.showDialog(GuiElemente.getMain().getScene().getWindow());
 
 					String  values= lv.getItems().toString();
+					
 					String [] helper = values.split(",");
 
 					boolean ermittler = true;
@@ -353,14 +354,7 @@ public class AVFXSettings {
 				final int selectedIdx = lv.getSelectionModel().getSelectedIndex();
 				if (selectedIdx != -1) {
 					String itemToRemove = lv.getSelectionModel().getSelectedItem().toString();
-
-					final int newSelectedIdx =
-							(selectedIdx == lv.getItems().size() - 1)
-									? selectedIdx - 1
-									: selectedIdx;
-
 					lv.getItems().remove(selectedIdx);
-					lv.getSelectionModel().select(newSelectedIdx);
 					if(Name.equals("Audiothek")){
 						deleteFromFile(readIntoArrayList(),itemToRemove);
 					}else if(Name.equals("Mediathek")){

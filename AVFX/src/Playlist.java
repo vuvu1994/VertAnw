@@ -194,7 +194,7 @@ private VBox vb;
             public void handle(ActionEvent e) {
                 try {
                     TextInputDialog dialog = new TextInputDialog("Playlist Name");
-                    dialog.setTitle("neue Playlist");
+                    dialog.setTitle("Neue Playlist");
                     dialog.setHeaderText("Name für Playlist eingeben");
                     dialog.setContentText("Name:");
 
