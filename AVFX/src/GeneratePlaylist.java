@@ -16,18 +16,23 @@ String[] Namen;
                 return new File(current, name).isFile();
             }
         });
-        System.out.println(Namen[0].toString());
+
     }
     public void create(){
 
+        if (!(Namen == null)) {
+            for (int i = 0; i < Namen.length; i++) {
+                pl = new Playlist(Namen[i].replace(".txt", ""));
+                pl.create();
+                pl.draw();
+                getLinks(i);
 
-        for(int i =0;i < Namen.length;i++){
-            pl = new Playlist(Namen[i].replace(".txt",""));
-            pl.create();
-            pl.draw();
-            getLinks(i);
-
+            }
         }
+        Playlist.setNavigationbar();
+
+
+
     }
     public void getLinks(int i){
 

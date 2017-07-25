@@ -68,6 +68,10 @@ private VBox vb;
         hb.setAlignment(Pos.CENTER);
         hb.setSpacing(2);
         try {
+            File dir = new File("Playlist");
+            if (!dir.exists()){
+                dir.mkdir();
+            }
             new File("Playlist/"+Name+".txt").createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
@@ -179,6 +183,11 @@ private VBox vb;
                 }
             }
         });
+        setNavigationbar();
+
+    }
+
+    public static void setNavigationbar() {
         GuiElemente.getNavigationbar().getChildren().clear();
         Button newPlaylist = new Button("Neue Playlist");
         newPlaylist.setOnAction(new EventHandler<ActionEvent>() {
@@ -205,7 +214,6 @@ private VBox vb;
             }
         });
         GuiElemente.getNavigationbar().getChildren().add(newPlaylist);
-
     }
 
     public void writeToFile(ArrayList<String> list) {
