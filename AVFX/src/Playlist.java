@@ -39,7 +39,7 @@ private VBox vb;
     public Playlist(String Name){
         this.Name = Name;
 
-        InternetBrowser.removeWebView();
+
     }
 
     public void create(){
@@ -188,6 +188,7 @@ private VBox vb;
     }
 
     public static void setNavigationbar() {
+        InternetBrowser.removeWebView();
         GuiElemente.getNavigationbar().getChildren().clear();
         Button newPlaylist = new Button("Neue Playlist");
         newPlaylist.setOnAction(new EventHandler<ActionEvent>() {
