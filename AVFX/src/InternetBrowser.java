@@ -20,11 +20,11 @@ public class InternetBrowser {
 	static WebView myWebView = new WebView();
 	static WebEngine engine = myWebView.getEngine();
 	public static void createWebView() {
-		Button zurück = new Button("Zurück");
-		Button vorwärts = new Button("Vorwärts");
+		Button zurueck = new Button("Zurück");
+		Button vorwaerts = new Button("Vorwärts");
 		GuiElemente.getNavigationbar().getChildren().clear();
-		GuiElemente.getNavigationbar().getChildren().add(zurück);
-		GuiElemente.getNavigationbar().getChildren().add(vorwärts);
+		GuiElemente.getNavigationbar().getChildren().add(zurueck);
+		GuiElemente.getNavigationbar().getChildren().add(vorwaerts);
 		InternetBrowser.removeWebView();
 		GuiElemente.setYoutube(true);
 		engine.load("http://www.youtube.de");
@@ -32,7 +32,7 @@ public class InternetBrowser {
 		myWebView.prefHeightProperty().bind(GuiElemente.getanchorpane().heightProperty());
 		myWebView.prefWidthProperty().bind(GuiElemente.getanchorpane().widthProperty());
 
-		zurück.setOnAction(new EventHandler<ActionEvent>() {
+		zurueck.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 				Platform.runLater(() -> {
@@ -41,7 +41,7 @@ public class InternetBrowser {
 			}
 		});
 
-		vorwärts.setOnAction(new EventHandler<ActionEvent>() {
+		vorwaerts.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 				Platform.runLater(() -> {
