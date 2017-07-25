@@ -38,5 +38,33 @@ public class Status {
             }).start();
         };
 
+    public static void makeLong(String text){
+
+        new Thread(() -> {
+            try
+            {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        GuiElemente.getStatus().setVisible(true);
+                        GuiElemente.getStatus().setText(text);
+                    }
+                });
+                Thread.sleep(8000);
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        GuiElemente.getStatus().setVisible(false);
+                    }
+                });
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+
+        }).start();
+    };
+
     }
 

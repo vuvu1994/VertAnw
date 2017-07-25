@@ -238,15 +238,24 @@ public class Controller {
 					GuiElemente.setRadioStream(rs);
 					GuiElemente.getRadiostream().start();
 					File size = new File("Radio/" + radio + ".mp3");
+					int zeit = 0;
+					Boolean timeout = false;
 					while (size.length() < 200000) {
+						++zeit;
 						try {
 							Thread.sleep(10);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
+						if (zeit == 4000){
+							Status.makeLong("Verbindung abgebrochen (Kein Internet)");
+							timeout = true;
+							break;
+						}
 					}
-					MediaPlayer.createMediaPlayerRadio("Radio/" + radio + ".mp3");
-
+					if (!timeout) {
+						MediaPlayer.createMediaPlayerRadio("Radio/" + radio + ".mp3");
+					}
 					++radio;
 				}
 

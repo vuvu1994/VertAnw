@@ -42,6 +42,7 @@ public class RadioStream extends Thread{
                     System.out.println("Closed");
                 } catch (IOException e) {
                    System.out.println("Closed RadioStream");
+                   break;
                 }
             }
 
