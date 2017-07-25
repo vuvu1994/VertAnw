@@ -20,8 +20,8 @@ public class InternetBrowser {
 	static WebView myWebView = new WebView();
 	static WebEngine engine = myWebView.getEngine();
 	public static void createWebView() {
-		Button zurueck = new Button("ZurÃ¼ck");
-		Button vorwaerts = new Button("VorwÃ¤rts");
+		Button zurueck = new Button("Zurück");
+		Button vorwaerts = new Button("Vorwärts");
 		GuiElemente.getNavigationbar().getChildren().clear();
 		GuiElemente.getNavigationbar().getChildren().add(zurueck);
 		GuiElemente.getNavigationbar().getChildren().add(vorwaerts);
