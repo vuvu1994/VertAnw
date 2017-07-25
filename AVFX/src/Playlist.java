@@ -105,7 +105,7 @@ private VBox vb;
                         @Override
                         public void handle(ActionEvent e) {
                             try {
-                                System.out.println("safe");
+                                System.out.println("speichern");
                                 ArrayList <String> safelist = new ArrayList<String>();
                                 for (int i =0;i<lv.getItems().size();i++){
                                     safelist.add(lv.getItems().get(i));
@@ -129,7 +129,7 @@ private VBox vb;
                             try {
 
                                 FileChooser fileChooser = new FileChooser();
-                                fileChooser.setTitle("Open Resource File");
+                                fileChooser.setTitle("Media-Datei öffnen");
                                 FileChooser.ExtensionFilter extFilter =
                                         new FileChooser.ExtensionFilter("Media Datein", "*.mp4", "*.mp3", "*.wav", "*.flv");
                                 fileChooser.getExtensionFilters().add(extFilter);
