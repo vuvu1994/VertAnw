@@ -109,7 +109,7 @@ public class GenerateObjekts extends Thread {
 				}
 			});
 			if (!(MediaNamen ==null)) {
-				System.out.println("Soviel: " + MediaNamen.length);
+
 				for (int j = 0; j < MediaNamen.length; j++) {
 
                     if (MediaNamen[j].contains(".mp4") ^ MediaNamen[j].contains(".aiff") ^ MediaNamen[j].contains(".flv") ^ MediaNamen[j].contains(".mp3") ^ MediaNamen[j].contains(".wav")) {
@@ -122,7 +122,7 @@ public class GenerateObjekts extends Thread {
 						Objekte.add(m.getObjekt());
 					}
 				}
-				System.out.println("Soviel Media: " + Media.size());
+
 			}
 		}
 	}
@@ -135,8 +135,6 @@ public class GenerateObjekts extends Thread {
 					@Override
 					public void run() {
 						fp.getChildren().clear();
-						System.out.println(Objekte.size());
-						
 						fp.getChildren().addAll(Objekte);
                         GuiElemente.getProgressBar().setVisible(false);
 					}
