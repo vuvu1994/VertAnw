@@ -55,7 +55,7 @@ private VBox vb;
         vb.getChildren().add(lv);
         HBox hb = new HBox();
         Button b1 = new Button("Play");
-        Button b2 = new Button("HinzufÃ¼gen");
+        Button b2 = new Button("Hinzufügen");
         Button b3 = new Button ("Entfernen");
         Button b4 = new Button ("Alle Entfernen");
         hb.getChildren().add(b1);
@@ -120,14 +120,14 @@ private VBox vb;
                             }
                         }
                     });
-                    Button extern = new Button("externe Datei hinzufÃ¼gen");
+                    Button extern = new Button("externe Datei hinzufügen");
                     extern.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent e) {
                             try {
 
                                 FileChooser fileChooser = new FileChooser();
-                                fileChooser.setTitle("Media-Datei Ã¶ffnen");
+                                fileChooser.setTitle("Media-Datei öffnen");
                                 FileChooser.ExtensionFilter extFilter =
                                         new FileChooser.ExtensionFilter("Media Datein", "*.mp4", "*.mp3", "*.wav", "*.flv");
                                 fileChooser.getExtensionFilters().add(extFilter);
@@ -137,7 +137,7 @@ private VBox vb;
                                 lv.getItems().add(file.getAbsolutePath());
                             } catch (Exception e1) {
 
-                                Status.make("Keine Datei ausgewÃ¤hlt");
+                                Status.make("Keine Datei ausgewählt");
                             }
                         }
                     });
@@ -195,7 +195,7 @@ private VBox vb;
                 try {
                     TextInputDialog dialog = new TextInputDialog("Playlist Name");
                     dialog.setTitle("neue Playlist");
-                    dialog.setHeaderText("Name fÃ¼r Playlist eingeben");
+                    dialog.setHeaderText("Name für Playlist eingeben");
                     dialog.setContentText("Name:");
 
 

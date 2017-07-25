@@ -1,7 +1,8 @@
+
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
-
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
@@ -46,8 +47,7 @@ public class AVFXMediaPlayer {
 
 	 public static void createMediaPlayerwithPlaylist(ArrayList al){
 
-			playlist = al;
-
+		playlist = al;
 	 	playlistactive=true;
 		 checkPlaylistFile();
 		 File mediaFile = new File(playlist.get(FileinPlaylist));
@@ -112,7 +112,7 @@ public class AVFXMediaPlayer {
 							 }
 						 });
 						 latch.await();
-						 //Keep with the background work
+
 						 return null;
 					 }
 				 };
