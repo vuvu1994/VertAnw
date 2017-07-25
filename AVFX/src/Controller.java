@@ -180,15 +180,15 @@ public class Controller {
 	public void openfile() throws Exception {
 		try {
 			FileChooser fileChooser = new FileChooser();
-			fileChooser.setTitle("Media auswählen");
+			fileChooser.setTitle("Media-Auswahl");
 			FileChooser.ExtensionFilter extFilter =
-					new FileChooser.ExtensionFilter("Media Datein", "*.mp4", "*.mp3", "*.wav", "*.flv");
+					new FileChooser.ExtensionFilter("Media-Datein", "*.mp4", "*.mp3", "*.wav", "*.flv");
 			fileChooser.getExtensionFilters().add(extFilter);
 			File file = fileChooser.showOpenDialog(GuiElemente.getMain().getScene().getWindow());
 			MediaPlayer.createMediaPlayer(file.getAbsolutePath().toString());
 
 		}catch(Exception e) {
-			Status.make("Keine Datei ausgewählt");
+			Status.make("Keine Datei gefunden");
 		}
 
 	}
@@ -200,13 +200,13 @@ public class Controller {
 
 
 	public void radioComboBox(ActionEvent event)  {
-		Status.make("Läd Radiostream");
+		Status.make("Buffering");
 
 		if (!GuiElemente.getRadioAktiv()) {
 			GuiElemente.setRadioAktiv(true);
 			radioComboBox.showingProperty().addListener((obs, wasShowing, isShowing) -> {
 				if (!isShowing) {
-					Status.make("Buffert Radiostream");
+
 
 					comboBoxValue = radioComboBox.getValue().toString();
 					File directory = new File("Radio");
@@ -245,7 +245,7 @@ public class Controller {
 						}
 					}
 					MediaPlayer.createMediaPlayerRadio("Radio/" + radio + ".mp3");
-					//FX Stuff done here
+
 					++radio;
 				}
 
