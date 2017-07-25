@@ -1,19 +1,15 @@
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import org.apache.commons.io.FileUtils;
 
 public class GenerateObjekts extends Thread {
 	String[] MediaNamen;
@@ -90,7 +86,7 @@ public class GenerateObjekts extends Thread {
 		
 	}
 	public void getMedia() throws IOException {
-		Settings list = new Settings();
+		AVFXSettings list = new AVFXSettings();
 		path.clear();
 		if (whichpath == 0 ) {
 			path = list.readDirectories("Mediathek");

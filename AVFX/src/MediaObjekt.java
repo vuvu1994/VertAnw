@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
@@ -22,8 +20,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-
-import javax.print.attribute.standard.Media;
 
 public class MediaObjekt {
 	String Name;
@@ -74,7 +70,7 @@ public class MediaObjekt {
 		AM.getChildren().add(hb);
 		AM.getChildren().add(bu);
 		File file = new File(Bild);
-		Settings settings = new Settings();
+		AVFXSettings settings = new AVFXSettings();
 		if (settings.getScrapper()&& !file.getName().contains(".mp3")&& !file.getName().contains(".wav")) {
 			if (!file.exists()) {
 				WebScraper.getData(Name);
@@ -139,7 +135,7 @@ public class MediaObjekt {
 				try {
 					if (!GuiElemente.playlist) {
 						System.out.println("Eventtyp bei MediaObjekt: " + e.getEventType());
-						MediaPlayer.createMediaPlayer(Path + Name);
+						AVFXMediaPlayer.createMediaPlayer(Path + Name);
 					}else{
 
 						Playlist pl = GuiElemente.getPlaylist();

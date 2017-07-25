@@ -1,14 +1,12 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Created by Vural on 07.06.2017.
  */
 public class GenerateSettings {
 
-    private Settings settings;
-    private String path = "Settings/";
+    private AVFXSettings settings;
+    private String path = "AVFXSettings/";
     String[] Namen;
 
     public void readfiles(){
@@ -26,7 +24,7 @@ public class GenerateSettings {
 
 
         for(int i =0;i < Namen.length;i++){
-            settings = new Settings(Namen[i].replace(".txt",""));
+            settings = new AVFXSettings(Namen[i].replace(".txt",""));
             settings.create();
             settings.draw();
             getLinks(i);
@@ -48,9 +46,9 @@ public class GenerateSettings {
 
     public static void createMediaSetting(){
         try {
-            File file = new File("Settings\\Audiothek.txt");
-            File file2 = new File("Settings\\Mediathek.txt");
-            File fileFolder = new File("Settings");
+            File file = new File("AVFXSettings\\Audiothek.txt");
+            File file2 = new File("AVFXSettings\\Mediathek.txt");
+            File fileFolder = new File("AVFXSettings");
             if (fileFolder.isDirectory()){
 
             }else{
@@ -60,14 +58,14 @@ public class GenerateSettings {
             if (file.exists()) {
 
             } else {
-                PrintWriter outputStream = new PrintWriter("Settings\\Audiothek.txt");
+                PrintWriter outputStream = new PrintWriter("AVFXSettings\\Audiothek.txt");
                 outputStream.close();
                 outputStream.flush();
             }
             if(file2.exists()){
 
             }else{
-                PrintWriter outputStream = new PrintWriter("Settings\\Mediathek.txt");
+                PrintWriter outputStream = new PrintWriter("AVFXSettings\\Mediathek.txt");
                 outputStream.close();
                 outputStream.flush();
             }

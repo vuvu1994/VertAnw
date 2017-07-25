@@ -22,7 +22,7 @@ import java.util.Scanner;
 /**
  * Created by Vural on 07.06.2017.
  */
-public class Settings {
+public class AVFXSettings {
 	private String Name;
 	ListView lv;
 	private VBox vb;
@@ -30,13 +30,13 @@ public class Settings {
 	public static OutputStream output;
 	public static InputStream input;
 
-	public Settings(String Name){
+	public AVFXSettings(String Name){
 		this.Name = Name;
 		InternetBrowser.removeWebView();
 		GuiElemente.getNavigationbar().getChildren().clear();
 	}
 
-	public Settings() {
+	public AVFXSettings() {
 
 	}
 
@@ -156,7 +156,7 @@ public class Settings {
 	public ArrayList<String> readIntoArrayList (){
 		Scanner s = null;
 		try {
-			s = new Scanner(new File("Settings\\"+Name+".txt"));
+			s = new Scanner(new File("AVFXSettings\\"+Name+".txt"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -171,7 +171,7 @@ public class Settings {
 	public ArrayList<String> readDirectories (String dateiName){
 		Scanner s = null;
 		try {
-			s = new Scanner(new File("Settings\\"+dateiName+".txt"));
+			s = new Scanner(new File("AVFXSettings\\"+dateiName+".txt"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -187,7 +187,7 @@ public class Settings {
 	public void writeToFile(ArrayList<String> list){
 		try {
 
-			BufferedWriter writer = new BufferedWriter(new FileWriter("Settings\\"+Name+".txt"));
+			BufferedWriter writer = new BufferedWriter(new FileWriter("AVFXSettings\\"+Name+".txt"));
 			for(String x:list){
 				writer.write(x);
 				writer.newLine();
@@ -325,13 +325,13 @@ public class Settings {
 						try {
 							lv.getItems().add(file.toString());
 							if(Name.equals("Audiothek")){
-								FileWriter fw = new FileWriter("Settings\\Audiothek.txt", true);
+								FileWriter fw = new FileWriter("AVFXSettings\\Audiothek.txt", true);
 								BufferedWriter ausgabe = new BufferedWriter(fw);
 								ausgabe.write(file.toString());
 								ausgabe.newLine();
 								ausgabe.close();
 							}else if(Name.equals("Mediathek")){
-								FileWriter fw = new FileWriter("Settings\\Mediathek.txt", true);
+								FileWriter fw = new FileWriter("AVFXSettings\\Mediathek.txt", true);
 								BufferedWriter ausgabe = new BufferedWriter(fw);
 								ausgabe.write(file.toString());
 								ausgabe.newLine();

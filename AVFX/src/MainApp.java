@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -6,8 +5,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -19,7 +16,7 @@ public class MainApp extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException, InterruptedException {
-		Settings einstellungen = new Settings();
+		AVFXSettings einstellungen = new AVFXSettings();
 		einstellungen.createRadioProperties();
 		GenerateSettings.createMediaSetting();
 		Parent root = FXMLLoader.load(getClass().getResource("Gui.fxml"));

@@ -55,7 +55,7 @@ public class Controller {
 	Text status;
 	ObservableList<String> radioList = FXCollections.observableArrayList("1Live","WDR2","WDR5");
 	static String comboBoxValue;
-	Settings radioURI = new Settings();
+	AVFXSettings radioURI = new AVFXSettings();
 	private int radio = 1;
 	public void initialize() throws InterruptedException, SQLException {
 		File dir = new File("Cover");
@@ -154,7 +154,7 @@ public class Controller {
 		fp.getChildren().clear();
 
 		GenerateSettings settings = new GenerateSettings();
-		Settings radioSettings = new Settings("Allgemeine Einstellungen");
+		AVFXSettings radioSettings = new AVFXSettings("Allgemeine Einstellungen");
 		radioSettings.createRadioSettings();
 		radioSettings.draw();
 
@@ -172,7 +172,7 @@ public class Controller {
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()) {
 			System.out.println("URL: " + result.get());
-			MediaPlayer.createMediaPlayerwithURL(result.get().toString());
+			AVFXMediaPlayer.createMediaPlayerwithURL(result.get().toString());
 		}
 
 
@@ -186,7 +186,7 @@ public class Controller {
 					new FileChooser.ExtensionFilter("Media-Datein", "*.mp4", "*.mp3", "*.wav", "*.flv");
 			fileChooser.getExtensionFilters().add(extFilter);
 			File file = fileChooser.showOpenDialog(GuiElemente.getMain().getScene().getWindow());
-			MediaPlayer.createMediaPlayer(file.getAbsolutePath().toString());
+			AVFXMediaPlayer.createMediaPlayer(file.getAbsolutePath().toString());
 
 		}catch(Exception e) {
 			Status.make("Keine Datei gefunden");
@@ -254,7 +254,7 @@ public class Controller {
 						}
 					}
 					if (!timeout) {
-						MediaPlayer.createMediaPlayerRadio("Radio/" + radio + ".mp3");
+						AVFXMediaPlayer.createMediaPlayerRadio("Radio/" + radio + ".mp3");
 					}
 					++radio;
 				}

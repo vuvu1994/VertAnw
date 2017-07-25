@@ -1,8 +1,5 @@
 import java.io.File;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Observable;
 import java.util.concurrent.CountDownLatch;
 
 import javafx.animation.PauseTransition;
@@ -13,10 +10,8 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
@@ -26,14 +21,13 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.sql.SQLException;
 
-public class MediaPlayer {
+public class AVFXMediaPlayer {
 
 	 static MediaView mediaView;
 	 static Media media;
@@ -149,7 +143,7 @@ public class MediaPlayer {
 	
 		
 		 AnchorPane ap = new AnchorPane();
-		 ClassLoader cl = MediaPlayer.class.getClassLoader();
+		 ClassLoader cl = AVFXMediaPlayer.class.getClassLoader();
 		 Image bg=new Image(cl.getResource("resources/playerbg.jpg").toExternalForm());
 		 ImageView bgIV=new ImageView(bg);	
 		 bgIV.setPreserveRatio(false);
@@ -222,7 +216,7 @@ public class MediaPlayer {
 
 			mediaView.fitWidthProperty().bind(m.widthProperty());
 			mediaView.fitHeightProperty().bind(m.heightProperty());
-			Settings settings = new Settings();
+			AVFXSettings settings = new AVFXSettings();
 			if (settings.getVideoformat()) {
 				mediaView.setPreserveRatio(true);
 			}else{

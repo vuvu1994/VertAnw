@@ -2,7 +2,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,7 +21,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Optional;
 
 /**
@@ -83,8 +81,8 @@ private VBox vb;
                     if (lv.getItems().size() > 0) {
                         ArrayList<String> al = new ArrayList<String>();
                         al.addAll(lv.getItems());
-                        MediaPlayer.setFileinPlaylist(0);
-                        MediaPlayer.createMediaPlayerwithPlaylist(al);
+                        AVFXMediaPlayer.setFileinPlaylist(0);
+                        AVFXMediaPlayer.createMediaPlayerwithPlaylist(al);
                     }
                 } catch (Exception e1) {
                     // TODO Auto-generated catch block
