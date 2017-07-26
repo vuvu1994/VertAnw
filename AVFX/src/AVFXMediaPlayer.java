@@ -49,7 +49,9 @@ public class AVFXMediaPlayer {
 
 		playlist = al;
 	 	playlistactive=true;
-		 checkPlaylistFile();
+	 	try { 
+	 	checkPlaylistFile();
+	 	
 		 File mediaFile = new File(playlist.get(FileinPlaylist));
 
 		 media = new Media(mediaFile.toURI().toString());
@@ -60,6 +62,9 @@ public class AVFXMediaPlayer {
 			 e.printStackTrace();
 		 }
 		 FileinPlaylist++;
+		}catch (Exception e) {
+			Status.make("Keine Datei zum Abspielen gefunden");
+		}
 	 }
 	 public static void createMediaPlayer(String datei){
 		 playlistactive=false;
