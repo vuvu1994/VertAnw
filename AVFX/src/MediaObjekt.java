@@ -194,6 +194,7 @@ public class MediaObjekt {
 		return this;
 	}
 	public void setCover(){
+		try {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Cover ausw√§hlen");
 		File file = fileChooser.showOpenDialog(GuiElemente.getMain().getScene().getWindow());
@@ -204,6 +205,9 @@ public class MediaObjekt {
 		    FileUtils.copyFile(file, dest);
 		} catch (IOException e) {
 		    e.printStackTrace();
+		}
+		}catch (Exception e) {
+			Status.make("Kein Cover ausgew‰hlt");
 		}
 
 	}
