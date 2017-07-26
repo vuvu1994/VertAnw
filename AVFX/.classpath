@@ -2,9 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="./Benötigte Libraries/commons-io-2.5.jar"/>
-	<classpathentry kind="lib" path="./Benötigte Libraries/commons-lang3-3.5.jar"/>
-	<classpathentry kind="lib" path="./Benötigte Libraries/h2-1.4.194.jar"/>
-	<classpathentry kind="lib" path="./Benötigte Libraries/jsoup-1.10.2.jar"/>
+	<classpathentry kind="lib" path="Benötigte Libraries/commons-io-2.5.jar"/>
+	<classpathentry kind="lib" path="Benötigte Libraries/commons-lang3-3.5.jar"/>
+	<classpathentry kind="lib" path="Benötigte Libraries/h2-1.4.194.jar"/>
+	<classpathentry kind="lib" path="Benötigte Libraries/jsoup-1.10.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

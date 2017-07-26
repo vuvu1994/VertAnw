@@ -141,7 +141,7 @@ public class MediaObjekt {
 						Playlist pl = GuiElemente.getPlaylist();
 
 						pl.add(Path+ Name);
-						Status.make(Name + " hinzugefÃ¼gt");
+						Status.make(Name + " hinzugefügt");
 					}
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -158,7 +158,6 @@ public class MediaObjekt {
 		scraper.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("tut was");
 				File dest = new File("Cover/"+Name+".jpg");
 				try {
 					FileUtils.forceDelete(dest);
