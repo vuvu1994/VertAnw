@@ -137,6 +137,7 @@ public class Controller {
 	}
 
 	public void bibliothek() throws Exception {
+		GuiElemente.playlist = false;
 		fp.getChildren().clear();
 		new GenerateObjekts().start();
 
